@@ -3,14 +3,11 @@ module.exports = {
 	theme: {
 		extend: {},
 		screens: {
-			tablet: '640px',
-			// => @media (min-width: 640px) { ... }
-
-			laptop: '1024px',
-			// => @media (min-width: 1024px) { ... }
-
-			desktop: '1280px',
-			// => @media (min-width: 1280px) { ... }
+			'2xl': { max: '1535px' },
+			xl: { max: '1279px' },
+			lg: { max: '1023px' },
+			md: { max: '767px' },
+			sm: { max: '639px' },
 		},
 	},
 	plugins: [],
