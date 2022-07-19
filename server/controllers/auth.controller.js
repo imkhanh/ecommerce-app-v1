@@ -21,16 +21,10 @@ const authController = {
 
 			await newUser.save();
 
-			const access_token = createAccessToken({ _id: newUser._id });
-			const refresh_token = createRefreshToken({ _id: newUser._id });
+			const token = jwt.sign({ _id: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
+			const decode = jwt.verify(token, process.env.JWT_SECRET);
 
-			res.cookie('refreshToken', refresh_token, {
-				httpOnly: true,
-				path: '/api/refresh_token',
-				maxAge: 7 * 24 * 30 * 60 * 60,
-			});
-
-			return res.json({ access_token, newUser });
+			return res.json({ msg: 'Create an account successfully', token, user: decode });
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}
@@ -50,45 +44,14 @@ const authController = {
 
 			if (!isMatch) return res.status(401).json({ msg: 'Password is incorrect' });
 
-			const access_token = createAccessToken({ _id: user._id });
-			const refresh_token = createRefreshToken({ _id: user._id });
+			const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
+			const decode = jwt.verify(token, process.env.JWT_SECRET);
 
-			res.cookie('refreshToken', refresh_token, {
-				httpOnly: true,
-				path: '/api/refresh_token',
-				maxAge: 7 * 24 * 30 * 60 * 60,
-			});
-
-			return res.json({ access_token, user });
+			return res.json({ token, user: decode });
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}
 	},
-	refreshToken: async (req, res) => {
-		try {
-			const rf_token = req.cookies.refreshToken;
-
-			if (!rf_token) return res.status(401).json({ msg: 'Please login/register now' });
-
-			jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-				if (err) return res.status(401).json({ msg: 'Please login/register now' });
-
-				const access_token = createAccessToken({ _id: user._id });
-
-				return res.json({ access_token });
-			});
-		} catch (error) {
-			return res.status(500).json({ msg: error.message });
-		}
-	},
-};
-
-const createAccessToken = (id) => {
-	return jwt.sign(id, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
-};
-
-const createRefreshToken = (id) => {
-	return jwt.sign(id, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
 };
 
 module.exports = authController;
