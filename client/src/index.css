@@ -4,7 +4,52 @@
 @tailwind utilities;
 
 @layer base {
-	html {
+	body {
+		background: white;
 		font-family: 'Oxygen', sans-serif;
+	}
+}
+
+@layer components {
+	.nav-link {
+		position: relative;
+	}
+
+	.nav-link::after {
+		content: '';
+		position: absolute;
+		bottom: -20px;
+		right: 0;
+		height: 1px;
+		width: 0%;
+		background: #000;
+		transition: 0.4s ease-in-out;
+	}
+
+	.nav-link:hover::after {
+		left: 0;
+		width: 100%;
+	}
+
+	.is-sticky {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 20;
+		background-color: #ffffff !important;
+		box-shadow: 0 2px 24px 0 rgb(0 0 0 / 5%);
+		animation: 400ms ease-in-out 0s normal none 1 running fadeInDown;
+	}
+
+	@keyframes fadeInDown {
+		0% {
+			opacity: 0;
+			transform: translateY(-40px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 }

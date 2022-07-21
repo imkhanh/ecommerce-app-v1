@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import Layout from '../Layout/Layout';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { isAuth } from './Auth';
 
 const LoginSection = () => {
+	const navigate = useNavigate();
 	const [showPass, setShowPass] = useState(false);
 	const [userData, setUserData] = useState({ email: '', password: '', success: '', error: '' });
 	const { email, password } = userData;
@@ -12,6 +14,10 @@ const LoginSection = () => {
 	useEffect(() => {
 		window.document.title = 'Login';
 	}, []);
+
+	useEffect(() => {
+		if (isAuth()) navigate('/');
+	}, [navigate]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -34,7 +40,7 @@ const LoginSection = () => {
 	return (
 		<div className="py-12 max-w-md mx-auto w-full space-y-12">
 			<div className="flex items-center text-xs font-light text-black/70 space-x-1">
-				<Link to="/" className="text-black">
+				<Link to="/" className="text-black font-normal">
 					Home
 				</Link>
 				<span>|</span>

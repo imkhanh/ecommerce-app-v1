@@ -43,16 +43,16 @@ const RegisterSection = () => {
 	return (
 		<div className="py-12 max-w-md mx-auto w-full space-y-12">
 			<div className="flex items-center text-xs font-light text-black/70 space-x-1">
-				<Link to="/" className="text-black">
+				<Link to="/" className="text-black font-normal">
 					Home
 				</Link>
 				<span>|</span>
-				<Link to="/register">Register</Link>
+				<Link to="/register">Registration</Link>
 			</div>
 			<div>
 				<div className="mb-4 space-y-2">
 					<span className="text-lg font-semibold tracking-widest">Registration</span>
-					<h1 className="text-sm text-black/70">Become a member shop</h1>
+					<h1 className="text-sm text-black/70">Become a member, your account for everything shop</h1>
 				</div>
 				{userData.error && alert('red', userData.error)}
 				{userData.success && alert('green', userData.success)}
@@ -88,7 +88,7 @@ const RegisterSection = () => {
 				<div className="border-y border-gray-200 p-4 text-center font-light text-black/90 text-xs">
 					Already an account?
 					<Link to="/login" className="ml-1 text-black font-medium hover:underline cursor-pointer select-none">
-						Login now
+						Login
 					</Link>
 				</div>
 			</div>

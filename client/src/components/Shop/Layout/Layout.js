@@ -10,9 +10,7 @@ const Layout = ({ children }) => {
 		<>
 			<Header />
 			<Cart />
-			<div className="pt-14" style={{ minHeight: 'calc(100vh - 64px)' }}>
-				{children}
-			</div>
+			<main style={{ minHeight: 'calc(100vh - 146px)' }}>{children}</main>
 			<Footer />
 		</>
 	);

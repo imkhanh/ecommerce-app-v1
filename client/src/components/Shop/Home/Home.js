@@ -9,7 +9,7 @@ const HomeComponent = () => {
 		window.document.title = 'Home';
 	}, []);
 
-	return <div>HomeComponent</div>;
+	return <section>HomeComponent</section>;
 };
 
 const Home = () => {
