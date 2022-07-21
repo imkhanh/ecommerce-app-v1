@@ -22,6 +22,8 @@ app.use(cors());
 
 // routes
 app.use('/api', require('./routes/user.route'));
+app.use('/api', require('./routes/product.route'));
+app.use('/api', require('./routes/category.route'));
 
 // run server
 

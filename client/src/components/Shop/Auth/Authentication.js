@@ -3,6 +3,5 @@ export const isAdmin = () => (localStorage.getItem('jwt') ? JSON.parse(localStor
 
 export const logout = () => {
 	localStorage.clear();
-
 	window.location.href = '/';
 };

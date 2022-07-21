@@ -1,6 +1,5 @@
 export const layoutState = {
 	toggleMenu: false,
-	authModal: false,
 	cartModal: false,
 	singleProduct: null,
 	cartProduct: null,
@@ -11,8 +10,6 @@ export const layoutReducer = (state = layoutState, action) => {
 	switch (action.type) {
 		case 'toggleMenu':
 			return { ...state, toggleMenu: action.payload };
-		case 'authModal':
-			return { ...state, authModal: action.payload };
 		case 'cartModal':
 			return { ...state, cartModal: action.payload };
 		case 'singleProduct':
