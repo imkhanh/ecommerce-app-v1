@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
 		offer: { type: Number, default: 0 },
 		quantity: { type: Number, default: 0 },
 		status: { type: String, default: 'active' },
-		images: { type: Array, default: [] },
+		images: [{ type: String, required: true }],
 	},
 	{ timestamps: true }
 );

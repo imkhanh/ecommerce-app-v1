@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,7 +6,7 @@
 @layer base {
 	body {
 		background: white;
-		font-family: 'Oxygen', sans-serif;
+		font-family: 'Nanum Gothic', sans-serif;
 	}
 }
 
@@ -39,7 +39,7 @@
 		z-index: 20;
 		background-color: #ffffff !important;
 		box-shadow: 0 2px 24px 0 rgb(0 0 0 / 5%);
-		animation: 400ms ease-in-out 0s normal none 1 running fadeInDown;
+		animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
 	}
 
 	@keyframes fadeInDown {

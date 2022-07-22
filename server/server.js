@@ -19,6 +19,7 @@ mongoose
 // middleware
 app.use(express.json());
 app.use(cors());
+app.use(express.static(__dirname + '/client/public/uploads'));
 
 // routes
 app.use('/api', require('./routes/user.route'));

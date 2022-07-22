@@ -72,7 +72,7 @@ const Header = () => {
 					</ul>
 				</div>
 				<div className="w-1/3 flex justify-center">
-					<Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-black font-bold uppercase tracking-widest">
+					<Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-black font-extrabold uppercase tracking-widest">
 						Ambition
 					</Link>
 				</div>
