@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductItem = () => {
+const ProductItem = ({ product }) => {
 	return (
-		<aside className="bg-white ">
+		<aside className="bg-white">
 			<figure>
-				<Link to={`/product/detail/`}>
-					<img src="https://image.thanhnien.vn/w1024/Uploaded/2022/zngujt/2021_08_14/training_11_08_2021__291628703763241_medium_sarx.jpg" alt="" className="h-[320px] lg:h-full w-full object-cover" />
+				<Link to={`/product/detail/${product._id}`}>
+					<img src={`http://localhost:3000/uploads/products/${product.images[0]}`} alt={product.name} className="h-[400px] lg:h-full w-full object-cover" />
 				</Link>
 			</figure>
-			<div className="pt-4 text-sm md:text-xs">
-				<Link to={`/product/detail/`} className="font-semibold">
-					Name
+			<div className="pt-4 ">
+				<Link to={`/product/detail/`} className="font-medium">
+					{product.name}
 				</Link>
-				<p className="my-2">Category</p>
-				<p>$300</p>
+				<p className="mb-2 text-black/50">{product.category.name}</p>
+				<p>${product.price}</p>
 			</div>
 		</aside>
 	);

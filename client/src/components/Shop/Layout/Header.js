@@ -6,7 +6,7 @@ import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import { isAuth, isAdmin, logout } from '../Auth/Auth';
 
 const Header = () => {
-	const { data, dispatch } = useContext(LayoutContext);
+	const { state, dispatch } = useContext(LayoutContext);
 	const menuRef = useRef(null);
 	const [isVisible, setIsVisible] = useState(false);
 	const [sticky, setSticky] = useState(false);
@@ -24,7 +24,7 @@ const Header = () => {
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollY = window.scrollY;
-			const stickyClass = scrollY >= 100 ? 'is-sticky' : '';
+			const stickyClass = scrollY >= 200 ? 'is-sticky' : '';
 			setSticky(stickyClass);
 		};
 
@@ -56,8 +56,8 @@ const Header = () => {
 			</div>
 			<nav className={classNav}>
 				<div className="hidden md:block md:w-1/3">
-					<span onClick={() => dispatch({ type: 'toggleMenu', payload: !data.toggleMenu })} className="cursor-pointer select-none ">
-						{data.toggleMenu ? <IoCloseOutline className="text-xl" /> : <IoMenuOutline className="text-xl" />}
+					<span onClick={() => dispatch({ type: 'toggleMenu', payload: !state.toggleMenu })} className="cursor-pointer select-none ">
+						{state.toggleMenu ? <IoCloseOutline className="text-xl" /> : <IoMenuOutline className="text-xl" />}
 					</span>
 				</div>
 				<div className="w-1/3 md:hidden">
@@ -127,7 +127,7 @@ const Header = () => {
 					</div>
 					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
 						<BsHandbag className="text-base" />
-						<span className="absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs border-2 border-white">0</span>
+						{/* <span className="absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs border-2 border-white">0</span> */}
 					</div>
 				</div>
 			</nav>

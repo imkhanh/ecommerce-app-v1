@@ -6,10 +6,10 @@ import { layoutReducer, layoutState } from './components/Shop/Layout/LayoutConte
 import { Home, Products, SingleProduct, Login, Register } from './components/Shop';
 
 const App = () => {
-	const [data, dispatch] = useReducer(layoutReducer, layoutState);
+	const [state, dispatch] = useReducer(layoutReducer, layoutState);
 
 	return (
-		<LayoutContext.Provider value={{ data, dispatch }}>
+		<LayoutContext.Provider value={{ state, dispatch }}>
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
@@ -17,7 +17,7 @@ const App = () => {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 
-					<Route path="/product/detail/" element={<SingleProduct />} />
+					<Route path="/product/detail/:id" element={<SingleProduct />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

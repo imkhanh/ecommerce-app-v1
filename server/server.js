@@ -19,12 +19,12 @@ mongoose
 // middleware
 app.use(express.json());
 app.use(cors());
-app.use(express.static(__dirname + '/client/public/uploads'));
+app.use(express.static(__dirname + '/uploads'));
 
 // routes
-app.use('/api', require('./routes/user.route'));
-app.use('/api', require('./routes/product.route'));
-app.use('/api', require('./routes/category.route'));
+app.use('/api', require('./routes/Auth'));
+app.use('/api', require('./routes/Product'));
+app.use('/api', require('./routes/Category'));
 
 // run server
 
