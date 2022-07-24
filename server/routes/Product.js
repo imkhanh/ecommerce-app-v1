@@ -20,4 +20,7 @@ router.post('/create-product', upload.any(), productController.createProduct);
 router.patch('/update-product/:id', productController.updateProduct);
 router.delete('/delete-product/:id', productController.deleteProduct);
 
+router.post('/add-cart', productController.addToCart);
+router.post('/add-wish', productController.addToCart);
+
 module.exports = router;

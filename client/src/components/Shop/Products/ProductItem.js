@@ -9,7 +9,7 @@ const ProductItem = ({ product }) => {
 					<img src={`http://localhost:3000/uploads/products/${product.images[0]}`} alt={product.name} className="h-[400px] lg:h-full w-full object-cover" />
 				</Link>
 			</figure>
-			<div className="pt-4 ">
+			<div className="pt-4 md:text-sm">
 				<Link to={`/product/detail/`} className="font-medium">
 					{product.name}
 				</Link>

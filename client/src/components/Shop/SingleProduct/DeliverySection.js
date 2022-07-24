@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
 const DeliverySection = () => {
@@ -7,11 +7,11 @@ const DeliverySection = () => {
 	return (
 		<div className="py-4 border-t border-gray-300">
 			<div onClick={() => setDelivery(!delivery)} className="flex items-center justify-between">
-				<h4 className="font-medium cursor-pointer select-none">Free Delivery and Returns</h4>
+				<h4 className="font-medium cursor-pointer text-black select-none">Free Delivery and Returns</h4>
 				<span className="cursor-pointer select-none">{delivery ? <BsChevronUp /> : <BsChevronDown />}</span>
 			</div>
 			{delivery && (
-				<div className="mt-8 text-sm font-light space-y-8">
+				<div className="mt-8 text-sm text-black/70 space-y-8">
 					<p>Your order of 5.000.000₫ or more gets free standard delivery.</p>
 					<ul className="pl-4 list-disc">
 						<li>Standard delivered 4-5 Business Days</li>

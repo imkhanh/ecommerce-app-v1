@@ -76,6 +76,30 @@ const productController = {
 			return res.status(500).json({ msg: error.message });
 		}
 	},
+	addToCart: async (req, res) => {
+		try {
+			const cartProduct = req.body;
+			const products = await Products.find({
+				_id: { $in: cartProduct },
+			});
+
+			return res.json({ products });
+		} catch (error) {
+			return res.status(500).json({ msg: error.message });
+		}
+	},
+	addToWish: async (req, res) => {
+		try {
+			const wishProduct = req.body;
+			const products = await Products.find({
+				_id: { $in: wishProduct },
+			});
+
+			return res.json({ products });
+		} catch (error) {
+			return res.status(500).json({ msg: error.message });
+		}
+	},
 };
 
 module.exports = productController;

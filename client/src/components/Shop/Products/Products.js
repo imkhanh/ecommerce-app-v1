@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { productReducer, productState } from './ProductContext';
 import Layout from '../Layout/Layout';
 import ProductItem from './ProductItem';
-import ProductMenu from './ProductMenu';
+import ProductHeader from './ProductHeader';
 import { getDataApi } from '../Api/FetchData';
 import Loading from '../Layout/Loading';
 
@@ -33,9 +33,19 @@ const ProductSection = () => {
 	}, []);
 
 	return (
-		<section className="max-w-[89rem] mx-auto w-full p-12 lg:p-8 md:px-4 space-y-8 transition-all">
-			<ProductMenu />
-			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-2 gap-y-12">{products && products.length > 0 ? products.map((product) => <ProductItem key={product._id} product={product} />) : <div>{loading && <Loading />}</div>}</div>
+		<section>
+			<ProductHeader />
+			<div className="mt-8 max-w-[89rem] mx-auto w-full px-12 lg:px-8 md:px-4">
+				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-2 gap-y-12">
+					{products && products.length > 0 ? (
+						products.map((product) => {
+							return <ProductItem key={product._id} product={product} />;
+						})
+					) : (
+						<div>{loading && <Loading />}</div>
+					)}
+				</div>
+			</div>
 		</section>
 	);
 };

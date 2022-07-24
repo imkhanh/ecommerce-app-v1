@@ -12,7 +12,7 @@ const RatingReviews = () => {
 	return (
 		<div className="py-4 border-y border-gray-300">
 			<div onClick={() => setShowReview(!showReview)} className="flex items-center justify-between">
-				<h4 className="font-medium cursor-pointer select-none">Reviews (0)</h4>
+				<h4 className="font-medium cursor-pointer text-black select-none">Reviews (0)</h4>
 				<span className="cursor-pointer select-none">{showReview ? <BsChevronUp /> : <BsChevronDown />}</span>
 			</div>
 			{showReview && (

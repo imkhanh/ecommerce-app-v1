@@ -1,11 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
 	html {
-		font-family: 'Lato', sans-serif;
+		font-family: 'Poppins', sans-serif;
 	}
 }
 
@@ -35,7 +35,7 @@
 		width: 100%;
 		z-index: 20;
 		background-color: #ffffff !important;
-		box-shadow: 0 2px 24px 0 rgb(0 0 0 / 5%);
+		box-shadow: 0 2px 24px 0 rgb(0 0 0 / 10%);
 		animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
 	}
 	@keyframes fadeInDown {
@@ -53,6 +53,6 @@
 		@apply absolute top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-gray-100 text-black hover:shadow-sm hover:bg-white grid place-items-center cursor-pointer select-none z-10 transition-colors;
 	}
 	.quantity-button {
-		@apply py-1.5 px-4 rounded-md flex items-center justify-center border border-gray-300 text-sm text-black cursor-pointer select-none hover:border-black transition-colors;
+		@apply py-1.5 px-3 rounded-md flex items-center justify-center border border-gray-300 text-sm text-black cursor-pointer select-none hover:border-black transition-colors;
 	}
 }

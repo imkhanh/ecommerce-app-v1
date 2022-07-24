@@ -9,7 +9,7 @@ const Header = () => {
 	const { state, dispatch } = useContext(LayoutContext);
 	const menuRef = useRef(null);
 	const [isVisible, setIsVisible] = useState(false);
-	const [sticky, setSticky] = useState(false);
+	const [sticky, setSticky] = useState('');
 
 	useEffect(() => {
 		const handleClick = (e) => {
@@ -24,7 +24,7 @@ const Header = () => {
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollY = window.scrollY;
-			const stickyClass = scrollY >= 200 ? 'is-sticky' : '';
+			const stickyClass = scrollY >= 140 ? 'is-sticky' : '';
 			setSticky(stickyClass);
 		};
 
