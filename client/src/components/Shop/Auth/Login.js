@@ -1,23 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
-import Layout from '../Layout/Layout';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { isAuth } from './Auth';
 
-const LoginSection = () => {
-	const navigate = useNavigate();
+const Login = () => {
 	const [showPass, setShowPass] = useState(false);
 	const [userData, setUserData] = useState({ email: '', password: '', success: '', error: '' });
 	const { email, password } = userData;
-
-	useEffect(() => {
-		window.document.title = 'Login';
-	}, []);
-
-	useEffect(() => {
-		if (isAuth()) navigate('/');
-	}, [navigate]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -60,15 +49,30 @@ const LoginSection = () => {
 					<div className="mb-4">
 						<label className="block mb-1 text-sm text-black/70">Email Address (*)</label>
 						<div className="relative">
-							<input type="text" name="email" value={email} onChange={handleChange} className="px-2 text-sm w-full h-10 border border-gray-200 rounded-sm outline-none focus:border-black transition-colors" />
+							<input
+								type="text"
+								name="email"
+								value={email}
+								onChange={handleChange}
+								className="px-2 text-sm w-full h-10 border border-gray-200 rounded-sm outline-none focus:border-black transition-colors"
+							/>
 						</div>
 					</div>
 					<div className="mb-4">
 						<label className="block mb-1 text-sm text-black/70">Password (*)</label>
 						<div className="relative">
-							<input type={showPass ? 'text' : 'password'} name="password" value={password} onChange={handleChange} className="px-2 text-sm w-full h-10 border border-gray-200 rounded-sm outline-none focus:border-black transition-colors" />
+							<input
+								type={showPass ? 'text' : 'password'}
+								name="password"
+								value={password}
+								onChange={handleChange}
+								className="px-2 text-sm w-full h-10 border border-gray-200 rounded-sm outline-none focus:border-black transition-colors"
+							/>
 
-							<span onClick={() => setShowPass(!showPass)} className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none text-black/50 hover:text-black">
+							<span
+								onClick={() => setShowPass(!showPass)}
+								className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none text-black/50 hover:text-black"
+							>
 								{showPass ? <BsEyeSlashFill className="text-sm" /> : <BsEyeFill className="text-sm" />}
 							</span>
 						</div>
@@ -86,10 +90,6 @@ const LoginSection = () => {
 			</div>
 		</div>
 	);
-};
-
-const Login = () => {
-	return <Layout children={<LoginSection />} />;
 };
 
 export default Login;

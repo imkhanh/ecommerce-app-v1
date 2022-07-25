@@ -1,25 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { BsGear, BsGrid, BsHandbag, BsHeart, BsPerson, BsPersonCircle, BsTelephone, BsPower, BsSearch, BsGeoAlt } from 'react-icons/bs';
+import React, { useContext, useEffect, useState } from 'react';
+import { BsHandbag, BsHeart, BsPerson, BsTelephone, BsSearch, BsGeoAlt } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { LayoutContext } from '../Layout/Layout';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
-import { isAuth, isAdmin, logout } from '../Auth/Auth';
 
 const Header = () => {
 	const { state, dispatch } = useContext(LayoutContext);
-	const menuRef = useRef(null);
-	const [isVisible, setIsVisible] = useState(false);
 	const [sticky, setSticky] = useState('');
-
-	useEffect(() => {
-		const handleClick = (e) => {
-			if (menuRef.current && !menuRef.current.contains(e.target)) {
-				setIsVisible(false);
-			}
-		};
-		window.addEventListener('click', handleClick, true);
-		return () => window.removeEventListener('click', handleClick, true);
-	}, []);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -64,7 +51,11 @@ const Header = () => {
 					<ul className="flex space-x-6 lg:space-x-4">
 						{links.map((link, index) => (
 							<li key={index}>
-								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-xs uppercase font-medium text-gray-800 hover:text-black nav-link">
+								<Link
+									to={link.to}
+									onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+									className="text-xs uppercase font-medium text-gray-800 hover:text-black nav-link"
+								>
 									{link.label}
 								</Link>
 							</li>
@@ -83,47 +74,10 @@ const Header = () => {
 					<Link to="/user/wish-list" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
 						<BsHeart className="text-base" />
 					</Link>
-					<div ref={menuRef} className="relative">
-						{isAuth() ? (
-							<>
-								<span onClick={() => setIsVisible(!isVisible)} className="cursor-pointer select-none">
-									<BsPersonCircle className="text-base" />
-								</span>
-								{isVisible && (
-									<div className="absolute top-12 left-[340%] w-48 h-auto transform  -translate-x-full bg-white border border-black/10 rounded-[3px] shadow-md z-30">
-										{isAdmin() ? (
-											<Link to="/admin/dashboard" className="py-[10px] px-4 flex items-center text-gray-700 hover:text-black hover:bg-gray-50">
-												<BsGrid />
-												<span className="ml-4 text-sm">Admin</span>
-											</Link>
-										) : (
-											<>
-												<Link to="/user/profile" className="py-[10px] px-4 flex items-center text-gray-700 hover:text-black hover:bg-gray-50">
-													<BsPersonCircle />
-													<span className="ml-4 text-sm">Profile</span>
-												</Link>
-												<Link to="/user/wish-list" className="py-[10px] px-4 flex items-center text-gray-700 hover:text-black hover:bg-gray-50">
-													<BsHeart />
-													<span className="ml-4 text-sm">Wish List</span>
-												</Link>
-												<Link to="/user/change-password" className="py-[10px] px-4 flex items-center text-gray-700 hover:text-black hover:bg-gray-50">
-													<BsGear />
-													<span className="ml-4 text-sm">Change Password</span>
-												</Link>
-											</>
-										)}
-										<div onClick={logout} className="py-[10px] px-4 flex items-center text-gray-700 hover:text-black hover:bg-gray-50 border-t border-gray-200 cursor-pointer">
-											<BsPower />
-											<span className="ml-4 text-sm">Logout</span>
-										</div>
-									</div>
-								)}
-							</>
-						) : (
-							<Link to="/login">
-								<BsPerson className="text-base" />
-							</Link>
-						)}
+					<div className="relative">
+						<Link to="/login">
+							<BsPerson className="text-base" />
+						</Link>
 					</div>
 					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
 						<BsHandbag className="text-base" />

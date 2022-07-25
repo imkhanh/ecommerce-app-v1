@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BsHeart, BsHeartFill, BsX } from 'react-icons/bs';
+import { BsHeart, BsX } from 'react-icons/bs';
 import Layout, { LayoutContext } from '../Layout/Layout';
-import { getDataApi, postDataApi } from '../Api/FetchData';
-import Loading from '../Layout/Loading';
+import { getDataApi } from '../Utils/FetchData';
+import Loading from '../Utils/Loading';
 import RatingReviews from './RatingReviews';
 import DeliverySection from './DeliverySection';
 import ImageSection from './ImageSection';
-import { isWish, addToWishList, removeToWishList, handleAddToCart, cartList } from './Actions';
-import { isAuth } from '../Auth/Auth';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 
@@ -23,48 +21,27 @@ const SingleProductSection = () => {
 	const [color, setColor] = useState('');
 	const [alert, setAlert] = useState(false);
 	const [qty, setQty] = useState(1);
-	const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem('wish')));
 
 	useEffect(() => {
 		window.document.title = 'Product Detail';
 	}, []);
 
 	useEffect(() => {
+		const fetchSingleProduct = async () => {
+			dispatch({ type: 'loading', payload: true });
+			try {
+				const res = await getDataApi(`/single-product/${id}`);
+				setImages(res.data.product.images);
+				dispatch({ type: 'singleProduct', payload: res.data.product });
+				dispatch({ type: 'loading', payload: false });
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
 		fetchSingleProduct();
 		// eslint-disable-next-line
 	}, []);
-
-	const fetchSingleProduct = async () => {
-		dispatch({ type: 'loading', payload: true });
-		try {
-			const res = await getDataApi(`/single-product/${id}`);
-			setImages(res.data.product.images);
-			dispatch({ type: 'singleProduct', payload: res.data.product });
-			dispatch({ type: 'loading', payload: false });
-			dispatch({ type: 'inCart', payload: cartList() });
-		} catch (error) {
-			console.log(error);
-		}
-
-		fetchCartProduct();
-	};
-
-	const fetchCartProduct = async () => {
-		const cartProduct = [];
-		const cart = JSON.parse(localStorage.getItem('cart'));
-		if (cart) {
-			for (const c of cart) {
-				cartProduct.push(c._id);
-			}
-		}
-
-		try {
-			const res = await postDataApi('/add-cart', cartProduct);
-			dispatch({ type: 'cartProduct', payload: res.data.products });
-		} catch (error) {
-			console.log(error);
-		}
-	};
 
 	const handleChangeSlide = (type) => {
 		if (type === 'next') {
@@ -171,34 +148,9 @@ const SingleProductSection = () => {
 						)}
 
 						<div className="space-y-4">
-							{state.inCart !== null && state.inCart.includes(product._id) ? (
-								<button className="w-full h-14 text-sm font-medium uppercase border border-black bg-black text-white rounded-full">In Cart</button>
-							) : (
-								<button
-									onClick={() =>
-										handleAddToCart(product._id, qty, product.price, color, size, setQty, setColor, setSize, setAlert, dispatch, fetchSingleProduct)
-									}
-									className="w-full h-14 text-sm font-medium uppercase border border-black bg-black text-white rounded-full"
-								>
-									Add to bag
-								</button>
-							)}
-
-							<button
-								onClick={() => addToWishList(product._id, setWishList)}
-								className={`${
-									isWish(product._id, wishList) ? 'hidden' : ''
-								} w-full h-14 flex items-center justify-center border border-gray-300 bg-white text-black/50 rounded-full`}
-							>
+							<button className="w-full h-14 text-sm font-medium uppercase border border-black bg-black text-white rounded-full">Add to bag</button>
+							<button className="w-full h-14 flex items-center justify-center border border-gray-300 bg-white text-black/50 rounded-full">
 								<BsHeart className="text-2xl" />
-							</button>
-							<button
-								onClick={() => removeToWishList(product._id, setWishList)}
-								className={`${
-									!isWish(product._id, wishList) ? 'hidden' : ''
-								} w-full h-14 flex items-center justify-center border border-red-300 bg-white text-red-500 rounded-full`}
-							>
-								<BsHeartFill className="text-2xl" />
 							</button>
 						</div>
 
