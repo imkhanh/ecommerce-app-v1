@@ -15,6 +15,8 @@ const App = () => {
 					<Route path="/" element={<Home />} />
 					<Route path="/products" element={<Products />} />
 					<Route path="/product/detail/:id" element={<SingleProduct />} />
+
+					<Route path="*" element={<div>Page Not Found</div>} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

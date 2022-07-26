@@ -1,41 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-@layer base {
-	html {
-		font-family: 'Poppins', sans-serif;
-	}
-}
 
 @layer components {
-	.nav-link {
-		position: relative;
+	.re {
+		background-color: #fff !important;
+		animation: 300ms ease-in-out 0s normal none 1 running fadeInUp;
 	}
-	.nav-link::after {
-		content: '';
-		position: absolute;
-		bottom: -20px;
-		right: 0;
-		height: 1px;
-		width: 0%;
-		background: #000;
-		transition: 0.4s ease-in-out;
-	}
-	.nav-link:hover::after {
-		left: 0;
-		width: 100%;
-	}
+	@keyframes fadeInUp {
+		from {
+			transform: translate3d(0, 40px, 0);
+			opacity: 0;
+		}
 
+		to {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+		}
+	}
 	.is-sticky {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		z-index: 20;
-		background-color: #ffffff !important;
-		box-shadow: 0 2px 24px 0 rgb(0 0 0 / 10%);
+		background-color: #fff !important;
+		border-bottom: 1px solid #ccc;
 		animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
 	}
 	@keyframes fadeInDown {
@@ -48,8 +38,16 @@
 			transform: translateY(0);
 		}
 	}
-
-	.custom-button {
+	.navbar {
+		@apply py-4 px-12 lg:px-8 md:px-4 border-y border-gray-200 flex items-center justify-between;
+	}
+	.dropdown-menu {
+		@apply absolute top-12 left-[70px] md:left-[50px] transform -translate-x-full w-48 h-auto bg-white border border-gray-200 rounded-[3px] shadow-md z-20;
+	}
+	.dropdown-menu-link {
+		@apply px-4 py-2.5 flex items-center text-black/80 hover:text-black hover:bg-gray-50 transition-colors;
+	}
+	.slide-button {
 		@apply absolute top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-gray-100 text-black hover:shadow-sm hover:bg-white grid place-items-center cursor-pointer select-none z-10 transition-colors;
 	}
 	.quantity-button {

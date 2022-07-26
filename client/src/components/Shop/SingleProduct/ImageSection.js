@@ -11,17 +11,13 @@ const ImageSection = ({ product, currentImage, handleChangeSlide }) => {
 				</p>
 			</div>
 			<div>
-				<span onClick={() => handleChangeSlide('prev')} className="custom-button left-2">
+				<span onClick={() => handleChangeSlide('prev')} className="slide-button left-2">
 					<BsChevronLeft />
 				</span>
 				<Zoom zoomMargin={40}>
-					<img
-						src={`http://localhost:3000/uploads/products/${product.images[currentImage]}`}
-						alt={product.name}
-						className="h-[640px] md:h-full w-[740px] object-cover"
-					/>
+					<img src={`http://localhost:3000/uploads/products/${product.images[currentImage]}`} alt={product.name} className="h-[640px] md:h-full w-[740px] object-cover" />
 				</Zoom>
-				<span onClick={() => handleChangeSlide('next')} className="custom-button right-2">
+				<span onClick={() => handleChangeSlide('next')} className="slide-button right-2">
 					<BsChevronRight />
 				</span>
 			</div>

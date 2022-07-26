@@ -35,19 +35,16 @@ const ProductSection = () => {
 	return (
 		<section>
 			<ProductHeader />
-			<div className="mt-8 max-w-[89rem] mx-auto w-full px-12 lg:px-8 md:px-4">
-				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-2 gap-y-12">
+
+			<div className="mt-8 max-w-[89rem] mx-auto w-full px-12 lg:px-8 md:px-4 transition-all">
+				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-2 gap-y-24 transition-all">
 					{products && products.length > 0 ? (
 						products.map((product) => {
 							return (
 								<aside key={product._id} className="bg-white">
 									<figure>
 										<Link to={`/product/detail/${product._id}`}>
-											<img
-												src={`http://localhost:3000/uploads/products/${product.images[0]}`}
-												alt={product.name}
-												className="h-[400px] lg:h-full w-full object-cover"
-											/>
+											<img src={`http://localhost:3000/uploads/products/${product.images[0]}`} alt={product.name} className="h-full w-full object-cover" />
 										</Link>
 									</figure>
 									<div className="pt-4 md:text-sm">
@@ -61,7 +58,7 @@ const ProductSection = () => {
 							);
 						})
 					) : (
-						<div>{loading && <Loading />}</div>
+						<>{loading && <Loading />}</>
 					)}
 				</div>
 			</div>

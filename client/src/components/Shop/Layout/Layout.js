@@ -2,6 +2,7 @@ import React, { createContext } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import CartModal from './CartModal';
+import LoginRegisterModal from '../Auth/LoginRegisterModal';
 
 export const LayoutContext = createContext();
 
@@ -10,7 +11,8 @@ const Layout = ({ children }) => {
 		<>
 			<Header />
 			<CartModal />
-			<main style={{ minHeight: 'calc(100vh - 146px)' }}>{children}</main>
+			<LoginRegisterModal />
+			<main style={{ minHeight: 'calc(100vh - 115px)' }}>{children}</main>
 			<Footer />
 		</>
 	);

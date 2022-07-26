@@ -1,22 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BsHandbag, BsHeart, BsPerson, BsTelephone, BsSearch, BsGeoAlt } from 'react-icons/bs';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { BsHandbag, BsHeart, BsSearch, BsPersonCircle, BsSpeedometer, BsPower, BsGear, BsReceipt } from 'react-icons/bs';
+import { IoMenuOutline, IoCloseOutline, IoPersonOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { LayoutContext } from '../Layout/Layout';
-import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
+import { isAdmin, isAuth, logout } from '../Auth/Auth';
 
 const Header = () => {
 	const { state, dispatch } = useContext(LayoutContext);
-	const [sticky, setSticky] = useState('');
+	const menuRef = useRef(null);
+	const [isVisible, setIsVisible] = useState(false);
 
 	useEffect(() => {
-		const handleScroll = () => {
-			const scrollY = window.scrollY;
-			const stickyClass = scrollY >= 140 ? 'is-sticky' : '';
-			setSticky(stickyClass);
+		const handleClick = (e) => {
+			if (menuRef.current && !menuRef.current.contains(e.target)) {
+				setIsVisible(false);
+			}
 		};
 
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
+		window.addEventListener('click', handleClick);
+		return () => window.removeEventListener('click', handleClick);
 	}, []);
 
 	const links = [
@@ -27,60 +29,108 @@ const Header = () => {
 		{ label: 'Q&A', to: '/question-and-answer' },
 	];
 
-	const classNav = `py-4 px-12 lg:px-8 md:px-4 border-y border-gray-200 flex items-center justify-between ${sticky}`;
+	const dropDownMenuComponent = () => {
+		return (
+			<ul className="dropdown-menu">
+				{isAdmin() ? (
+					<li>
+						<Link to="/admin/dashboard">
+							<BsSpeedometer />
+							<span>Admin</span>
+						</Link>
+					</li>
+				) : (
+					<>
+						<li>
+							<Link to="/user/profile" className="dropdown-menu-link">
+								<IoPersonOutline />
+								<span className="ml-4 text-sm">Profile</span>
+							</Link>
+						</li>
+						<li>
+							<Link to="/user/profile" className="dropdown-menu-link">
+								<BsHeart />
+								<span className="ml-4 text-sm">Wish List</span>
+							</Link>
+						</li>
+						<li>
+							<Link to="/user/profile" className="dropdown-menu-link">
+								<BsGear />
+								<span className="ml-4 text-sm">Change Password</span>
+							</Link>
+						</li>
+						<li>
+							<Link to="/user/profile" className="dropdown-menu-link">
+								<BsReceipt />
+								<span className="ml-4 text-sm">Orders</span>
+							</Link>
+						</li>
+					</>
+				)}
+				<li>
+					<div onClick={logout} className="dropdown-menu-link cursor-pointer">
+						<BsPower />
+						<span className="ml-4 text-sm">Logout</span>
+					</div>
+				</li>
+			</ul>
+		);
+	};
 
 	return (
 		<header>
-			<div className="h-8 pl-12 lg:pl-8 md:pl-4 flex items-center justify-between bg-black">
-				<div className="flex items-center text-white space-x-2 transition-all">
-					<BsTelephone className="text-sm" />
-					<p className="text-[10px]">Call +84 79 424 0880</p>
-				</div>
-				<div className="px-4 h-full flex items-center space-x-2 bg-gray-200 text-black">
-					<BsGeoAlt className="text-sm" />
-					<span className="text-xs">Store Locator</span>
-				</div>
-			</div>
-			<nav className={classNav}>
+			<nav className="navbar">
 				<div className="hidden md:block md:w-1/3">
 					<span onClick={() => dispatch({ type: 'toggleMenu', payload: !state.toggleMenu })} className="cursor-pointer select-none ">
 						{state.toggleMenu ? <IoCloseOutline className="text-xl" /> : <IoMenuOutline className="text-xl" />}
 					</span>
 				</div>
-				<div className="w-1/3 md:hidden">
-					<ul className="flex space-x-6 lg:space-x-4">
+				<div className="w-1/3 md:flex md:justify-center">
+					<Link
+						to="/"
+						onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+						className="text-black text-xl font-black uppercase italic tracking-widest"
+						style={{ fontFamily: 'Bigilla' }}
+					>
+						Ambition
+					</Link>
+				</div>
+
+				<div className="w-1/3 md:hidden flex justify-center">
+					<ul className="flex space-x-12 xl:space-x-8 lg:space-x-4 transition-all">
 						{links.map((link, index) => (
 							<li key={index}>
-								<Link
-									to={link.to}
-									onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-									className="text-xs uppercase font-medium text-gray-800 hover:text-black nav-link"
-								>
+								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-xs uppercase font-light text-black/70 hover:text-black">
 									{link.label}
 								</Link>
 							</li>
 						))}
 					</ul>
 				</div>
-				<div className="w-1/3 flex justify-center">
-					<Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-black font-extrabold uppercase tracking-widest">
-						Ambition
-					</Link>
-				</div>
-				<div className="w-1/3 flex justify-end space-x-6 lg:space-x-4">
-					<div className="md:hidden">
-						<BsSearch className="text-base" />
+
+				<div className="w-1/3 flex justify-end space-x-6 lg:space-x-4 transition-all">
+					<div>
+						<BsSearch />
 					</div>
-					<Link to="/user/wish-list" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-						<BsHeart className="text-base" />
+					<Link to="/user/wish-list" className="md:hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+						<BsHeart />
 					</Link>
-					<div className="relative">
-						<Link to="/login">
-							<BsPerson className="text-base" />
-						</Link>
+					<div ref={menuRef} className="relative">
+						{!isAuth() ? (
+							<span className="cursor-pointer select-none" onClick={() => dispatch({ type: 'loginRegisterModal', payload: true })}>
+								<IoPersonOutline />
+							</span>
+						) : (
+							<>
+								<span onClick={() => setIsVisible(!isVisible)} className="cursor-pointer select-none">
+									<BsPersonCircle />
+								</span>
+								{isVisible && dropDownMenuComponent()}
+							</>
+						)}
 					</div>
 					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
-						<BsHandbag className="text-base" />
+						<BsHandbag />
 						{/* <span className="absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs border-2 border-white">0</span> */}
 					</div>
 				</div>

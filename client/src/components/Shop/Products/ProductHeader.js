@@ -23,7 +23,7 @@ const ProductHeader = () => {
 	useEffect(() => {
 		const handleScroll = () => {
 			const scrollY = window.scrollY;
-			const stickyClass = scrollY >= 300 ? 'is-sticky' : '';
+			const stickyClass = scrollY >= 140 ? 'is-sticky' : 're';
 			setSticky(stickyClass);
 		};
 
@@ -32,8 +32,8 @@ const ProductHeader = () => {
 	}, []);
 
 	return (
-		<div className={`h-20 flex items-center ${sticky}`}>
-			<div className="max-w-[89rem] mx-auto w-full px-12 lg:px-8 md:px-4 grid grid-cols-12 items-center transition-all">
+		<div className={`h-16 ${sticky}`}>
+			<div className="max-w-[89rem] mx-auto w-full h-full px-12 lg:px-8 md:px-4 grid grid-cols-12 items-center transition-all">
 				<div className="col-span-6 lg:col-span-4 md:hidden transition-all">
 					<p className="text-sm">{products && products.length} products</p>
 				</div>

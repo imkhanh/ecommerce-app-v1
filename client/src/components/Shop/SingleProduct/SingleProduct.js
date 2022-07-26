@@ -83,7 +83,7 @@ const SingleProductSection = () => {
 					</div>
 				</div>
 				{/*right size*/}
-				<div className="sticky top-20 w-2/6 h-full lg:w-1/2 md:w-full transition-all">
+				<div className="sticky top-8 w-2/6 lg:w-1/2 md:w-full h-full transition-all">
 					<div className="mb-8 space-y-8">
 						<div>
 							<h1 className="text-3xl text-black font-bold">{product.name}</h1>
