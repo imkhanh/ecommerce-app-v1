@@ -7,6 +7,7 @@ import { isAdmin, isAuth, logout } from '../Auth/Auth';
 
 const Header = () => {
 	const { state, dispatch } = useContext(LayoutContext);
+
 	const menuRef = useRef(null);
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -16,7 +17,6 @@ const Header = () => {
 				setIsVisible(false);
 			}
 		};
-
 		window.addEventListener('click', handleClick);
 		return () => window.removeEventListener('click', handleClick);
 	}, []);
@@ -79,7 +79,7 @@ const Header = () => {
 
 	return (
 		<header>
-			<nav className="navbar">
+			<nav className="h-14 px-12 lg:px-8 md:px-4 border-y border-gray-200 flex items-center justify-between">
 				<div className="hidden md:block md:w-1/3">
 					<span onClick={() => dispatch({ type: 'toggleMenu', payload: !state.toggleMenu })} className="cursor-pointer select-none ">
 						{state.toggleMenu ? <IoCloseOutline className="text-xl" /> : <IoMenuOutline className="text-xl" />}
@@ -89,7 +89,7 @@ const Header = () => {
 					<Link
 						to="/"
 						onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-						className="text-black text-xl font-black uppercase italic tracking-widest"
+						className="text-black text-2xl font-black uppercase italic hover:tracking-widest transition-all"
 						style={{ fontFamily: 'Bigilla' }}
 					>
 						Ambition
@@ -100,7 +100,7 @@ const Header = () => {
 					<ul className="flex space-x-12 xl:space-x-8 lg:space-x-4 transition-all">
 						{links.map((link, index) => (
 							<li key={index}>
-								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-xs uppercase font-light text-black/70 hover:text-black">
+								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-xs uppercase text-black/70 hover:text-black">
 									{link.label}
 								</Link>
 							</li>
@@ -131,7 +131,7 @@ const Header = () => {
 					</div>
 					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
 						<BsHandbag />
-						{/* <span className="absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs border-2 border-white">0</span> */}
+						<span className="absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs border-2 border-white">0</span>
 					</div>
 				</div>
 			</nav>

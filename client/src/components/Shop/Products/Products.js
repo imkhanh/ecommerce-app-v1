@@ -13,14 +13,16 @@ const ProductSection = () => {
 	const { products, loading } = state;
 
 	useEffect(() => {
-		window.document.title = 'Products';
+		document.title = 'All Product';
 	}, []);
 
 	useEffect(() => {
 		const fetchAllProduct = async () => {
+			dispatch({ type: 'loading', payload: true });
+
 			try {
-				dispatch({ type: 'loading', payload: true });
 				const res = await getDataApi('/all-product');
+
 				dispatch({ type: 'products', payload: res.data.products });
 				dispatch({ type: 'loading', payload: false });
 			} catch (error) {

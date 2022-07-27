@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const Login = () => {
 	const [showPass, setShowPass] = useState(false);
-	const [userData, setUserData] = useState({ email: '', password: '', success: '', error: '' });
-	const { email, password } = userData;
+	const [userData, setUserData] = useState({ email: '', password: '', isSubmitting: false, error: null });
+	const { email, password, isSubmitting } = userData;
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -14,14 +14,19 @@ const Login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setUserData({ ...userData, isSubmitting: true });
 
 		try {
 			const res = await axios.post('/api/login', { email, password });
-			localStorage.setItem('jwt', JSON.stringify(res.data));
+			setUserData({ ...userData, isSubmitting: false });
+
+			localStorage.setItem('jwt', JSON.stringify(res.data.token));
+			localStorage.setItem('user', JSON.stringify(res.data.user));
+
 			window.location.href = '/';
 		} catch (error) {
-			setUserData({ ...userData, email: '', password: '', success: '', error: error.response.data.msg });
-			setTimeout(() => setUserData({ ...userData, mail: '', password: '', success: '', error: '' }), 2000);
+			setUserData({ ...userData, email: '', password: '', error: error.response.data.msg });
+			setTimeout(() => setUserData({ ...userData, mail: '', password: '', error: '' }), 2000);
 		}
 	};
 
@@ -56,24 +61,16 @@ const Login = () => {
 							className="px-2 text-sm w-full h-10 border border-gray-200 rounded-[3px] outline-none focus:border-black transition-colors"
 						/>
 
-						<span
-							onClick={() => setShowPass(!showPass)}
-							className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none text-black/50 hover:text-black"
-						>
+						<span onClick={() => setShowPass(!showPass)} className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none text-black/50 hover:text-black">
 							{showPass ? <BsEyeSlashFill className="text-sm" /> : <BsEyeFill className="text-sm" />}
 						</span>
 					</div>
 				</div>
 				<div className="my-8 px-4">
-					<p className="text-xs text-center text-black/70 font-light">
-						By logging in, you agree to Ambition's Privacy Policy and Terms of Use.
-					</p>
+					<p className="text-xs text-center text-black/70 font-light">By logging in, you agree to Ambition's Privacy Policy and Terms of Use.</p>
 				</div>
-				<button
-					type="submit"
-					className="w-full h-10 bg-black text-white text-xs uppercase tracking-wide font-medium rounded-[3px]"
-				>
-					Login
+				<button type="submit" disabled={isSubmitting} className="w-full h-10 bg-black text-white text-xs uppercase tracking-wide font-medium rounded-[3px]">
+					{isSubmitting ? 'Loading' : 'Login'}
 				</button>
 			</form>
 		</div>

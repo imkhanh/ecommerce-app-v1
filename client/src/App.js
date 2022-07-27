@@ -1,9 +1,11 @@
 import React, { useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import { LayoutContext } from './components/Shop/Layout/Layout';
 import { layoutReducer, layoutState } from './components/Shop/Layout/LayoutContext';
 
-import { Home, Products, SingleProduct } from './components/Shop';
+import { Home, Products, SingleProduct, PageNotFound, RequiredAdmin, RequiredAuth } from './components/Shop';
+import { Dashboard, AdminProducts } from './components/Admin';
 
 const App = () => {
 	const [state, dispatch] = useReducer(layoutReducer, layoutState);
@@ -16,7 +18,14 @@ const App = () => {
 					<Route path="/products" element={<Products />} />
 					<Route path="/product/detail/:id" element={<SingleProduct />} />
 
-					<Route path="*" element={<div>Page Not Found</div>} />
+					<Route element={<RequiredAuth />}></Route>
+
+					<Route element={<RequiredAdmin />}>
+						<Route path="/admin/dashboard" element={<Dashboard />} />
+						<Route path="/admin/products" element={<AdminProducts />} />
+					</Route>
+
+					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

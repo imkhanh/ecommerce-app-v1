@@ -4,11 +4,14 @@ import { BsHeart, BsX } from 'react-icons/bs';
 import Layout, { LayoutContext } from '../Layout/Layout';
 import { getDataApi } from '../Utils/FetchData';
 import Loading from '../Utils/Loading';
-import RatingReviews from './RatingReviews';
-import DeliverySection from './DeliverySection';
-import ImageSection from './ImageSection';
+
+import RatingReviews from './RatingReviews/RatingReviews';
+import ImageSection from './Sections/ImageSection';
+import DeliverySection from './Sections/DeliverySection';
+
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
+import ColorSection from './Sections/ColorSection';
 
 const SingleProductSection = () => {
 	const { id } = useParams();
@@ -23,7 +26,7 @@ const SingleProductSection = () => {
 	const [qty, setQty] = useState(1);
 
 	useEffect(() => {
-		window.document.title = 'Product Detail';
+		document.title = `Product `;
 	}, []);
 
 	useEffect(() => {
@@ -31,8 +34,9 @@ const SingleProductSection = () => {
 			dispatch({ type: 'loading', payload: true });
 			try {
 				const res = await getDataApi(`/single-product/${id}`);
-				setImages(res.data.product.images);
+
 				dispatch({ type: 'singleProduct', payload: res.data.product });
+				setImages(res.data.product.images);
 				dispatch({ type: 'loading', payload: false });
 			} catch (error) {
 				console.log(error);
@@ -51,11 +55,26 @@ const SingleProductSection = () => {
 		}
 	};
 
-	if (loading) {
-		return <Loading />;
-	} else if (!product) {
-		return <div>No product found</div>;
-	}
+	const handleUpdateQuantity = (type) => {
+		if (type === 'decrease') {
+			if (qty === 1) {
+				setQty(1);
+			} else {
+				setQty(qty - 1);
+				setAlert(false);
+			}
+		} else if (type === 'increase') {
+			if (qty === product.quantity) {
+				setQty(product.quantity);
+				setAlert(true);
+			} else {
+				setQty(qty + 1);
+			}
+		}
+	};
+
+	if (loading) return <Loading />;
+	else if (!product) return null;
 
 	return (
 		<section className="max-w-[89rem] w-full mx-auto h-auto p-12 lg:p-8 md:px-4 transition-all">
@@ -71,9 +90,9 @@ const SingleProductSection = () => {
 				<p className="text-black font-normal cursor-pointer">{product.name}</p>
 			</div>
 			<div className="flex md:flex-col space-x-12 lg:space-x-6 md:space-x-0 transition-all">
-				{/*left side*/}
-				<div className="w-4/6 lg:w-1/2 md:w-full transition-all">
-					<div className={`md:hidden grid ${images.length <= 2 ? 'grid-cols-1' : 'grid-cols-2'} lg:grid-cols-1 gap-3 transition-all`}>
+				{/* =========  left container ========= */}
+				<div className="w-4/6 lg:w-1/2 md:hidden transition-all">
+					<div className={`grid ${images.length <= 2 ? 'grid-cols-1' : 'grid-cols-2'} lg:grid-cols-1 gap-3 transition-all`}>
 						{images.length > 0 &&
 							images.map((img, index) => (
 								<Zoom key={index} zoomMargin={40}>
@@ -82,7 +101,8 @@ const SingleProductSection = () => {
 							))}
 					</div>
 				</div>
-				{/*right size*/}
+
+				{/* ========= right size ========= */}
 				<div className="sticky top-8 w-2/6 lg:w-1/2 md:w-full h-full transition-all">
 					<div className="mb-8 space-y-8">
 						<div>
@@ -92,65 +112,36 @@ const SingleProductSection = () => {
 						</div>
 
 						<ImageSection product={product} currentImage={currentImage} handleChangeSlide={handleChangeSlide} />
-
-						<div className="flex flex-col">
-							<span className="mb-2 text-sm font-medium">Sizes</span>
-							<div className="grid grid-cols-4 gap-3">
-								{product.sizes.map((s, index) => (
-									<span
-										key={index}
-										onClick={() => setSize(s)}
-										className={`py-3 px-5 text-base flex items-center justify-center border ${
-											size === s ? 'border-black' : 'border-gray-200'
-										} rounded-md hover:border-black cursor-pointer select-none transition-colors`}
-									>
-										{s}
-									</span>
-								))}
-							</div>
-						</div>
-
-						<div className="flex flex-col">
-							<span className="mb-2 text-sm font-medium">Colors</span>
-							<div className="grid grid-cols-4 gap-2">
-								{product.colors.map((c, index) => (
-									<span
-										key={index}
-										onClick={() => setColor(c)}
-										className={`py-3 px-5 text-base flex items-center justify-center border ${
-											color === c ? 'border-black' : 'border-gray-200'
-										} rounded-md hover:border-black cursor-pointer select-none transition-colors`}
-									>
-										{c}
-									</span>
-								))}
-							</div>
-						</div>
-
+						<ColorSection product={product} size={size} setSize={setSize} />
+						<ColorSection product={product} color={color} setColor={setColor} />
 						{product.quantity !== 0 && (
 							<div className="flex flex-col">
 								<span className="text-sm mb-4">Quantity: {product.quantity}</span>
 								<div className="flex items-center">
-									<span className="quantity-button">-</span>
+									<span onClick={() => handleUpdateQuantity('decrease')} className="quantity-button">
+										-
+									</span>
 									<span className="w-8 text-sm text-center">{qty}</span>
-									<span className="quantity-button">+</span>
+									<span onClick={() => handleUpdateQuantity('increase')} className="quantity-button">
+										+
+									</span>
 								</div>
 							</div>
 						)}
 
 						{alert && (
 							<div className="px-4 py-6 relative bg-[#fafafa] text-[#838383]">
-								<p className="text-sm font-light">Please choose your size and color</p>
+								<p className="text-sm font-light">Stock limited</p>
 								<span onClick={() => setAlert(false)} className="cursor-pointer select-none absolute top-2 right-2">
 									<BsX className="text-2xl" />
 								</span>
 							</div>
 						)}
 
-						<div className="space-y-4">
-							<button className="w-full h-14 text-sm font-medium uppercase border border-black bg-black text-white rounded-full">Add to bag</button>
-							<button className="w-full h-14 flex items-center justify-center border border-gray-300 bg-white text-black/50 rounded-full">
-								<BsHeart className="text-2xl" />
+						<div className="grid grid-cols-4 gap-3">
+							<button className="col-span-3 w-full h-14 text-sm font-medium uppercase border border-black bg-black text-white rounded-md">Add to bag</button>
+							<button className="col-span-1 w-full h-14 flex items-center justify-center border border-gray-300 bg-white text-black/50 rounded-md">
+								<BsHeart className="text-xl" />
 							</button>
 						</div>
 
@@ -158,6 +149,7 @@ const SingleProductSection = () => {
 							<p className="text-sm  font-light text-justify leading-6">{product.description}</p>
 						</div>
 					</div>
+
 					<DeliverySection />
 					<RatingReviews />
 				</div>

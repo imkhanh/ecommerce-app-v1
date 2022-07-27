@@ -9,10 +9,11 @@ const Register = () => {
 		password: '',
 		fullname: '',
 		username: '',
-		success: '',
-		error: '',
+		isSubmitting: false,
+		success: null,
+		error: null,
 	});
-	const { email, password, fullname, username } = userData;
+	const { email, password, fullname, username, isSubmitting } = userData;
 
 	const alert = (type, msg) => {
 		return (
@@ -23,11 +24,7 @@ const Register = () => {
 	};
 
 	if (userData.success || userData.error) {
-		setTimeout(
-			() =>
-				setUserData({ ...userData, fullname: '', username: '', email: '', password: '', success: '', error: '' }),
-			2000
-		);
+		setTimeout(() => setUserData({ ...userData, fullname: '', username: '', email: '', password: '', isSubmitting: false, success: null, error: null }), 2000);
 	}
 
 	const handleChange = (e) => {
@@ -37,16 +34,20 @@ const Register = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setUserData({ ...userData, isSubmitting: true });
+
 		try {
 			const res = await axios.post('/api/register', { email, password, fullname, username });
+
 			setUserData({
 				...userData,
 				fullname: '',
 				username: '',
 				email: '',
 				password: '',
+				isSubmitting: false,
 				success: res.data.msg,
-				error: '',
+				error: null,
 			});
 		} catch (error) {
 			setUserData({
@@ -55,7 +56,8 @@ const Register = () => {
 				username: '',
 				email: '',
 				password: '',
-				success: '',
+				isSubmitting: false,
+				success: null,
 				error: error.response.data.msg,
 			});
 		}
@@ -108,24 +110,16 @@ const Register = () => {
 							className="px-2 text-sm w-full h-10 border border-gray-200 rounded-[3px] outline-none focus:border-black transition-colors"
 						/>
 
-						<span
-							onClick={() => setShowPass(!showPass)}
-							className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none text-black/50 hover:text-black"
-						>
+						<span onClick={() => setShowPass(!showPass)} className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none text-black/50 hover:text-black">
 							{showPass ? <BsEyeSlashFill className="text-sm" /> : <BsEyeFill className="text-sm" />}
 						</span>
 					</div>
 				</div>
 				<div className="my-8 px-4">
-					<p className="text-xs text-center text-black/70 font-light">
-						By creating an account, you agree to Ambition's Privacy Policy and Terms of Use.
-					</p>
+					<p className="text-xs text-center text-black/70 font-light">By creating an account, you agree to Ambition's Privacy Policy and Terms of Use.</p>
 				</div>
-				<button
-					type="submit"
-					className="w-full h-10 bg-black text-white text-xs tracking-wide uppercase font-medium rounded-[3px]"
-				>
-					Register
+				<button type="submit" disabled={isSubmitting} className="w-full h-10 bg-black text-white text-xs uppercase tracking-wide font-medium rounded-[3px]">
+					{isSubmitting ? 'Loading' : 'Register'}
 				</button>
 			</form>
 		</div>

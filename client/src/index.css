@@ -25,7 +25,7 @@
 		width: 100%;
 		z-index: 20;
 		background-color: #fff !important;
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid #eee;
 		animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
 	}
 	@keyframes fadeInDown {
@@ -38,9 +38,7 @@
 			transform: translateY(0);
 		}
 	}
-	.navbar {
-		@apply py-4 px-12 lg:px-8 md:px-4 border-y border-gray-200 flex items-center justify-between;
-	}
+
 	.dropdown-menu {
 		@apply absolute top-12 left-[70px] md:left-[50px] transform -translate-x-full w-48 h-auto bg-white border border-gray-200 rounded-[3px] shadow-md z-20;
 	}
@@ -51,6 +49,6 @@
 		@apply absolute top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-gray-100 text-black hover:shadow-sm hover:bg-white grid place-items-center cursor-pointer select-none z-10 transition-colors;
 	}
 	.quantity-button {
-		@apply py-1.5 px-3 rounded-md flex items-center justify-center border border-gray-300 text-sm text-black cursor-pointer select-none hover:border-black transition-colors;
+		@apply py-1 px-2.5 rounded-md flex items-center justify-center border border-gray-300 text-sm text-black/70 hover:text-black cursor-pointer select-none hover:border-black transition-colors;
 	}
 }
