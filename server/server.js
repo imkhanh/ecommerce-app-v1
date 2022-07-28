@@ -23,8 +23,8 @@ app.use(express.static(__dirname + '/uploads'));
 
 // routes
 app.use('/api', require('./routes/Auth'));
-app.use('/api', require('./routes/Product'));
-app.use('/api', require('./routes/Category'));
+app.use('/api/product', require('./routes/Product'));
+app.use('/api/category', require('./routes/Category'));
 
 // run server
 

@@ -34,9 +34,9 @@ const Header = () => {
 			<ul className="dropdown-menu">
 				{isAdmin() ? (
 					<li>
-						<Link to="/admin/dashboard">
+						<Link to="/admin/dashboard" className="dropdown-menu-link">
 							<BsSpeedometer />
-							<span>Admin</span>
+							<span className="ml-4 text-sm">Admin</span>
 						</Link>
 					</li>
 				) : (
@@ -86,12 +86,7 @@ const Header = () => {
 					</span>
 				</div>
 				<div className="w-1/3 md:flex md:justify-center">
-					<Link
-						to="/"
-						onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-						className="text-black text-2xl font-black uppercase italic hover:tracking-widest transition-all"
-						style={{ fontFamily: 'Bigilla' }}
-					>
+					<Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-black text-2xl font-black uppercase italic" style={{ fontFamily: 'Bigilla' }}>
 						Ambition
 					</Link>
 				</div>
@@ -100,7 +95,7 @@ const Header = () => {
 					<ul className="flex space-x-12 xl:space-x-8 lg:space-x-4 transition-all">
 						{links.map((link, index) => (
 							<li key={index}>
-								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-xs uppercase text-black/70 hover:text-black">
+								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-sm text-black font-medium">
 									{link.label}
 								</Link>
 							</li>

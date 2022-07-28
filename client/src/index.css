@@ -48,7 +48,12 @@
 	.slide-button {
 		@apply absolute top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-gray-100 text-black hover:shadow-sm hover:bg-white grid place-items-center cursor-pointer select-none z-10 transition-colors;
 	}
+
 	.quantity-button {
 		@apply py-1 px-2.5 rounded-md flex items-center justify-center border border-gray-300 text-sm text-black/70 hover:text-black cursor-pointer select-none hover:border-black transition-colors;
+	}
+	.add-cart-button,
+	.wish-button {
+		@apply w-full h-16 text-base flex items-center justify-center font-medium border rounded-full;
 	}
 }

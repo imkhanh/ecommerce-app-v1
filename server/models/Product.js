@@ -9,8 +9,6 @@ const productSchema = new mongoose.Schema(
 		category: { type: ObjectId, ref: 'category' },
 		price: { type: Number, default: 0 },
 		offer: { type: Number, default: 0 },
-		colors: [{ type: String, required: true }],
-		sizes: [{ type: String, required: true }],
 		quantity: { type: Number, default: 0 },
 		status: { type: String, default: 'active' },
 		images: { type: Array, default: [] },

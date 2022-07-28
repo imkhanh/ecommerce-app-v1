@@ -5,9 +5,9 @@ const DeliverySection = () => {
 	const [delivery, setDelivery] = useState(false);
 
 	return (
-		<div className="py-4 border-t border-gray-300">
+		<div className="py-6 border-t border-gray-300">
 			<div onClick={() => setDelivery(!delivery)} className="flex items-center justify-between">
-				<h4 className="font-medium cursor-pointer text-black select-none">Free Delivery and Returns</h4>
+				<h4 className="cursor-pointer text-lg text-black select-none">Free Delivery and Returns</h4>
 				<span className="cursor-pointer select-none">{delivery ? <BsChevronUp /> : <BsChevronDown />}</span>
 			</div>
 			{delivery && (

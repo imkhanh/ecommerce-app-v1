@@ -38,7 +38,7 @@ const productController = {
 	createProduct: async (req, res) => {
 		try {
 			const files = req.files;
-			const { name, content, description, category, price, quantity, offer, status, colors } = req.body;
+			const { name, content, description, category, price, quantity, offer, status } = req.body;
 			if (!(name && content && description && category && price && quantity && offer && status)) {
 				deleteImage(files, 'file');
 				return res.status(400).json({ msg: 'All fields must be required' });
@@ -50,7 +50,7 @@ const productController = {
 				for (const file of files) {
 					imageArray.push(file.filename);
 				}
-				const newProduct = new Products({ name, content, description, images: imageArray, colors, category, price, quantity, offer, status });
+				const newProduct = new Products({ name, content, description, images: imageArray, category, price, quantity, offer, status });
 				await newProduct.save();
 				return res.json({ msg: 'Created product successfully ', product: newProduct });
 			}
@@ -81,9 +81,10 @@ const productController = {
 			const cartProduct = req.body;
 			const products = await Products.find({
 				_id: { $in: cartProduct },
-			});
-
-			return res.json({ products });
+			}).populate('category', '_id name');
+			if (products) {
+				return res.json({ products });
+			}
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}
@@ -93,9 +94,10 @@ const productController = {
 			const wishProduct = req.body;
 			const products = await Products.find({
 				_id: { $in: wishProduct },
-			});
-
-			return res.json({ products });
+			}).populate('category', '_id name');
+			if (products) {
+				return res.json({ products });
+			}
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}

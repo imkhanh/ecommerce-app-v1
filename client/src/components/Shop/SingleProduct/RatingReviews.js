@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import ReviewForm from './ReviewForm';
 import ReviewDisplay from './ReviewDisplay';
-import { LayoutContext } from '../../Layout/Layout';
-import { isAuth } from '../../Auth/Auth';
+import { LayoutContext } from '../Layout/Layout';
+import { isAuth } from '../Auth/Auth';
 
 const RatingReviews = () => {
 	const { state, dispatch } = useContext(LayoutContext);
@@ -11,9 +11,9 @@ const RatingReviews = () => {
 	const product = state.singleProduct.ratingReviews;
 
 	return (
-		<div className="py-4 border-y border-gray-300">
+		<div className="py-6 border-y border-gray-300">
 			<div onClick={() => setShowReview(!showReview)} className="flex items-center justify-between">
-				<h4 className="font-medium cursor-pointer text-black select-none">Reviews ({product.length})</h4>
+				<h4 className="cursor-pointer text-lg text-black select-none">Reviews ({product.length})</h4>
 				<span className="cursor-pointer select-none">{showReview ? <BsChevronUp /> : <BsChevronDown />}</span>
 			</div>
 			{showReview && (

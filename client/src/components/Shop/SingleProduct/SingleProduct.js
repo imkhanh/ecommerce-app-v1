@@ -1,27 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BsHeart, BsX } from 'react-icons/bs';
+import { BsHeart, BsHeartFill, BsShare, BsX } from 'react-icons/bs';
 import Layout, { LayoutContext } from '../Layout/Layout';
-import { getDataApi } from '../Utils/FetchData';
+import { getSingleProduct, postAddToCart } from './FetchData';
+import { isWish, addWish, removeWish } from '../Products/Actions';
+import { handleChangeSlide, handleUpdateQuantity, addToCart, cartList } from './Actions';
 import Loading from '../Utils/Loading';
 
-import RatingReviews from './RatingReviews/RatingReviews';
-import ImageSection from './Sections/ImageSection';
-import DeliverySection from './Sections/DeliverySection';
+import RatingReviews from './RatingReviews';
+import ImageSlides from './ImageSlides';
+import DeliverySection from './Delivery';
 
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
-import ColorSection from './Sections/ColorSection';
+import { isAuth } from '../Auth/Auth';
 
 const SingleProductSection = () => {
 	const { id } = useParams();
 	const { state, dispatch } = useContext(LayoutContext);
-	const { singleProduct: product, loading } = state;
+	const product = state.singleProduct;
 
+	const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem('wish')));
 	const [images, setImages] = useState([]);
 	const [currentImage, setCurrentImage] = useState(0);
-	const [size, setSize] = useState('');
-	const [color, setColor] = useState('');
 	const [alert, setAlert] = useState(false);
 	const [qty, setQty] = useState(1);
 
@@ -30,50 +31,38 @@ const SingleProductSection = () => {
 	}, []);
 
 	useEffect(() => {
-		const fetchSingleProduct = async () => {
-			dispatch({ type: 'loading', payload: true });
-			try {
-				const res = await getDataApi(`/single-product/${id}`);
-
-				dispatch({ type: 'singleProduct', payload: res.data.product });
-				setImages(res.data.product.images);
-				dispatch({ type: 'loading', payload: false });
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
 		fetchSingleProduct();
 		// eslint-disable-next-line
 	}, []);
 
-	const handleChangeSlide = (type) => {
-		if (type === 'next') {
-			setCurrentImage(currentImage === images.length - 1 ? 0 : currentImage + 1);
-		} else if (type === 'prev') {
-			setCurrentImage(currentImage === 0 ? images.length - 1 : currentImage - 1);
+	const fetchSingleProduct = async () => {
+		dispatch({ type: 'loading', payload: true });
+		try {
+			const res = await getSingleProduct(id);
+
+			dispatch({ type: 'singleProduct', payload: res.data.product });
+			setImages(res.data.product.images);
+			dispatch({ type: 'loading', payload: false });
+			dispatch({ type: 'inCart', payload: cartList() });
+		} catch (error) {
+			console.log(error);
+		}
+
+		fetchCartProduct();
+	};
+
+	const fetchCartProduct = async () => {
+		try {
+			const res = await postAddToCart();
+			if (res && res.data.products) {
+				dispatch({ type: 'cartProduct', payload: res.data.products });
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
-	const handleUpdateQuantity = (type) => {
-		if (type === 'decrease') {
-			if (qty === 1) {
-				setQty(1);
-			} else {
-				setQty(qty - 1);
-				setAlert(false);
-			}
-		} else if (type === 'increase') {
-			if (qty === product.quantity) {
-				setQty(product.quantity);
-				setAlert(true);
-			} else {
-				setQty(qty + 1);
-			}
-		}
-	};
-
-	if (loading) return <Loading />;
+	if (state.loading) return <Loading />;
 	else if (!product) return null;
 
 	return (
@@ -95,7 +84,7 @@ const SingleProductSection = () => {
 					<div className={`grid ${images.length <= 2 ? 'grid-cols-1' : 'grid-cols-2'} lg:grid-cols-1 gap-3 transition-all`}>
 						{images.length > 0 &&
 							images.map((img, index) => (
-								<Zoom key={index} zoomMargin={40}>
+								<Zoom key={index} zoomMargin={80}>
 									<img alt={product.name} src={`http://localhost:3000/uploads/products/${img}`} className="h-full w-full object-cover" />
 								</Zoom>
 							))}
@@ -105,24 +94,32 @@ const SingleProductSection = () => {
 				{/* ========= right size ========= */}
 				<div className="sticky top-8 w-2/6 lg:w-1/2 md:w-full h-full transition-all">
 					<div className="mb-8 space-y-8">
-						<div>
-							<h1 className="text-3xl text-black font-bold">{product.name}</h1>
-							<p className="mb-3 text-base text-black/80 font-medium">{product.category.name}</p>
-							<p>${product.price}</p>
+						<div className="pb-4 flex items-center justify-between border-b border-gray-200">
+							<div>
+								<h1 className="text-3xl lg:text-2xl md:text-xl text-black font-bold">{product.name}</h1>
+								<p className="mb-3 md:mb-2 text-base md:text-sm text-black/80 font-medium">{product.category.name}</p>
+								<p className="md:text-sm">${product.price}</p>
+							</div>
+							<span className="cursor-pointer text-black/50">
+								<BsShare />
+							</span>
 						</div>
 
-						<ImageSection product={product} currentImage={currentImage} handleChangeSlide={handleChangeSlide} />
-						<ColorSection product={product} size={size} setSize={setSize} />
-						<ColorSection product={product} color={color} setColor={setColor} />
+						<ImageSlides product={product} currentImage={currentImage} setCurrentImage={setCurrentImage} handleChangeSlide={handleChangeSlide} />
+						<div className="flex flex-col">
+							<span className="mb-2 text-sm font-medium">Description</span>
+							<p className="text-sm  font-light text-justify leading-6">{product.description}</p>
+						</div>
+
 						{product.quantity !== 0 && (
 							<div className="flex flex-col">
 								<span className="text-sm mb-4">Quantity: {product.quantity}</span>
 								<div className="flex items-center">
-									<span onClick={() => handleUpdateQuantity('decrease')} className="quantity-button">
+									<span onClick={() => handleUpdateQuantity('decrease', qty, product.quantity, setQty, setAlert)} className="quantity-button">
 										-
 									</span>
 									<span className="w-8 text-sm text-center">{qty}</span>
-									<span onClick={() => handleUpdateQuantity('increase')} className="quantity-button">
+									<span onClick={() => handleUpdateQuantity('increase', qty, product.quantity, setQty, setAlert)} className="quantity-button">
 										+
 									</span>
 								</div>
@@ -138,15 +135,31 @@ const SingleProductSection = () => {
 							</div>
 						)}
 
-						<div className="grid grid-cols-4 gap-3">
-							<button className="col-span-3 w-full h-14 text-sm font-medium uppercase border border-black bg-black text-white rounded-md">Add to bag</button>
-							<button className="col-span-1 w-full h-14 flex items-center justify-center border border-gray-300 bg-white text-black/50 rounded-md">
-								<BsHeart className="text-xl" />
-							</button>
-						</div>
+						<div className="flex flex-col space-y-4">
+							{state.inCart !== null && state.inCart.includes(product._id) ? (
+								<button className="add-cart-button bg-gray-900 text-white">In Cart</button>
+							) : (
+								<>
+									{!isAuth() ? (
+										<button onClick={() => dispatch({ type: 'loginRegisterModal', payload: true })} className="add-cart-button bg-gray-900 text-white">
+											Please login to buy
+										</button>
+									) : (
+										<button onClick={() => addToCart(product._id, qty, product.price, setQty, dispatch, fetchSingleProduct)} className="add-cart-button bg-black text-white border-black">
+											Add to Bag
+										</button>
+									)}
+								</>
+							)}
 
-						<div>
-							<p className="text-sm  font-light text-justify leading-6">{product.description}</p>
+							<button onClick={() => addWish(product._id, setWishList)} className={`${isWish(product._id, wishList) ? 'hidden' : ''} wish-button border-gray-300 bg-white text-black/50 `}>
+								<span className="mr-1">Favourite</span>
+								<BsHeart />
+							</button>
+							<button onClick={() => removeWish(product._id, setWishList)} className={`${!isWish(product._id, wishList) ? 'hidden' : ''} wish-button border-blue-100  bg-blue-50 text-blue-500`}>
+								<span className="mr-1">Favourite</span>
+								<BsHeartFill />
+							</button>
 						</div>
 					</div>
 

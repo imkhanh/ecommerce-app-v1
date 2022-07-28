@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { productReducer, productState } from './ProductContext';
-import { getDataApi } from '../Utils/FetchData';
-import { Link } from 'react-router-dom';
+import { getAllProduct } from './FetchData';
 import ProductHeader from './ProductHeader';
+import ProductItem from './ProductItem';
 import Layout from '../Layout/Layout';
 import Loading from '../Utils/Loading';
 
@@ -21,7 +21,7 @@ const ProductSection = () => {
 			dispatch({ type: 'loading', payload: true });
 
 			try {
-				const res = await getDataApi('/all-product');
+				const res = await getAllProduct();
 
 				dispatch({ type: 'products', payload: res.data.products });
 				dispatch({ type: 'loading', payload: false });
@@ -42,22 +42,7 @@ const ProductSection = () => {
 				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-2 gap-y-24 transition-all">
 					{products && products.length > 0 ? (
 						products.map((product) => {
-							return (
-								<aside key={product._id} className="bg-white">
-									<figure>
-										<Link to={`/product/detail/${product._id}`}>
-											<img src={`http://localhost:3000/uploads/products/${product.images[0]}`} alt={product.name} className="h-full w-full object-cover" />
-										</Link>
-									</figure>
-									<div className="pt-4 md:text-sm">
-										<Link to={`/product/detail/`} className="font-medium">
-											{product.name}
-										</Link>
-										<p className="mb-2 text-black/50">{product.category.name}</p>
-										<p>${product.price}</p>
-									</div>
-								</aside>
-							);
+							return <ProductItem key={product._id} product={product} />;
 						})
 					) : (
 						<>{loading && <Loading />}</>
