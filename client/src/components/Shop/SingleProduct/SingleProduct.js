@@ -24,6 +24,7 @@ const SingleProductSection = () => {
 	const [images, setImages] = useState([]);
 	const [currentImage, setCurrentImage] = useState(0);
 	const [alert, setAlert] = useState(false);
+	const [readMore, setReadMore] = useState(false);
 	const [qty, setQty] = useState(1);
 
 	useEffect(() => {
@@ -54,9 +55,7 @@ const SingleProductSection = () => {
 	const fetchCartProduct = async () => {
 		try {
 			const res = await postAddToCart();
-			if (res && res.data.products) {
-				dispatch({ type: 'cartProduct', payload: res.data.products });
-			}
+			dispatch({ type: 'cartProduct', payload: res.data.products });
 		} catch (error) {
 			console.log(error);
 		}
@@ -92,8 +91,8 @@ const SingleProductSection = () => {
 				</div>
 
 				{/* ========= right size ========= */}
-				<div className="sticky top-8 w-2/6 lg:w-1/2 md:w-full h-full transition-all">
-					<div className="mb-8 space-y-8">
+				<div className="w-2/6 lg:w-1/2 md:w-full h-full transition-all">
+					<div className="mb-12 space-y-8">
 						<div className="pb-4 flex items-center justify-between border-b border-gray-200">
 							<div>
 								<h1 className="text-3xl lg:text-2xl md:text-xl text-black font-bold">{product.name}</h1>
@@ -108,7 +107,13 @@ const SingleProductSection = () => {
 						<ImageSlides product={product} currentImage={currentImage} setCurrentImage={setCurrentImage} handleChangeSlide={handleChangeSlide} />
 						<div className="flex flex-col">
 							<span className="mb-2 text-sm font-medium">Description</span>
-							<p className="text-sm  font-light text-justify leading-6">{product.description}</p>
+							<p className="text-sm font-light text-justify leading-6">
+								{product.description.length < 420 ? product.description : readMore ? product.description + ' ' : product.description.slice(0, 420) + '...'}
+
+								<span onClick={() => setReadMore(!readMore)} className="ml-1 italic text-black font-normal underline cursor-pointer select-none">
+									{readMore ? 'hide' : 'read more'}
+								</span>
+							</p>
 						</div>
 
 						{product.quantity !== 0 && (

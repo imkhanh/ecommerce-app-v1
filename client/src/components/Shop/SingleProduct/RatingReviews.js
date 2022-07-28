@@ -11,7 +11,7 @@ const RatingReviews = () => {
 	const product = state.singleProduct.ratingReviews;
 
 	return (
-		<div className="py-6 border-y border-gray-300">
+		<div className="py-6 border-y border-gray-200">
 			<div onClick={() => setShowReview(!showReview)} className="flex items-center justify-between">
 				<h4 className="cursor-pointer text-lg text-black select-none">Reviews ({product.length})</h4>
 				<span className="cursor-pointer select-none">{showReview ? <BsChevronUp /> : <BsChevronDown />}</span>
