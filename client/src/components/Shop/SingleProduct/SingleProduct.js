@@ -22,13 +22,13 @@ const SingleProductSection = () => {
 
 	const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem('wish')));
 	const [images, setImages] = useState([]);
-	const [currentImage, setCurrentImage] = useState(0);
 	const [alert, setAlert] = useState(false);
 	const [readMore, setReadMore] = useState(false);
+	const [currentImage, setCurrentImage] = useState(0);
 	const [qty, setQty] = useState(1);
 
 	useEffect(() => {
-		document.title = `Product `;
+		document.title = 'Product';
 	}, []);
 
 	useEffect(() => {
@@ -96,7 +96,7 @@ const SingleProductSection = () => {
 						<div className="pb-4 flex items-center justify-between border-b border-gray-200">
 							<div>
 								<h1 className="text-3xl lg:text-2xl md:text-xl text-black font-bold">{product.name}</h1>
-								<p className="mb-3 md:mb-2 text-base md:text-sm text-black/80 font-medium">{product.category.name}</p>
+								<p className="mb-3 md:mb-2 text-base md:text-sm text-black/70">{product.category.name}</p>
 								<p className="md:text-sm">${product.price}</p>
 							</div>
 							<span className="cursor-pointer text-black/50">
@@ -108,9 +108,9 @@ const SingleProductSection = () => {
 						<div className="flex flex-col">
 							<span className="mb-2 text-sm font-medium">Description</span>
 							<p className="text-sm font-light text-justify leading-6">
-								{product.description.length < 420 ? product.description : readMore ? product.description + ' ' : product.description.slice(0, 420) + '...'}
+								{product.description.length < 430 ? product.description : readMore ? product.description + ' ' : product.description.slice(0, 430) + '...'}
 
-								<span onClick={() => setReadMore(!readMore)} className="ml-1 italic text-black font-normal underline cursor-pointer select-none">
+								<span onClick={() => setReadMore(!readMore)} className="ml-1 italic text-black/50 hover:text-black underline cursor-pointer select-none">
 									{readMore ? 'hide' : 'read more'}
 								</span>
 							</p>

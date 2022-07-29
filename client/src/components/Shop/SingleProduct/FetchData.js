@@ -15,9 +15,8 @@ export const postAddToCart = async () => {
 
 	if (cart) {
 		for (const c of cart) {
-			cartProduct.push(c);
+			cartProduct.push(c.id);
 		}
-		return cartProduct;
 	}
 
 	try {

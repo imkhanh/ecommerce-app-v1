@@ -24,6 +24,43 @@ export const handleUpdateQuantity = (type, qty, quantity, setQty, setAlert) => {
 	}
 };
 
+export const totalPrice = () => {
+	let total = 0;
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+	if (cart.length > 0) {
+		cart.forEach((item) => {
+			total += item.qty * item.price;
+		});
+		return total;
+	}
+};
+
+export const subTotalPrice = (id, price) => {
+	let total = 0;
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+	if (cart.length > 0) {
+		cart.forEach((item) => {
+			if (item.id === id) {
+				total += item.qty * price;
+			}
+		});
+		return total;
+	}
+};
+
+export const totalQuantity = (id) => {
+	let total = 0;
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+	if (cart.length > 0) {
+		cart.forEach((item) => {
+			if (item.id === id) {
+				total += item.qty;
+			}
+		});
+		return total;
+	}
+};
+
 export const cartList = () => {
 	const list = [];
 	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];

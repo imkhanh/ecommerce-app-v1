@@ -95,7 +95,7 @@ const Header = () => {
 					<ul className="flex space-x-12 xl:space-x-8 lg:space-x-4 transition-all">
 						{links.map((link, index) => (
 							<li key={index}>
-								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-sm text-black font-medium">
+								<Link to={link.to} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-xs uppercase text-black/70 hover:text-black font-light">
 									{link.label}
 								</Link>
 							</li>
@@ -126,7 +126,11 @@ const Header = () => {
 					</div>
 					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
 						<BsHandbag />
-						<span className="absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs border-2 border-white">0</span>
+						{state.cartProduct && state.cartProduct?.length > 0 && (
+							<span className="absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs border-2 border-white">
+								{state.cartProduct && state.cartProduct?.length}
+							</span>
+						)}
 					</div>
 				</div>
 			</nav>

@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LayoutContext } from './components/Shop/Layout/Layout';
 import { layoutReducer, layoutState } from './components/Shop/Layout/LayoutContext';
 
-import { Home, Products, SingleProduct, PageNotFound, RequiredAdmin, RequiredAuth } from './components/Shop';
+import { Home, Products, SingleProduct, PageNotFound, UpdateProfile, RequiredAdmin, RequiredAuth } from './components/Shop';
 import { Dashboard, AdminProducts } from './components/Admin';
 
 const App = () => {
@@ -18,7 +18,9 @@ const App = () => {
 					<Route path="/products" element={<Products />} />
 					<Route path="/product/detail/:id" element={<SingleProduct />} />
 
-					<Route element={<RequiredAuth />}></Route>
+					<Route element={<RequiredAuth />}>
+						<Route path="/user/profile" element={<UpdateProfile />} />
+					</Route>
 
 					<Route element={<RequiredAdmin />}>
 						<Route path="/admin/dashboard" element={<Dashboard />} />
