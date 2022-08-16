@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.static(__dirname + '/uploads'));
 
 // routes
-// app.use('/api', require('./routes/Auth'));
+app.use('/api', require('./routes/authRoute'));
 
 // run server
 

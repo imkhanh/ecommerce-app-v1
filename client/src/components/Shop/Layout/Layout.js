@@ -1,7 +1,8 @@
 import React, { createContext } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import LoginRegisterModal from '../LoginRegisterModal/LoginRegisterModal';
+import CartModal from '../CartModal/CartModal';
+import LoginRegisterModal from '../Auth/LoginRegisterModal';
 
 export const LayoutContext = createContext();
 
@@ -10,6 +11,7 @@ const Layout = ({ children }) => {
 		<>
 			<Header />
 			<LoginRegisterModal />
+			<CartModal />
 			<div>{children}</div>
 			<Footer />
 		</>
