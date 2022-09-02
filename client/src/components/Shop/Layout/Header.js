@@ -15,19 +15,19 @@ const Header = () => {
 	];
 
 	return (
-		<header className="h-16 w-full fixed top-0 border-b border-gray-100 bg-white z-30">
-			<div className="h-full max-w-[1200px] mx-auto flex items-center justify-between">
+		<header className="h-14 w-full fixed top-0 border-b border-gray-100 bg-white z-30">
+			<div className="h-full max-w-[1280px] w-full mx-auto flex items-center justify-between">
 				<div className="flex items-center">
 					<div className="mr-24">
-						<Link to="/" className="text-lg font-black">
-							LMF
+						<Link to="/" className="text-sm font-light uppercase line-through">
+							1
 						</Link>
 					</div>
 					<nav className="flex list-none space-x-12">
 						{navLinks.map((link, index) => {
 							return (
 								<li key={index}>
-									<Link to={link.to} className="text-sm text-black hover:text-black/80">
+									<Link to={link.to} className="text-sm uppercase text-black font-light hover:text-black/80 tracking-wide">
 										{link.label}
 									</Link>
 								</li>
@@ -36,7 +36,7 @@ const Header = () => {
 					</nav>
 				</div>
 
-				<div className="flex items-center space-x-8">
+				<div className="flex items-center space-x-8 md:space-x-6">
 					<div>
 						<BsSearch />
 					</div>
@@ -48,7 +48,7 @@ const Header = () => {
 							<BsPerson />
 						</span>
 					</div>
-					<div className="relative cursor-pointer select-none">
+					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
 						<BsHandbag />
 						<span className="absolute -top-3 -right-3 w-6 h-6 rounded-full flex items-center justify-center bg-black text-white border-2 border-white text-sm font-medium">0</span>
 					</div>

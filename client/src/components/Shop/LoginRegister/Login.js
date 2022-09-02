@@ -17,7 +17,7 @@ const Login = () => {
 
 	return (
 		<div className="px-12 pb-8">
-			<form onSubmit={handleSubmit} className="space-y-4">
+			<form onSubmit={handleSubmit} className="space-y-3">
 				<div>
 					<label className="block mb-1 text-sm text-black/80">Email Address</label>
 					<input
@@ -25,7 +25,7 @@ const Login = () => {
 						name="email"
 						value={formData.email}
 						onChange={handleChange}
-						className="px-2 w-full h-10 text-sm bg-transparent border border-gray-200 rounded-[3px] outline-none focus:border-black transition-colors"
+						className="px-2 w-full h-10 text-sm bg-transparent border border-gray-200 rounded-sm outline-none focus:border-black transition-colors"
 					/>
 				</div>
 				<div>
@@ -36,7 +36,7 @@ const Login = () => {
 							name="password"
 							value={formData.password}
 							onChange={handleChange}
-							className="px-2 w-full h-10 text-sm bg-transparent border border-gray-200 rounded-[3px] outline-none focus:border-black transition-colors"
+							className="px-2 w-full h-10 text-sm bg-transparent border border-gray-200 rounded-sm outline-none focus:border-black transition-colors"
 						/>
 						<span
 							onClick={() => setShowPassword(!showPassword)}
@@ -46,7 +46,7 @@ const Login = () => {
 						</span>
 					</div>
 				</div>
-				<button type="submit" className="w-full h-10 text-sm font-medium uppercase tracking-wide bg-black text-white rounded-[3px]">
+				<button type="submit" className="w-full h-10 text-sm font-medium uppercase tracking-wide bg-black text-white rounded-sm">
 					Login
 				</button>
 			</form>
