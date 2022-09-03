@@ -11,10 +11,10 @@ const Layout = ({ children }) => {
 			<Header />
 			<LoginRegisterModal />
 			<CartModal />
-			<div className="pt-8 max-w-[1280px] w-full mx-auto" style={{ minHeight: 'calc(100vh - 112px)' }}>
+			<div className="px-8 md:px-4 max-w-[1280px] mx-auto w-full h-full transition-all" style={{ minHeight: 'calc(100vh - 112px)' }}>
 				{children}
 			</div>
-			<div className="h-14">Footer</div>
+			<div className="h-14 bg-black text-white text-sm flex items-center justify-center">Footer</div>
 		</>
 	);
 };

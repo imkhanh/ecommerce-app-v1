@@ -1,12 +1,9 @@
 import React, { createContext, useReducer } from 'react';
 import Layout from '../Layout/Layout';
 import { homeReducer, homeState } from './HomeContext';
+import HomeSection from './HomeSection';
 
 export const HomeContext = createContext();
-
-const HomeSection = () => {
-	return <div>HomeSection</div>;
-};
 
 const Home = () => {
 	const [state, dispatch] = useReducer(homeReducer, homeState);

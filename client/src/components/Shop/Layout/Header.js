@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BsHandbag, BsHeart, BsPerson, BsSearch } from 'react-icons/bs';
+import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import { LayoutContext } from './Layout';
 
 const Header = () => {
-	const { dispatch } = useContext(LayoutContext);
+	const { state, dispatch } = useContext(LayoutContext);
 
 	const navLinks = [
 		{ label: 'Home', to: '/' },
@@ -15,43 +16,46 @@ const Header = () => {
 	];
 
 	return (
-		<header className="h-14 w-full fixed top-0 border-b border-gray-100 bg-white z-30">
-			<div className="h-full max-w-[1280px] w-full mx-auto flex items-center justify-between">
-				<div className="flex items-center">
-					<div className="mr-24">
-						<Link to="/" className="text-sm font-light uppercase line-through">
-							1
-						</Link>
-					</div>
-					<nav className="flex list-none space-x-12">
-						{navLinks.map((link, index) => {
-							return (
-								<li key={index}>
-									<Link to={link.to} className="text-sm uppercase text-black font-light hover:text-black/80 tracking-wide">
-										{link.label}
-									</Link>
-								</li>
-							);
-						})}
-					</nav>
-				</div>
+		<header className="h-14 px-8 md:px-4 flex items-center justify-between border-b border-gray-100 bg-white z-30 transition-all">
+			<div className="md:w-1/3 md:block hidden">
+				<span className="text-2xl text-black/80 hover:text-black cursor-pointer select-none" onClick={() => dispatch({ type: 'mobileToggle', payload: !state.mobileToggle })}>
+					{state.mobileToggle ? <IoCloseOutline /> : <IoMenuOutline />}
+				</span>
+			</div>
 
-				<div className="flex items-center space-x-8 md:space-x-6">
-					<div>
-						<BsSearch />
-					</div>
-					<div>
-						<BsHeart />
-					</div>
-					<div className="cursor-pointer select-none">
-						<span onClick={() => dispatch({ type: 'loginRegisterModal', payload: true })}>
-							<BsPerson />
-						</span>
-					</div>
-					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
-						<BsHandbag />
-						<span className="absolute -top-3 -right-3 w-6 h-6 rounded-full flex items-center justify-center bg-black text-white border-2 border-white text-sm font-medium">0</span>
-					</div>
+			<div className="w-1/3 md:flex md:justify-center">
+				<Link to="/" className="text-sm font-black text-black uppercase">
+					<span>Prima vista</span>
+				</Link>
+			</div>
+
+			<nav className="md:hidden w-1/3 flex items-center justify-center list-none space-x-12 lg:space-x-10 md:space-x-8">
+				{navLinks.map((link, index) => {
+					return (
+						<li key={index}>
+							<Link to={link.to} className="text-xs uppercase hover:text-black font-light text-black/80 tracking-wide transition-colors">
+								{link.label}
+							</Link>
+						</li>
+					);
+				})}
+			</nav>
+
+			<div className="w-1/3 flex items-center justify-end space-x-6 md:space-x-4">
+				<div className="md:hidden">
+					<BsSearch />
+				</div>
+				<div className="md:hidden">
+					<BsHeart />
+				</div>
+				<div className="cursor-pointer select-none">
+					<span onClick={() => dispatch({ type: 'loginRegisterModal', payload: true })}>
+						<BsPerson />
+					</span>
+				</div>
+				<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
+					<BsHandbag />
+					<span className="absolute -top-3 -right-3 w-6 h-6 rounded-full flex items-center justify-center bg-black text-white border-2 border-white text-sm font-medium">0</span>
 				</div>
 			</div>
 		</header>

@@ -4,7 +4,7 @@ import { LayoutContext } from './components/Shop/Layout/Layout';
 import { layoutState, layoutReducer } from './components/Shop/Layout/LayoutContext';
 
 // shop routes
-import { Home } from './components/Shop';
+import { Home, Products } from './components/Shop';
 // manager routes
 
 const App = () => {
@@ -15,6 +15,7 @@ const App = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/products" element={<Products />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>
