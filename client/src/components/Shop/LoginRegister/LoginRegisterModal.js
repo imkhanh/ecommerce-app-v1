@@ -20,26 +20,17 @@ const LoginRegisterModal = () => {
 			>
 				<div className="py-8 px-12 space-y-8">
 					<div className="text-center">
-						<h4 className="mb-4 text-sm text-black font-thin line-through uppercase">onedayonething</h4>
-						{isLogin ? <p className="text-[22px] uppercase">Your account for everything shop</p> : <p className="text-[22px] uppercase">Become a member shop</p>}
+						<h4 className="mb-4 text-sm text-black font-light uppercase">knovv</h4>
+						{isLogin ? <p className="text-[22px] font-medium uppercase">Your account for everything shop</p> : <p className="text-[22px] uppercase">Become a member shop</p>}
 					</div>
 					{isLogin ? <LoginForm /> : <RegisterForm />}
 					<div className="flex items-center justify-center">
-						{isLogin ? (
-							<p className="text-xs font-light">
-								Not a member?
-								<span onClick={() => setIsLogin(!isLogin)} className="ml-1 hover:text-black hover:underline cursor-pointer">
-									Join us
-								</span>
-							</p>
-						) : (
-							<p className="text-xs font-light">
-								Already an account?
-								<span onClick={() => setIsLogin(!isLogin)} className="ml-1 hover:text-black hover:underline cursor-pointer">
-									Login
-								</span>
-							</p>
-						)}
+						<p className="text-xs text-black/50 font-light">
+							{isLogin ? 'Not a member ?' : 'Already an account?'}
+							<span onClick={() => setIsLogin(!isLogin)} className="ml-1 hover:text-black hover:underline cursor-pointer">
+								{isLogin ? 'Join us' : '	Login'}
+							</span>
+						</p>
 					</div>
 				</div>
 			</div>

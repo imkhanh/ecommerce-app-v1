@@ -8,7 +8,7 @@ const LoginForm = () => {
 		<div>
 			<form className="space-y-4">
 				<div>
-					<label className="mb-1 block text-sm text-black/70">Email Address</label>
+					<label className="mb-1 block text-sm text-black/70">Email address</label>
 					<input type="text" name="email" className="px-2 w-full h-10 text-sm text-black border border-black/10 focus:border-black outline-none rounded-sm transition-colors" />
 				</div>
 				<div>
