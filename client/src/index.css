@@ -1,23 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-	.container {
-		@apply max-w-[1535px] w-full mx-auto px-4;
-	}
-	.link::before {
-		content: '';
-		position: absolute;
-		bottom: -20px;
-		right: 0;
-		width: 0%;
-		height: 1px;
-		background: black;
-		transition: 0.4s ease-in-out;
-	}
-	.link:hover::before {
-		left: 0;
-		width: 100%;
-	}
-}

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { layoutReducer, layoutState, LayoutContext, Home } from './components/Shop';
+import { layoutReducer, layoutState, LayoutContext, Home, Products } from './components/Shop';
 
 const App = () => {
 	const [state, dispatch] = useReducer(layoutReducer, layoutState);
@@ -10,6 +10,7 @@ const App = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/shop" element={<Products />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>
