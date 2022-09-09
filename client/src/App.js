@@ -1,20 +1,7 @@
-import React, { useReducer } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { layoutReducer, layoutState, LayoutContext, Home, Products } from './components/Shop';
+import React from 'react';
 
 const App = () => {
-	const [state, dispatch] = useReducer(layoutReducer, layoutState);
-
-	return (
-		<LayoutContext.Provider value={{ state, dispatch }}>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/shop" element={<Products />} />
-				</Routes>
-			</BrowserRouter>
-		</LayoutContext.Provider>
-	);
+	return <div>App</div>;
 };
 
 export default App;
