@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BsHandbag, BsHeart, BsSearch, BsPerson } from 'react-icons/bs';
+import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
+import { LayoutContext } from '../Layout/Layout';
 
 const Header = () => {
-	const [click, setClick] = useState(false);
+	const { state, dispatch } = useContext(LayoutContext);
 
 	const menuLinks = [
 		{ label: 'Home', to: '/' },
@@ -14,30 +16,29 @@ const Header = () => {
 	];
 
 	return (
-		<div className="h-12 w-full fixed top-0 left-0 bg-white border border-black/10 z-20">
-			<div className="relative px-8 md:px-4 h-full max-w-7xl mx-auto w-full flex items-center justify-between duration-200 ease-in-out">
-				<div className="hidden md:block cursor-pointer">
-					<span onClick={() => setClick(!click)}>{click ? 'Close' : 'Menu'}</span>
+		<div className="w-full h-14 fixed top-0 left-0 bg-white border-b shadow-sm border-black/5 z-20">
+			<div className="h-full relative px-8 md:px-4 max-w-7xl mx-auto w-full flex items-center justify-between duration-200 ease-in-out">
+				<div className="hidden md:block md:w-1/3 cursor-pointer select-none">
+					<span onClick={() => dispatch({ type: 'mobileToggle', payload: !state.mobileToggle })} className="text-xl">
+						{state.mobileToggle ? <IoCloseOutline /> : <IoMenuOutline />}
+					</span>
 				</div>
-				<div className="flex items-center">
-					<div className="mr-20 lg:mr-12 md:mr-0 duration-200 ease-in-out">
-						<Link to="/" className="text-sm font-bold uppercase tracking-widest">
-							Flex
+				<div className="w-2/3 md:w-1/3 flex items-center md:justify-center">
+					<div className="mr-16 lg:mr-8 md:mr-0 duration-200 ease-in-out">
+						<Link to="/" className="text-lg font-bold uppercase tracking-wider">
+							Prima vista
 						</Link>
 					</div>
 
 					<ul
-						className={`flex items-center md:flex-col md:justify-center md:absolute md:top-12 md:w-full md:h-screen md:bg-gray-100 ${
-							click ? 'md:opacity-100 md:left-0' : 'md:opacity-0 md:-left-full'
+						className={`flex items-center md:flex-col md:justify-center md:absolute md:top-14 md:w-full md:h-screen md:bg-gray-50 ${
+							state.mobileToggle ? 'md:opacity-100 md:left-0' : 'md:opacity-0 md:-left-full'
 						} duration-300 ease-in-out`}
 					>
 						{menuLinks.map((link, index) => {
 							return (
 								<li key={index}>
-									<Link
-										to={link.to}
-										className="mx-6 lg:mx-4 md:mx-0 md:my-6 md:block text-xs md:text-lg uppercase font-light md:font-medium text-black hover:text-black/80  duration-200 ease-in-out"
-									>
+									<Link to={link.to} className="mx-4 lg:mx-3 md:mx-0 md:my-6 md:block text-xs md:text-lg uppercase text-black hover:text-black/80 duration-200 ease-in-out">
 										{link.label}
 									</Link>
 								</li>
@@ -46,26 +47,21 @@ const Header = () => {
 					</ul>
 				</div>
 
-				<div className="flex items-center justify-end space-x-6 lg:space-x-4 duration-200 ease-in-out">
-					<div className="md:hidden block">
-						<span>
-							<BsSearch />
-						</span>
+				<div className="w-1/3 flex items-center justify-end space-x-6 lg:space-x-4 duration-200 ease-in-out">
+					<div className="lg:hidden block">
+						<BsSearch />
 					</div>
-					<div className="md:hidden block">
-						<span>
-							<BsHeart />
-						</span>
-					</div>
-					<div className="">
-						<span className="text-lg">
+					<Link to="/" className="md:hidden block">
+						<BsHeart />
+					</Link>
+					<div className="relative cursor-pointer">
+						<span className="text-lg" onClick={() => dispatch({ type: 'loginRegisterModal', payload: true })}>
 							<BsPerson />
 						</span>
 					</div>
-					<div className="relative">
-						<span>
-							<BsHandbag />
-						</span>
+					<div className="relative cursor-pointer" onClick={() => dispatch({ type: 'cartModal', payload: true })}>
+						<BsHandbag />
+						<span className="text-sm absolute -top-3 -right-3 bg-black text-white w-6 h-6 rounded-full border-2 border-white flex items-center justify-center">0</span>
 					</div>
 				</div>
 			</div>

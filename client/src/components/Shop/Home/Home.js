@@ -4,7 +4,7 @@ import Layout from '../Layout/Layout';
 
 export const HomeContext = createContext();
 
-export const Home = () => {
+const Home = () => {
 	const [state, dispatch] = useReducer(homeReducer, homeState);
 
 	return (
@@ -13,3 +13,5 @@ export const Home = () => {
 		</HomeContext.Provider>
 	);
 };
+
+export default Home;
