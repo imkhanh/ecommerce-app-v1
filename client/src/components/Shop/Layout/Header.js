@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { BsHandbag, BsHeart, BsSearch, BsPerson } from 'react-icons/bs';
+import { BsHandbag, BsHeart, BsPerson } from 'react-icons/bs';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import { LayoutContext } from '../Layout/Layout';
 
@@ -33,7 +33,7 @@ const Header = () => {
 					<ul
 						className={`flex items-center md:flex-col md:justify-center md:absolute md:top-14 md:w-full md:h-screen md:bg-gray-50 ${
 							state.mobileToggle ? 'md:opacity-100 md:left-0' : 'md:opacity-0 md:-left-full'
-						} duration-300 ease-in-out`}
+						} duration-300 ease-in-out z-50`}
 					>
 						{menuLinks.map((link, index) => {
 							return (
@@ -48,9 +48,6 @@ const Header = () => {
 				</div>
 
 				<div className="w-1/3 flex items-center justify-end space-x-6 lg:space-x-4 duration-200 ease-in-out">
-					<div className="lg:hidden block">
-						<BsSearch />
-					</div>
 					<Link to="/" className="md:hidden block">
 						<BsHeart />
 					</Link>

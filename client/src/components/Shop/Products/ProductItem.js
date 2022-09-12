@@ -19,11 +19,11 @@ const ProductItem = () => {
 				</Link>
 			</figure>
 
-			<div className="pt-4">
-				<Link to="/product/detail" className="font-bold">
+			<div className="p-4">
+				<Link to="/product/detail" className="font-medium">
 					Product 1
 				</Link>
-				<p className="mt-1">Nike</p>
+				<p className="mt-2 mb-1">Nike</p>
 				<p>$ 200</p>
 			</div>
 		</aside>

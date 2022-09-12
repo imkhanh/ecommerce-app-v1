@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
 			<Header />
 			<CartModal />
 			<LoginRegisterModal />
-			<div className="pt-14 bg-white">{children}</div>
+			{children}
 		</>
 	);
 };

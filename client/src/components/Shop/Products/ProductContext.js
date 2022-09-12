@@ -9,7 +9,6 @@ export const productReducer = (state = productState, action) => {
 			return { ...state, products: action.payload };
 		case 'loading':
 			return { ...state, loading: action.payload };
-
 		default:
 			return state;
 	}
