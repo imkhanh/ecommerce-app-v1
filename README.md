@@ -1,1 +1,1 @@
-# ecommerce-app-v1
+# Ecommerce App
