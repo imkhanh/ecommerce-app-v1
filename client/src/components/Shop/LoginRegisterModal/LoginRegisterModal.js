@@ -1,14 +1,27 @@
 import React, { useContext, useState } from 'react';
 import { LayoutContext } from '../Layout/Layout';
+import { loginReq, registerReq } from './FetchApi';
 import InputField from './InputField';
 
-const initialState = { fullname: '', username: '', email: '', password: '', success: null, error: null };
+const initialState = { name: '', email: '', password: '', success: null, error: null };
 
 const LoginRegisterModal = () => {
 	const { state, dispatch } = useContext(LayoutContext);
 	const [formData, setFormData] = useState(initialState);
 	const [showPass, setShowPass] = useState(false);
 	const [switchForm, setSwitchForm] = useState(true);
+
+	if (formData.error || formData.success) {
+		setTimeout(() => {
+			setFormData({ ...formData, name: '', email: '', password: '', error: null, success: null, loading: false });
+		}, 2000);
+	}
+
+	const alert = (type, msg) => (
+		<div className={`h-10 pl-2 flex items-center bg-${type}-100 text-${type}-500 rounded-sm`}>
+			<p className="text-sm">{msg}</p>
+		</div>
+	);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -24,17 +37,40 @@ const LoginRegisterModal = () => {
 			password: '',
 			success: null,
 			error: null,
+			loading: false,
 		});
 		setShowPass(false);
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (switchForm) {
-			console.log('login');
+			setFormData({ ...formData, loading: true });
+			try {
+				const res = await loginReq({ email: formData.email, password: formData.password });
+				if (res && res.token) {
+					setFormData({ ...formData, email: '', password: '', error: null, loading: false });
+					localStorage.setItem('user', JSON.stringify(res));
+					window.location.href = '/';
+				} else {
+					setFormData({ ...formData, email: '', password: '', error: res.error, loading: false });
+				}
+			} catch (error) {
+				console.log(error);
+			}
 		} else {
-			console.log('register');
+			setFormData({ ...formData, loading: true });
+			try {
+				const res = await registerReq({ name: formData.name, email: formData.email, password: formData.password });
+				if (res && res.success) {
+					setFormData({ ...formData, name: '', email: '', password: '', error: null, success: res.success, loading: false });
+				} else {
+					setFormData({ ...formData, name: '', email: '', password: '', error: null, success: null, loading: false });
+				}
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 
@@ -54,9 +90,8 @@ const LoginRegisterModal = () => {
 				</div>
 
 				<form onSubmit={handleSubmit} className="py-8 px-12 space-y-4">
-					{/* <div className="h-10 px-2 flex items-center bg-red-100 text-red-500 rounded-sm">
-						<p className="text-sm">Error</p>
-					</div> */}
+					{formData.success && alert('green', formData.success)}
+					{formData.error && alert('red', formData.error)}
 					{switchForm ? (
 						<>
 							<InputField label="Email address" type="text" name="email" value={formData.email} onChange={handleChange} />
@@ -64,8 +99,7 @@ const LoginRegisterModal = () => {
 						</>
 					) : (
 						<>
-							<InputField label="Full name" type="text" name="fullname" value={formData.fullname} onChange={handleChange} />
-							<InputField label="User name" type="text" name="username" value={formData.username} onChange={handleChange} />
+							<InputField label="Name" type="text" name="name" value={formData.name} onChange={handleChange} />
 							<InputField label="Email address" type="text" name="email" value={formData.email} onChange={handleChange} />
 							<InputField label="Password" type="password" name="password" value={formData.password} onChange={handleChange} showPass={showPass} setShowPass={setShowPass} />
 						</>

@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -25,13 +26,12 @@ mongoose
 	.catch((err) => console.log('Database Not Connected !!!'));
 
 // Routes
-
 app.use('/api', require('./routes/auth'));
-
-// Middleware
-const PORT = process.env.PORT || 5000;
+app.use('/api/category', require('./routes/categories'));
+app.use('/api/product', require('./routes/products'));
 
 // Run server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 	console.log(`Server running on port:::: ${PORT}`);
 });

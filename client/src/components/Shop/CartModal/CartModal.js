@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { BsX } from 'react-icons/bs';
-import { LayoutContext } from './Layout';
+import { LayoutContext } from '../Layout/Layout';
 
 const CartModal = () => {
 	const { state, dispatch } = useContext(LayoutContext);

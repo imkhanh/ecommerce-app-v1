@@ -1,13 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BsHandbag, BsHeart, BsPerson } from 'react-icons/bs';
+import { BsCreditCard, BsGear, BsHandbag, BsHeart, BsPerson, BsPersonCircle, BsPower } from 'react-icons/bs';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import { LayoutContext } from '../Layout/Layout';
+import { isAdmin, isAuth, logout } from '../LoginRegisterModal/Authentication';
 
 const Header = () => {
 	const { state, dispatch } = useContext(LayoutContext);
+	const [isVisible, setIsVisible] = useState(false);
+	const menuRef = useRef(null);
 
-	const menuLinks = [
+	useEffect(() => {
+		const handleClick = (e) => {
+			if (menuRef.current && !menuRef.current.contains(e.target)) {
+				setIsVisible(false);
+			}
+		};
+
+		window.addEventListener('click', handleClick);
+
+		return () => window.removeEventListener('click', handleClick);
+	}, []);
+
+	const navLinks = [
 		{ label: 'Home', to: '/' },
 		{ label: 'Shop', to: '/shop' },
 		{ label: 'News', to: '/news' },
@@ -35,10 +50,10 @@ const Header = () => {
 							state.mobileToggle ? 'md:opacity-100 md:left-0' : 'md:opacity-0 md:-left-full'
 						} duration-300 ease-in-out z-50`}
 					>
-						{menuLinks.map((link, index) => {
+						{navLinks.map((link, index) => {
 							return (
 								<li key={index}>
-									<Link to={link.to} className="mx-4 lg:mx-3 md:mx-0 md:my-6 md:block text-xs md:text-lg uppercase text-black hover:text-black/80 duration-200 ease-in-out">
+									<Link to={link.to} className="mx-4 lg:mx-3 md:mx-0 md:my-6 md:block text-xs md:text-lg uppercase text-black hover:text-black/70 duration-200 ease-in-out">
 										{link.label}
 									</Link>
 								</li>
@@ -51,10 +66,58 @@ const Header = () => {
 					<Link to="/" className="md:hidden block">
 						<BsHeart />
 					</Link>
-					<div className="relative cursor-pointer">
-						<span className="text-lg" onClick={() => dispatch({ type: 'loginRegisterModal', payload: true })}>
-							<BsPerson />
-						</span>
+					<div ref={menuRef} className="relative cursor-pointer">
+						{isAuth() ? (
+							<>
+								<span onClick={() => setIsVisible(!isVisible)}>
+									<BsPersonCircle />
+								</span>
+								{isVisible && (
+									<ul className="absolute right-0 z-10 w-48 mt-4 bg-white border border-gray-200 shadow-md origin-top-right">
+										{isAdmin() ? (
+											<li>
+												<Link to="/" className="py-2 px-4 border-gray-200 flex items-center text-black/70 hover:text-black hover:bg-gray-50"></Link>
+											</li>
+										) : (
+											<>
+												<li>
+													<Link to="/" className="py-2 px-4 border-gray-200 flex items-center text-black/70 hover:text-black hover:bg-gray-50">
+														<BsPerson />
+														<span className="ml-4 text-sm">Profile</span>
+													</Link>
+												</li>
+												<li>
+													<Link to="/" className="py-2 px-4 border-gray-200 flex items-center text-black/70 hover:text-black hover:bg-gray-50">
+														<BsHeart />
+														<span className="ml-4 text-sm">My Wish List</span>
+													</Link>
+												</li>
+												<li>
+													<Link to="/" className="py-2 px-4 border-gray-200 flex items-center text-black/70 hover:text-black hover:bg-gray-50">
+														<BsCreditCard />
+														<span className="ml-4 text-sm">My Order</span>
+													</Link>
+												</li>
+												<li>
+													<Link to="/" className="py-2 px-4 border-gray-200 flex items-center text-black/70 hover:text-black hover:bg-gray-50">
+														<BsGear />
+														<span className="ml-4 text-sm">Change Password</span>
+													</Link>
+												</li>
+											</>
+										)}
+										<li onClick={logout} className="py-2 px-4 border-t border-gray-200 flex items-center text-black/70 hover:text-black hover:bg-gray-50 cursor-pointer">
+											<BsPower />
+											<span className="ml-4 text-sm">Logout</span>
+										</li>
+									</ul>
+								)}
+							</>
+						) : (
+							<span className="text-lg" onClick={() => dispatch({ type: 'loginRegisterModal', payload: true })}>
+								<BsPerson />
+							</span>
+						)}
 					</div>
 					<div className="relative cursor-pointer" onClick={() => dispatch({ type: 'cartModal', payload: true })}>
 						<BsHandbag />
