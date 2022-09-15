@@ -5,10 +5,10 @@ const bcrypt = require('bcrypt');
 const authController = {
 	register: async (req, res) => {
 		try {
-			const { name, email, password } = req.body;
-			if (!name || !email || !password) return res.json({ error: 'Filed must not be empty' });
+			const { fullName, userName, email, password } = req.body;
+			if (!fullName || !userName || !email || !password) return res.json({ error: 'All fields must not be empty' });
 
-			if (name.length < 3 || name.length > 255) return res.json({ error: 'Name must be 3 - 255 character long' });
+			if (userName.length < 3 || userName.length > 255) return res.json({ error: 'User name must be 3 - 255 character long' });
 
 			if (password.length < 6) return res.json({ error: 'Password must be at least 6 character long' });
 
@@ -28,7 +28,7 @@ const authController = {
 	login: async (req, res) => {
 		try {
 			const { email, password } = req.body;
-			if (!email || !password) return res.json({ error: 'Filed must not be empty' });
+			if (!email || !password) return res.json({ error: 'All fields must not be empty' });
 
 			const user = await userModel.findOne({ email });
 			if (!user) return res.json({ error: 'Email not exists' });

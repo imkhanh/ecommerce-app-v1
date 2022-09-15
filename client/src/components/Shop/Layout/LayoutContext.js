@@ -1,7 +1,3 @@
-import React, { createContext } from 'react';
-
-export const LayoutContext = createContext();
-
 export const layoutState = {
 	mobileToggle: false,
 	authModal: false,
@@ -15,29 +11,20 @@ export const layoutState = {
 export const layoutReducer = (state = layoutState, action) => {
 	switch (action.type) {
 		case 'mobileToggle':
-			return { ...state, mobileToggle: action.type };
+			return { ...state, mobileToggle: action.payload };
 		case 'authModal':
-			return { ...state, authModal: action.type };
+			return { ...state, authModal: action.payload };
 		case 'cartModal':
-			return { ...state, cartModal: action.type };
+			return { ...state, cartModal: action.payload };
 		case 'singleProduct':
-			return { ...state, singleProduct: action.type };
+			return { ...state, singleProduct: action.payload };
 		case 'carts':
-			return { ...state, carts: action.type };
+			return { ...state, carts: action.payload };
 		case 'inCart':
-			return { ...state, inCart: action.type };
+			return { ...state, inCart: action.payload };
 		case 'loading':
-			return { ...state, loading: action.type };
+			return { ...state, loading: action.payload };
 		default:
 			return state;
 	}
-};
-
-export const Layout = ({ children }) => {
-	return (
-		<>
-			<div>Header</div>
-			{children}
-		</>
-	);
 };
