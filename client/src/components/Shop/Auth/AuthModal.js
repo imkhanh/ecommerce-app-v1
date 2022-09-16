@@ -11,18 +11,16 @@ const AuthModal = () => {
 		<div>
 			<div
 				onClick={() => dispatch({ type: 'authModal', payload: false })}
-				className={`${state.authModal ? '' : 'hidden'} fixed inset-0 bg-black opacity-70 w-full h-full z-40`}
+				className={`fixed inset-0 ${state.authModal ? 'bg-black opacity-70' : 'opacity-0 pointer-events-none'} w-full h-full z-40 duration-300 ease-in-out`}
 			/>
 			<div
 				className={`${
-					state.authModal ? '' : 'hidden'
-				} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white max-w-sm w-full h-auto rounded-sm shadow-lg z-50`}
+					state.authModal ? 'bg-white opacity-100 delay-200' : 'opacity-0 pointer-events-none'
+				} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-sm w-full h-auto rounded-sm shadow-lg duration-300 ease-in-out z-50 `}
 			>
 				<div className="py-8 px-12 text-center space-y-4">
 					<h4 className="text-sm text-black font-black uppercase">FLEX</h4>
-					<p className="text-[22px] text-black font-medium uppercase leading-6">
-						{isLogin ? 'Your account for everything shop' : 'Become a member shop'}
-					</p>
+					<p className="text-[22px] text-black font-medium uppercase leading-6">{isLogin ? 'Your account for everything shop' : 'Become a member shop'}</p>
 				</div>
 
 				{isLogin ? <Login /> : <Register />}

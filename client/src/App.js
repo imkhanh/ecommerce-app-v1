@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LayoutContext } from './components/Shop/Layout/Layout';
 import { layoutReducer, layoutState } from './components/Shop/Layout/LayoutContext';
 
-import { Home } from './components/Shop';
+import { Home, Products, SingleProduct } from './components/Shop';
 
 const App = () => {
 	const [state, dispatch] = useReducer(layoutReducer, layoutState);
@@ -12,6 +12,8 @@ const App = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/shop" element={<Products />} />
+					<Route path="/shop/detail/:id" element={<SingleProduct />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

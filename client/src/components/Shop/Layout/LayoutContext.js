@@ -3,8 +3,8 @@ export const layoutState = {
 	authModal: false,
 	cartModal: false,
 	singleProduct: null,
-	carts: null,
-	inCart: null,
+	carts: [],
+	inCart: false,
 	loading: false,
 };
 

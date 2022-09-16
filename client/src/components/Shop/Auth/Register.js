@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { IoEyeOffSharp, IoEyeSharp } from 'react-icons/io5';
+import { BsEyeSlashFill, BsEyeFill } from 'react-icons/bs';
 
 const Register = () => {
 	const [showPass, setShowPass] = useState(false);
@@ -112,9 +112,9 @@ const Register = () => {
 					/>
 					<span
 						onClick={() => setShowPass(!showPass)}
-						className="text-black/30 hover:text-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none"
+						className="text-sm text-black/30 hover:text-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none"
 					>
-						{showPass ? <IoEyeOffSharp /> : <IoEyeSharp />}
+						{showPass ? <BsEyeSlashFill /> : <BsEyeFill />}
 					</span>
 				</div>
 			</div>

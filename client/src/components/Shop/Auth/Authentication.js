@@ -5,7 +5,7 @@ export const isAdmin = () => (localStorage.getItem('auth') ? JSON.parse(localSto
 export const logout = () => {
 	localStorage.removeItem('auth');
 	localStorage.removeItem('cart');
-	localStorage.removeItem('wish');
+	localStorage.removeItem('wishList');
 
 	window.location.href = '/';
 };

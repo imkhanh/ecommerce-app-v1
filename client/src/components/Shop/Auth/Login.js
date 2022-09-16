@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { IoEyeOffSharp, IoEyeSharp } from 'react-icons/io5';
+import { BsEyeSlashFill, BsEyeFill } from 'react-icons/bs';
 
 const Login = () => {
 	const [showPass, setShowPass] = useState(false);
@@ -21,7 +21,7 @@ const Login = () => {
 				setTimeout(() => {
 					window.location.href = '/';
 					localStorage.setItem('auth', JSON.stringify(res.data));
-				}, 1500);
+				}, 1000);
 				setData({ ...data, error: null, success: res.data.success, loading: false });
 			} else {
 				setData({ ...data, error: res.data.error, success: null, loading: false });
@@ -72,9 +72,9 @@ const Login = () => {
 					/>
 					<span
 						onClick={() => setShowPass(!showPass)}
-						className="text-black/30 hover:text-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none"
+						className="text-sm text-black/30 hover:text-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none"
 					>
-						{showPass ? <IoEyeOffSharp /> : <IoEyeSharp />}
+						{showPass ? <BsEyeSlashFill /> : <BsEyeFill />}
 					</span>
 				</div>
 			</div>

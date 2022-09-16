@@ -8,7 +8,7 @@ const Home = () => {
 	const [state, dispatch] = useReducer(homeReducer, homeState);
 	return (
 		<HomeContext.Provider value={{ state, dispatch }}>
-			<Layout children={<div>Home Section</div>} />
+			<Layout children={<div className="px-8 lg:px-4 max-w-7xl mx-auto w-full">Home Section</div>} />
 		</HomeContext.Provider>
 	);
 };
