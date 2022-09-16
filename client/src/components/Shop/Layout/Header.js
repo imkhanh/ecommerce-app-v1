@@ -1,11 +1,20 @@
 import React, { useContext } from 'react';
-import { IoMenuOutline, IoCloseOutline, IoHeartOutline, IoPersonOutline, IoBagHandleOutline } from 'react-icons/io5';
+import {
+	IoMenuOutline,
+	IoCloseOutline,
+	IoHeartOutline,
+	IoPersonOutline,
+	IoBagHandleOutline,
+	IoSearchOutline,
+	IoPowerOutline,
+	IoPersonCircleOutline,
+} from 'react-icons/io5';
 import { LayoutContext } from '../Layout/Layout';
 import { Link } from 'react-router-dom';
+import { isAuth } from '../Auth/Authentication';
 
 const Header = () => {
 	const { state, dispatch } = useContext(LayoutContext);
-
 	const navLinks = [
 		{ label: 'Home', to: '/' },
 		{ label: 'Shop', to: '/' },
@@ -27,8 +36,8 @@ const Header = () => {
 				</div>
 				<div className="flex items-center md:justify-center">
 					<div>
-						<Link to="/" className="text-md text-black font-semibold uppercase tracking-widest">
-							Mern
+						<Link to="/" className="text-md text-black font-black uppercase tracking-widest">
+							Flex
 						</Link>
 					</div>
 					<nav className="ml-24 lg:ml-16 md:ml-0">
@@ -42,7 +51,7 @@ const Header = () => {
 									<li key={index}>
 										<Link
 											to={link.to}
-											className="block md:px-4 mx-6 lg:mx-4 md:mx-0 md:my-3 text-xs uppercase text-black hover:text-black/80 duration-200 ease-in-out"
+											className="block md:px-4 mx-4 md:mx-0 md:my-3 text-xs font-light uppercase text-black hover:text-black/80 duration-200 ease-in-out"
 										>
 											{link.label}
 										</Link>
@@ -54,16 +63,44 @@ const Header = () => {
 				</div>
 				<div className="flex justify-end space-x-6 lg:space-x-4 duration-200 ease-in-out">
 					<span className="md:hidden">
-						<IoHeartOutline />
+						<IoSearchOutline className="text-xl text-black/80" />
+					</span>
+					<span className="md:hidden">
+						<IoHeartOutline className="text-xl text-black/80" />
 					</span>
 					<div className="relative cursor-pointer select-none">
-						<span onClick={() => dispatch({ type: 'authModal', payload: true })}>
-							<IoPersonOutline />
-						</span>
+						{isAuth() ? (
+							<>
+								<span>
+									<IoPersonCircleOutline className="text-xl text-black/80" />
+								</span>
+								<ul className="absolute top-10 left-0 w-44 h-auto bg-white border border-gray-200 shadow-sm rounded-sm origin-top-right z-30">
+									<li>
+										<Link
+											to="/"
+											className="py-[10px] px-4 flex items-center text-black/75 hover:text-black hover:bg-gray-50 duration-200 ease-in-out"
+										>
+											<IoPersonOutline />
+											<span className="ml-4 text-sm">Profile</span>
+										</Link>
+									</li>
+									<li>
+										<div className="border-t border-gray-200 py-[10px] px-4 flex items-center text-black/75 hover:text-black hover:bg-gray-50 duration-200 ease-in-out">
+											<IoPowerOutline />
+											<span className="ml-4 text-sm">Logout</span>
+										</div>
+									</li>
+								</ul>
+							</>
+						) : (
+							<span onClick={() => dispatch({ type: 'authModal', payload: true })}>
+								<IoPersonOutline className="text-xl text-black/80" />
+							</span>
+						)}
 					</div>
 					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
-						<IoBagHandleOutline />
-						<span className="absolute -top-3 -right-3 text-sm bg-black text-white w-[22px] h-[22px] rounded-full border-2 border-white flex items-center justify-center">
+						<IoBagHandleOutline className="text-xl text-black/80" />
+						<span className="absolute -top-3 -right-3 text-sm bg-black text-white w-6 h-6 rounded-full border-2 border-white flex items-center justify-center">
 							0
 						</span>
 					</div>

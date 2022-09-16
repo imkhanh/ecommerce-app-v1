@@ -19,7 +19,7 @@ const AuthModal = () => {
 				} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white max-w-sm w-full h-auto rounded-sm shadow-lg z-50`}
 			>
 				<div className="py-8 px-12 text-center space-y-4">
-					<h4 className="text-sm text-black font-medium uppercase">FLEX</h4>
+					<h4 className="text-sm text-black font-black uppercase">FLEX</h4>
 					<p className="text-[22px] text-black font-medium uppercase leading-6">
 						{isLogin ? 'Your account for everything shop' : 'Become a member shop'}
 					</p>

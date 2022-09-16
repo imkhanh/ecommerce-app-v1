@@ -16,7 +16,7 @@ const authController = {
 			if (user) return res.json({ error: 'Email already exists' });
 
 			const passwordHash = await bcrypt.hash(password, 12);
-			const newUser = new userModel({ name, email, password: passwordHash });
+			const newUser = new userModel({ fullName, userName, email, password: passwordHash });
 
 			await newUser.save();
 
@@ -41,7 +41,7 @@ const authController = {
 			const token = jwt.sign({ _id: user._id, name: user.name, userRole: user.userRole }, process.env.JWT_SECRET, { expiresIn: '1d' });
 			const decode = jwt.verify(token, process.env.JWT_SECRET);
 
-			return res.json({ token, user: decode });
+			return res.json({ success: 'Logged successfully', token, user: decode });
 		} catch (error) {
 			console.log(error);
 		}

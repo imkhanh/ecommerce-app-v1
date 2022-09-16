@@ -1,85 +1,130 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { IoEyeOffSharp, IoEyeSharp } from 'react-icons/io5';
 
 const Register = () => {
-	const [types, setTypes] = useState({
-		showPass: false,
-		showConfirmPass: false,
-	});
-	const handleSubmit = async (e) => {};
+	const [showPass, setShowPass] = useState(false);
+	const [data, setData] = useState({ fullName: '', userName: '', email: '', password: '', error: null, success: null, loading: false });
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setData({ ...data, [name]: value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		setData({ ...data, loading: true });
+		try {
+			const res = await axios.post('/api/register', {
+				fullName: data.fullName,
+				userName: data.userName,
+				email: data.email,
+				password: data.password,
+			});
+			if (res.data.success) {
+				setData({
+					...data,
+					fullName: '',
+					userName: '',
+					email: '',
+					password: '',
+					error: null,
+					success: res.data.success,
+					loading: false,
+				});
+				setTimeout(
+					() => setData({ ...data, fullName: '', userName: '', email: '', password: '', error: null, success: null, loading: false }),
+					2000
+				);
+			} else {
+				setData({ ...data, error: res.data.error, success: null, loading: false });
+				setTimeout(() => setData({ ...data, error: null, success: null, loading: false }), 2000);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<form className="px-12 space-y-4" onSubmit={handleSubmit}>
+			{data.error && (
+				<div className={`px-2 h-10 flex items-center bg-red-100 text-red-500 rounded-sm`}>
+					<p className="text-sm">{data.error}</p>
+				</div>
+			)}
+			{data.success && (
+				<div className={`px-2 h-10 flex items-center bg-green-100 text-green-500 rounded-sm`}>
+					<p className="text-sm">{data.success}</p>
+				</div>
+			)}
 			<div>
-				<label className="mb-1 block text-sm">Full name *</label>
+				<label htmlFor="fullName" className="mb-1 block text-sm">
+					Full name *
+				</label>
 				<input
 					type="text"
 					name="fullName"
+					value={data.fullName}
+					onChange={handleChange}
 					placeholder="Please enter your full name"
 					className="px-2 text-sm w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 				/>
 			</div>
 			<div>
-				<label className="mb-1 block text-sm">User name *</label>
+				<label htmlFor="userName" className="mb-1 block text-sm">
+					User name *
+				</label>
 				<input
 					type="text"
 					name="userName"
+					value={data.userName}
+					onChange={handleChange}
 					placeholder="Please enter your user name"
 					className="px-2 text-sm w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 				/>
 			</div>
 			<div>
-				<label className="mb-1 block text-sm">Email address *</label>
+				<label htmlFor="email" className="mb-1 block text-sm">
+					Email address *
+				</label>
 				<input
 					type="text"
 					name="email"
+					value={data.email}
+					onChange={handleChange}
 					placeholder="Please enter your email address"
 					className="px-2 text-sm w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 				/>
 			</div>
 			<div>
-				<label className="mb-1 block text-sm">Password *</label>
+				<label htmlFor="password" className="mb-1 block text-sm">
+					Password *
+				</label>
 				<div className="relative">
 					<input
-						type={types.showPass ? 'text' : 'password'}
+						type={showPass ? 'text' : 'password'}
 						name="password"
+						value={data.password}
+						onChange={handleChange}
 						placeholder="Please enter your password"
 						className="px-2 text-sm w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 					/>
 					<span
-						onClick={() => setTypes({ ...types, showPass: !types.showPass })}
-						className="text-black/50 hover:text-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none"
+						onClick={() => setShowPass(!showPass)}
+						className="text-black/30 hover:text-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none"
 					>
-						{types.showPass ? <IoEyeOffSharp /> : <IoEyeSharp />}
+						{showPass ? <IoEyeOffSharp /> : <IoEyeSharp />}
 					</span>
 				</div>
 			</div>
-			<div>
-				<label className="mb-1 block text-sm">Confirm Password *</label>
-				<div className="relative">
-					<input
-						type={types.showConfirmPass ? 'text' : 'password'}
-						name="confirmPassword"
-						placeholder="Please enter your confirm password"
-						className="px-2 text-sm w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
-					/>
-					<span
-						onClick={() => setTypes({ ...types, showConfirmPass: !types.showConfirmPass })}
-						className="text-black/50 hover:text-black absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer select-none"
-					>
-						{types.showConfirmPass ? <IoEyeOffSharp /> : <IoEyeSharp />}
-					</span>
-				</div>
-			</div>
-
 			<div>
 				<p className="p-4 text-center text-black/40 text-xs font-light">
-					By creating an account, you agree to shop's Privacy Policy and Terms of Use.
+					By creating an account, you agree to Flex's Privacy Policy and Terms of Use.
 				</p>
 			</div>
-
 			<button type="submit" className="w-full h-10 text-white bg-black text-sm uppercase font-medium rounded-sm">
-				Login
+				{data.loading ? 'Loading' : 'Register'}
 			</button>
 		</form>
 	);
