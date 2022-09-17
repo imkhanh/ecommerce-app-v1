@@ -20,7 +20,9 @@ const AuthModal = () => {
 			>
 				<div className="py-8 px-12 text-center space-y-4">
 					<h4 className="text-sm text-black font-black uppercase">FLEX</h4>
-					<p className="text-[22px] text-black font-medium uppercase leading-6">{isLogin ? 'Your account for everything shop' : 'Become a member shop'}</p>
+					<p className="text-[22px] text-black font-bold uppercase leading-6 tracking-wide">
+						{isLogin ? 'Your account for everything shop' : 'Become a member shop'}
+					</p>
 				</div>
 
 				{isLogin ? <Login /> : <Register />}
@@ -28,7 +30,7 @@ const AuthModal = () => {
 				<div className="py-8 px-12">
 					<p className="text-xs font-light text-black/50 text-center">
 						{isLogin ? 'Not a Member?' : 'Already a Member?'}{' '}
-						<span onClick={() => setIsLogin(!isLogin)} className="text-black font-medium underline cursor-pointer select-none">
+						<span onClick={() => setIsLogin(!isLogin)} className="text-black hover:text-blue-500 underline cursor-pointer select-none">
 							{isLogin ? 'Join us' : 'Login'}
 						</span>
 					</p>

@@ -12,7 +12,9 @@ const Layout = ({ children }) => {
 			<Header />
 			<AuthModal />
 			<CartModal />
-			<div className="pt-14">{children}</div>
+			<div className="pt-14" style={{ minHeight: 'calc(100vh - 56px)' }}>
+				{children}
+			</div>
 			<Footer />
 		</>
 	);

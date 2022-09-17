@@ -77,18 +77,32 @@ const productController = {
 	},
 	addToWishList: async (req, res) => {
 		try {
+			const { wishArr } = req.body;
+			const products = await productModel
+				.find({
+					_id: { $in: wishArr },
+				})
+				.populate('category', '_id name image');
+
+			if (products) {
+				return res.json({ products });
+			}
 		} catch (error) {
 			console.log(error);
 		}
 	},
 	addToCart: async (req, res) => {
 		try {
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	addToCart: async (req, res) => {
-		try {
+			const { cartArr } = req.body;
+			const products = await productModel
+				.find({
+					_id: { $in: cartArr },
+				})
+				.populate('category', '_id name image');
+
+			if (products) {
+				return res.json({ products });
+			}
 		} catch (error) {
 			console.log(error);
 		}

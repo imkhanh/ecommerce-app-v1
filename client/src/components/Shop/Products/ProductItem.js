@@ -16,7 +16,7 @@ const ProductItem = ({ product }) => {
 					<BsHeart />
 				</span>
 				<span
-					className={`${!isWish(product._id, wishList) ? 'hidden' : ''} text-red-500 text-xl cursor-pointer select-none`}
+					className={`${!isWish(product._id, wishList) ? 'hidden' : ''} text-blue-500 text-xl cursor-pointer select-none`}
 					onClick={() => removeWishList(product._id, setWishList)}
 				>
 					<BsHeartFill />

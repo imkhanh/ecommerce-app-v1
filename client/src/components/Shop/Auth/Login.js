@@ -21,7 +21,7 @@ const Login = () => {
 				setTimeout(() => {
 					window.location.href = '/';
 					localStorage.setItem('auth', JSON.stringify(res.data));
-				}, 1000);
+				}, 700);
 				setData({ ...data, error: null, success: res.data.success, loading: false });
 			} else {
 				setData({ ...data, error: res.data.error, success: null, loading: false });
@@ -45,7 +45,7 @@ const Login = () => {
 				</div>
 			)}
 			<div>
-				<label htmlFor="email" className="mb-1 block text-sm">
+				<label htmlFor="email" className="mb-2 block text-xs font-light">
 					Email address *
 				</label>
 				<input
@@ -54,11 +54,11 @@ const Login = () => {
 					value={data.email}
 					onChange={handleChange}
 					placeholder="Please enter your email address"
-					className="px-2 text-sm w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
+					className="px-2 text-xs w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-white focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 duration-200 ease-in-out"
 				/>
 			</div>
 			<div>
-				<label htmlFor="password" className="mb-1 block text-sm">
+				<label htmlFor="password" className="mb-2 block text-xs font-light">
 					Password *
 				</label>
 				<div className="relative">
@@ -68,7 +68,7 @@ const Login = () => {
 						value={data.password}
 						onChange={handleChange}
 						placeholder="Please enter your password"
-						className="px-2 text-sm w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
+						className="px-2 text-xs w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-white focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 duration-200 ease-in-out"
 					/>
 					<span
 						onClick={() => setShowPass(!showPass)}
@@ -80,9 +80,7 @@ const Login = () => {
 			</div>
 
 			<div>
-				<p className="p-4 text-center text-black/40 text-xs font-light">
-					By logging in, you agree to Flex's Privacy Policy and Terms of Use.
-				</p>
+				<p className="py-2 px-4 text-center text-black/40 text-xs font-light">By logging in, you agree to Flex's Privacy Policy and Terms of Use.</p>
 			</div>
 
 			<button type="submit" className="w-full h-10 text-white bg-black text-sm uppercase font-medium rounded-sm">
