@@ -1,16 +1,16 @@
-import { useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import useClickOutSide from '../Utils/useClickOutSide';
 
 const Delivery = () => {
-	const [show, setShow] = useState(false);
+	const { divRef, isVisible, setIsVisible } = useClickOutSide();
 
 	return (
-		<div className="py-5">
-			<div onClick={() => setShow(!show)} className="flex items-center justify-between cursor-pointer select-none">
-				<span className="text-lg font-semibold">Free Delivery and Returns</span>
-				<span>{show ? <BsChevronUp /> : <BsChevronDown />}</span>
+		<div ref={divRef} className="py-5">
+			<div onClick={() => setIsVisible(!isVisible)} className="flex items-center justify-between cursor-pointer select-none">
+				<span className="text-lg font-medium">Free Delivery and Returns</span>
+				<span>{isVisible ? <BsChevronUp /> : <BsChevronDown />}</span>
 			</div>
-			{show && (
+			{isVisible && (
 				<div className="pt-6 text-black font-light space-y-8">
 					<p>Your order of 5.000.000₫ or more gets free standard delivery.</p>
 					<ul className="pl-4 list-disc">

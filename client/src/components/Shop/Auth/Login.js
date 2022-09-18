@@ -35,17 +35,17 @@ const Login = () => {
 	return (
 		<form className="px-12 space-y-4" onSubmit={handleSubmit}>
 			{data.error && (
-				<div className={`px-2 h-10 flex items-center bg-red-100 text-red-500 rounded-sm`}>
+				<div className={`px-2 h-10 flex items-center bg-red-100 text-red-500 rounded-md`}>
 					<p className="text-sm">{data.error}</p>
 				</div>
 			)}
 			{data.success && (
-				<div className={`px-2 h-10 flex items-center bg-green-100 text-green-500 rounded-sm`}>
+				<div className={`px-2 h-10 flex items-center bg-green-100 text-green-500 rounded-md`}>
 					<p className="text-sm">{data.success}</p>
 				</div>
 			)}
 			<div>
-				<label htmlFor="email" className="mb-2 block text-xs font-light">
+				<label htmlFor="email" className="mb-1 block text-sm font-light">
 					Email address *
 				</label>
 				<input
@@ -54,11 +54,11 @@ const Login = () => {
 					value={data.email}
 					onChange={handleChange}
 					placeholder="Please enter your email address"
-					className="px-2 text-xs w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-white focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 duration-200 ease-in-out"
+					className="px-2 text-xs w-full h-11 bg-white border border-black/10 rounded-md outline-none focus:border-black duration-200 ease-in-out"
 				/>
 			</div>
 			<div>
-				<label htmlFor="password" className="mb-2 block text-xs font-light">
+				<label htmlFor="password" className="mb-1 block text-sm font-light">
 					Password *
 				</label>
 				<div className="relative">
@@ -68,7 +68,7 @@ const Login = () => {
 						value={data.password}
 						onChange={handleChange}
 						placeholder="Please enter your password"
-						className="px-2 text-xs w-full h-10 bg-white border border-black/10 rounded-sm outline-none focus:border-white focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 duration-200 ease-in-out"
+						className="px-2 text-xs w-full h-11 bg-white border border-black/10 rounded-md outline-none focus:border-black duration-200 ease-in-out"
 					/>
 					<span
 						onClick={() => setShowPass(!showPass)}
@@ -83,7 +83,7 @@ const Login = () => {
 				<p className="py-2 px-4 text-center text-black/40 text-xs font-light">By logging in, you agree to Flex's Privacy Policy and Terms of Use.</p>
 			</div>
 
-			<button type="submit" className="w-full h-10 text-white bg-black text-sm uppercase font-medium rounded-sm">
+			<button type="submit" className="w-full h-10 text-white bg-black text-sm uppercase font-medium rounded-md">
 				{data.loading ? 'Loading' : 'Login'}
 			</button>
 		</form>

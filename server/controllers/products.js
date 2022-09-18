@@ -20,7 +20,7 @@ const deleteImages = (files, mode) => {
 const productController = {
 	getAll: async (req, res) => {
 		try {
-			const products = await productModel.find({}).populate('category', '_id name image');
+			const products = await productModel.find({}).populate('category', '_id name image').sort('-createdAt');
 			if (products) return res.json({ products });
 		} catch (error) {
 			console.log(error);
@@ -30,6 +30,18 @@ const productController = {
 		try {
 			const product = await productModel.findById(req.params.id).populate('category', '_id name image').populate('ratingReviews.user', '_id userName');
 			if (product) return res.json({ product });
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	getListRelated: async (req, res) => {
+		try {
+			const product = await productModel.findById(req.params.id);
+			const products = await productModel
+				.find({ category: product.category })
+				.populate('category', '_id name image')
+				.populate('ratingReviews.user', '_id userName');
+			if (products) return res.json({ products });
 		} catch (error) {
 			console.log(error);
 		}

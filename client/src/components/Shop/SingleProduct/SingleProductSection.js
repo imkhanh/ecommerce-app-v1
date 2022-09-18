@@ -8,6 +8,7 @@ import { nextSlide, prevSlide, updateQuantity, addToCart, cartList } from './Fun
 import Loading from '../Utils/Loading';
 import Delivery from './Delivery';
 import RatingReviews from './RatingReviews';
+import ListRelated from './ListRelated';
 
 const SingleProductSection = () => {
 	const { id } = useParams();
@@ -176,9 +177,7 @@ const SingleProductSection = () => {
 				</div>
 			</div>
 
-			<div className="py-12">
-				<h1 className="text-xl lg:text-lg uppercase font-bold">you also might like</h1>
-			</div>
+			<ListRelated />
 		</section>
 	);
 };

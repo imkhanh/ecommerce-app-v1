@@ -59,10 +59,10 @@ const RatingReviewForm = () => {
 
 	return (
 		<>
-			{isReview.includes(isAuth().user._id) ? (
+			{isReview.includes(isAuth().user?._id) ? (
 				''
 			) : (
-				<div className="mt-8 flex flex-col space-y-2">
+				<div className="mb-8 flex flex-col space-y-2">
 					<div className="flex flex-col">
 						<span className="text-lg font-medium">Add a review</span>
 						<span className="text-gray-400 text-sm italic font-light">Your email address will not be published. Required fields are marked *</span>

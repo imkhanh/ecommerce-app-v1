@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { ProductContext } from './Products';
-import { getAllProducts } from './FetchData';
+import { getAllProducts, getAllCategories } from './FetchData';
 import ProductItem from './ProductItem';
 import Loading from '../Utils/Loading';
+import ProductMenu from './ProductMenu';
 
 const ProductSection = () => {
 	const { state, dispatch } = useContext(ProductContext);
@@ -10,6 +11,7 @@ const ProductSection = () => {
 
 	useEffect(() => {
 		fetchData();
+		fetchCategoriesData();
 		// eslint-disable-next-line
 	}, []);
 
@@ -26,12 +28,20 @@ const ProductSection = () => {
 			console.log(error);
 		}
 	};
+	const fetchCategoriesData = async () => {
+		try {
+			const res = await getAllCategories();
+			dispatch({ type: 'categories', payload: res.data.categories });
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<section className="p-8 lg:p-4 max-w-7xl mx-auto w-full">
-			<div className="mb-8">Menu</div>
+			<ProductMenu />
 
-			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-3">
+			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-3 duration-300 ease-in-out">
 				{loading ? (
 					<Loading />
 				) : products && products.length > 0 ? (

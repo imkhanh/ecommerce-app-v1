@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { BsApp, BsBagCheck, BsGear, BsHandbag, BsHeart, BsPerson, BsPersonCircle, BsPower, BsSearch } from 'react-icons/bs';
+import { BsApp, BsBagCheck, BsGear, BsHandbag, BsHeart, BsPerson, BsPersonCircle, BsPower } from 'react-icons/bs';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import { isAdmin, isAuth, logout } from '../Auth/Authentication';
 import { LayoutContext } from '../Layout/Layout';
@@ -58,9 +58,6 @@ const Header = () => {
 				</div>
 				<div className="flex justify-end space-x-6 lg:space-x-4 duration-200 ease-in-out">
 					<div className="md:hidden">
-						<BsSearch />
-					</div>
-					<div className="md:hidden">
 						<Link to="/user/wish-list">
 							<BsHeart />
 						</Link>
@@ -72,7 +69,7 @@ const Header = () => {
 									<BsPersonCircle />
 								</span>
 								{isVisible && (
-									<ul className="absolute top-12 -right-10 w-52 h-auto bg-white border border-gray-100 shadow-md rounded-sm origin-top-right z-30">
+									<ul className="absolute top-12 -right-10 w-52 h-auto bg-white border border-gray-100 shadow-md rounded-md origin-top-right z-40">
 										{isAdmin() ? (
 											<li>
 												<Link

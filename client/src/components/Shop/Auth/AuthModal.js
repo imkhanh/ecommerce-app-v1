@@ -16,7 +16,7 @@ const AuthModal = () => {
 			<div
 				className={`${
 					state.authModal ? 'bg-white opacity-100 delay-200' : 'opacity-0 pointer-events-none'
-				} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-sm w-full h-auto rounded-sm shadow-lg duration-300 ease-in-out z-50 `}
+				} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-sm w-full h-auto rounded-md shadow-lg duration-300 ease-in-out z-50 `}
 			>
 				<div className="py-8 px-12 text-center space-y-4">
 					<h4 className="text-sm text-black font-black uppercase">FLEX</h4>
