@@ -98,23 +98,25 @@ const CartModal = () => {
 						<div className="py-4 italic text-black/50 font-light ">No product in cart</div>
 					)}
 				</div>
-				<div className="h-40 border-t border-gray-200">
-					<div className="p-4 flex items-center justify-between">
-						<span className="text-gray-500">Total</span>
-						<span className="text-lg font-bold">$ {totalPrice()}</span>
+				{carts.length > 0 && (
+					<div className="h-40 border-t border-gray-200">
+						<div className="p-4 flex items-center justify-between">
+							<span className="text-gray-500">Total</span>
+							<span className="text-lg font-bold">$ {totalPrice()}</span>
+						</div>
+						<div className="px-4">
+							<Link to="/checkout" className="py-3 bg-black text-white uppercase flex items-center justify-center rounded-md">
+								<BsPaypal />
+								<span className="ml-2 text-sm">Checkout</span>
+							</Link>
+							<div className="py-1 text-center text-sm text-black/50">or</div>
+							<Link to="/shop" className="text-black/50 hover:text-black flex items-center justify-center">
+								<BsArrowLeft />
+								<span className="ml-2 text-sm font-light italic underline">Back to shop</span>
+							</Link>
+						</div>
 					</div>
-					<div className="px-4">
-						<Link to="/checkout" className="py-3 bg-black text-white uppercase flex items-center justify-center rounded-md">
-							<BsPaypal />
-							<span className="ml-2 text-sm">Checkout</span>
-						</Link>
-						<div className="py-1 text-center text-sm text-black/50">or</div>
-						<Link to="/shop" className="text-black/50 hover:text-black flex items-center justify-center">
-							<BsArrowLeft />
-							<span className="ml-2 text-sm font-light italic underline">Back to shop</span>
-						</Link>
-					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);

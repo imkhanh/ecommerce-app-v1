@@ -10,13 +10,13 @@ const ProductItem = ({ product }) => {
 		<div className="relative mb-8 bg-white z-0">
 			<div className="absolute top-4 right-4 z-20">
 				<span
-					className={`${isWish(product._id, wishList) ? 'hidden' : ''} text-black text-xl cursor-pointer select-none`}
+					className={`${isWish(product._id, wishList) ? 'hidden' : ''} text-black text-[18px] cursor-pointer select-none`}
 					onClick={() => addToWishList(product._id, setWishList)}
 				>
 					<BsHeart />
 				</span>
 				<span
-					className={`${!isWish(product._id, wishList) ? 'hidden' : ''} text-blue-500 text-xl cursor-pointer select-none`}
+					className={`${!isWish(product._id, wishList) ? 'hidden' : ''} text-blue-500 text-[18px] cursor-pointer select-none`}
 					onClick={() => removeWishList(product._id, setWishList)}
 				>
 					<BsHeartFill />
@@ -28,11 +28,14 @@ const ProductItem = ({ product }) => {
 				</Link>
 			</figure>
 			<div className="pt-4">
-				<Link to={`/shop/detail/${product._id}`} className="text-sm uppercase font-bold">
-					{product.name}
-				</Link>
+				<div className="flex items-center justify-between">
+					<Link to={`/shop/detail/${product._id}`} className="text-sm uppercase font-bold truncate">
+						{product.name}
+					</Link>
+					<div className="flex-shrink text-sm text-black/50">({product.ratingReviews.length})</div>
+				</div>
 				<p className="mt-1 text-black/50">{product.category.name}</p>
-				<p className="mt-2 text-lg">${product.price}</p>
+				<p className="mt-2 text-base">${product.price}</p>
 			</div>
 		</div>
 	);

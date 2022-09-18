@@ -28,7 +28,7 @@ const productController = {
 	},
 	getSingleProduct: async (req, res) => {
 		try {
-			const product = await productModel.findById(req.params.id).populate('category', '_id name image');
+			const product = await productModel.findById(req.params.id).populate('category', '_id name image').populate('ratingReviews.user', '_id userName');
 			if (product) return res.json({ product });
 		} catch (error) {
 			console.log(error);
@@ -109,12 +109,30 @@ const productController = {
 	},
 	addReview: async (req, res) => {
 		try {
+			const { userId, proId, rating, review } = req.body;
+			if (!userId || !proId || !rating || !review) return res.json({ error: 'All field must be required' });
+
+			const newReview = await productModel.findByIdAndUpdate(proId, {
+				$push: {
+					ratingReviews: { user: userId, rating: rating, review: review },
+				},
+			});
+
+			await newReview.save();
+			return res.json({ success: 'Thanks for your review' });
 		} catch (error) {
 			console.log(error);
 		}
 	},
 	deleteReview: async (req, res) => {
 		try {
+			const { rId, proId } = req.body;
+			const deleteReview = await productModel.findByIdAndUpdate(proId, {
+				$pull: {
+					ratingReviews: { _id: rId },
+				},
+			});
+			if (deleteReview) return res.json({ success: 'Deleted review' });
 		} catch (error) {
 			console.log(error);
 		}

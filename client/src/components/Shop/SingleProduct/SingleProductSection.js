@@ -8,7 +8,6 @@ import { nextSlide, prevSlide, updateQuantity, addToCart, cartList } from './Fun
 import Loading from '../Utils/Loading';
 import Delivery from './Delivery';
 import RatingReviews from './RatingReviews';
-import './styles.css';
 
 const SingleProductSection = () => {
 	const { id } = useParams();

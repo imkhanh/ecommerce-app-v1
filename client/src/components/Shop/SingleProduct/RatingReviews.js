@@ -21,12 +21,9 @@ const RatingReviews = () => {
 			{show && (
 				<div className="pt-6">
 					{!isAuth() ? (
-						<>
-							<p className="mb-2 font-light">Have your say. Be the first to review the {product.name}.</p>
-							<p onClick={() => dispatch({ type: 'authModal', payload: true })} className="cursor-pointer select-none underline underline-offset-4">
-								Write a Review
-							</p>
-						</>
+						<p onClick={() => dispatch({ type: 'authModal', payload: true })} className="cursor-pointer select-none underline underline-offset-4">
+							Write a Review
+						</p>
 					) : (
 						<>
 							<ReviewDisplay />
