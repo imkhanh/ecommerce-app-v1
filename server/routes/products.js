@@ -15,16 +15,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get('/get-all', productController.getAll);
+router.get('/get-all', productController.getAllProducts);
 router.get('/get-single/:id', productController.getSingleProduct);
 router.get('/get-list-related/:id', productController.getListRelated);
-router.post('/create-product', upload.any(), productController.createProduct);
-router.patch('/update-product/:id', productController.updateProduct);
-router.delete('/delete-product/:id', productController.deleteProduct);
+router.post('/create-product', upload.any(), productController.postAddProduct);
+router.patch('/update-product/:id', productController.patchUpateProduct);
+router.delete('/delete-product/:id', productController.deletProduct);
 
-router.post('/add-wish', productController.addToWishList);
-router.post('/add-cart', productController.addToCart);
-router.post('/add-review', productController.addReview);
-router.post('/delete-review', productController.deleteReview);
+router.post('/add-wish', productController.postAddToWish);
+router.post('/add-cart', productController.postAddToCart);
+router.post('/add-review', productController.postAddReview);
+router.post('/delete-review', productController.postDeleteReview);
 
 module.exports = router;

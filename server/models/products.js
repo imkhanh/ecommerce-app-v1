@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const productSchema = new mongoose.Schema(
 	{
 		name: { type: String, required: true },
-		category: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
 		description: { type: String, required: true },
 		images: { type: Array, default: [] },
-		price: { type: String, required: true },
+		price: { type: Number, required: true },
 		quantity: { type: Number, required: true },
+		category: { type: ObjectId, ref: 'categories' },
 		status: String,
 		offer: String,
-		ratingReviews: [
+		reviews: [
 			{
 				user: { type: mongoose.Types.ObjectId, ref: 'users' },
 				rating: String,
-				review: String,
+				body: String,
 				createdAt: { type: Date, default: Date.now() },
 			},
 		],
