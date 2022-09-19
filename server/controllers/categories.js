@@ -1,6 +1,4 @@
-const categoryModel = require('../models/categories');
-const fs = require('fs');
-const path = require('path');
+const Categories = require('../models/categories');
 
 const categoryController = {
 	getAllCategories: async (req, res) => {
@@ -25,6 +23,15 @@ const categoryController = {
 	},
 	postAddCategory: async (req, res) => {
 		try {
+			const { name, description, status } = req.body;
+
+			const categoryName = await Categories.findOne({ name });
+			if (categoryName) return res.json({ error: 'This category already exists' });
+
+			const newCategory = new Categories({ name, description, status });
+			await newCategory.save();
+
+			return res.json({ success: 'Category created successfully', category: newCategory });
 		} catch (error) {
 			console.log(error);
 		}

@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const productController = require('../controllers/products');
-
 const multer = require('multer');
 const path = require('path');
 
@@ -16,14 +15,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get('/get-all', productController.getAllProducts);
-router.get('/get-single/:id', productController.getSingleProduct);
+router.get('/get-single-product/:id', productController.getSingleProduct);
 router.get('/get-list-related/:id', productController.getListRelated);
-router.post('/create-product', upload.any(), productController.postAddProduct);
+router.post('/add-product', upload.any(), productController.postAddProduct);
 router.patch('/update-product/:id', productController.patchUpateProduct);
 router.delete('/delete-product/:id', productController.deletProduct);
 
-router.post('/add-wish', productController.postAddToWish);
-router.post('/add-cart', productController.postAddToCart);
+router.post('/add-to-wish', productController.postAddToWish);
+router.post('/add-to-cart', productController.postAddToCart);
 router.post('/add-review', productController.postAddReview);
 router.post('/delete-review', productController.postDeleteReview);
 

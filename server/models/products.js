@@ -9,8 +9,8 @@ const productSchema = new mongoose.Schema(
 		price: { type: Number, required: true },
 		quantity: { type: Number, required: true },
 		category: { type: ObjectId, ref: 'categories' },
+		offer: { type: Number, default: 0 },
 		status: String,
-		offer: String,
 		reviews: [
 			{
 				user: { type: mongoose.Types.ObjectId, ref: 'users' },
