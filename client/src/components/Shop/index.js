@@ -2,5 +2,6 @@ import { LayoutContext } from './Layout/Layout';
 import { layouteReducer, layouteState } from './Layout/LayoutContext';
 import Home from './Home/Home';
 import Shop from './Products/Products';
+import SingleProduct from './SingleProduct/SingleProduct';
 
-export { LayoutContext, layouteReducer, layouteState, Home, Shop };
+export { LayoutContext, layouteReducer, layouteState, Home, Shop, SingleProduct };

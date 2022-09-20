@@ -30,7 +30,7 @@ const Header = () => {
 	];
 
 	return (
-		<header className="h-14 fixed top-0 inset-x-0 w-full bg-white border-b border-gray-100 shadow-sm z-50">
+		<header className="h-14 fixed top-0 inset-x-0 w-full bg-white border-b border-gray-100 shadow-sm z-20">
 			<div className="h-full px-8 md:px-4 flex items-center justify-between">
 				<div className="hidden md:block md:w-1/4">
 					<span
@@ -55,7 +55,7 @@ const Header = () => {
 							<li key={index}>
 								<Link
 									to={link.to}
-									className="inline-block mx-4 md:my-4 text-xs md:text-lg font-light md:font-bold text-black hover:text-black md:hover:text-black/60 uppercase transition-colors"
+									className="inline-block mx-4 md:my-4 text-xs md:text-lg font-light md:font-bold text-black hover:text-black md:hover:text-black/60 uppercase tracking-widest transition-colors"
 								>
 									{link.label}
 								</Link>
@@ -147,9 +147,11 @@ const Header = () => {
 					</div>
 					<div onClick={() => dispatch({ type: 'cartModal', payload: true })} className="relative cursor-pointer select-none">
 						<BsHandbag />
-						<span className="absolute -top-4 -right-4 w-6 h-6 rounded-full bg-black text-white text-sm font-medium flex items-center justify-center border-2 border-white">
-							0
-						</span>
+						{state.cartProduct && (
+							<span className="absolute -top-4 -right-4 w-6 h-6 rounded-full bg-black text-white text-sm font-medium flex items-center justify-center border-2 border-white">
+								{state.cartProduct?.length}
+							</span>
+						)}
 					</div>
 				</div>
 			</div>

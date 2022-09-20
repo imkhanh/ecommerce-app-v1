@@ -29,7 +29,7 @@ const productController = {
 	},
 	getSingleProduct: async (req, res) => {
 		try {
-			const product = await Products.find(req.params.id).populate('category', '_id name').populate('reviews.user', '_id name email');
+			const product = await Products.findById(req.params.id).populate('category', '_id name').populate('reviews.user', '_id name email');
 			if (product) return res.json({ product });
 		} catch (error) {
 			console.log(error);
