@@ -31,14 +31,14 @@ const authController = {
 			if (!email || !password) return res.json({ error: 'All fields must not be empty' });
 
 			const user = await userModel.findOne({ email });
-			if (!user) return res.json({ error: 'Email not exists' });
+			if (!user) return res.json({ error: 'The email not exists' });
 
 			if (password.length < 6) return res.json({ error: 'Password must be at least 6 character long' });
 
 			const isMatch = await bcrypt.compare(password, user.password);
 			if (!isMatch) return res.json({ error: 'Password is incorrect' });
 
-			const token = jwt.sign({ _id: user._id, name: user.name, userRole: user.userRole }, process.env.JWT_SECRET, { expiresIn: '1d' });
+			const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
 			const decode = jwt.verify(token, process.env.JWT_SECRET);
 
 			return res.json({ success: 'Logged successfully', token, user: decode });

@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //shop routes
-import { LayoutContext, layouteReducer, layouteState, Home, Products } from './components/Shop';
+import { LayoutContext, layouteReducer, layouteState, Home, Shop } from './components/Shop';
 //manager routes
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/products" element={<Products />} />
+					<Route path="/shop" element={<Shop />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

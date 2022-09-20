@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { LayoutContext } from '../';
+import { LayoutContext } from '..';
 import Login from './Login';
 import Register from './Register';
 
@@ -17,15 +17,15 @@ const AuthModal = () => {
 				<div className="p-8 w-[384px] h-auto rounded-sm bg-white shadow-lg space-y-8">
 					<div className="text-center">
 						<h1 className="mb-4 text-xl font-black">.K</h1>
-						<p className="text-xl uppercase font-medium">{login ? 'Your account for everything shop' : 'Become a member shop'}</p>
+						<p className="text-[22px] uppercase font-medium leading-6">{login ? 'Your account for everything shop' : 'Become a member shop'}</p>
 					</div>
 
 					<div className="px-6">{login ? <Login /> : <Register />}</div>
 
 					<div className="text-center">
-						<p onClick={() => setLogin(!login)} className="text-xs font-light text-black/80 cursor-pointer select-none">
+						<p onClick={() => setLogin(!login)} className="text-xs font-light text-black/60">
 							{login ? 'Not a member ?' : 'Already an account ?'}
-							<span className="ml-1 text-black underline underline-offset-2">{login ? 'Join us' : 'Login now'}</span>
+							<span className="ml-1 text-black font-normal underline underline-offset-2 cursor-pointer select-none">{login ? 'Join us' : 'Login'}</span>
 						</p>
 					</div>
 				</div>
