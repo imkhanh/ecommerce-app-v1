@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { BsBagCheck, BsHandbag, BsHeart, BsKey, BsPerson, BsPersonCircle, BsPower } from 'react-icons/bs';
 import { IoCloseOutline, IoMenuOutline } from 'react-icons/io5';
 import { isAdmin, isAuth, logout } from '../Auth/Authenticated';
+import { Link } from 'react-router-dom';
 import { LayoutContext } from './Layout';
 
 const Header = () => {
@@ -30,23 +30,23 @@ const Header = () => {
 	];
 
 	return (
-		<header className="h-14 fixed top-0 inset-x-0 w-full bg-white border-b border-gray-100 shadow-sm z-20">
+		<header className="h-20 fixed top-0 inset-x-0 w-full bg-white border-b border-black/10 z-20">
 			<div className="h-full px-8 md:px-4 flex items-center justify-between">
 				<div className="hidden md:block md:w-1/4">
 					<span
-						className="text-xl text-black/60 hover:text-black cursor-pointer select-none transition-colors"
+						className="text-xl text-black cursor-pointer select-none transition-colors"
 						onClick={() => dispatch({ type: 'mobileToggle', payload: !state.mobileToggle })}
 					>
 						{state.mobileToggle ? <IoCloseOutline /> : <IoMenuOutline />}
 					</span>
 				</div>
 				<div className="w-1/4 md:w-2/4 md:flex md:justify-center">
-					<Link to="/" className="text-xl font-black">
+					<Link to="/" className="text-2xl font-black">
 						.K
 					</Link>
 				</div>
 				<ul
-					className={`w-2/4 flex justify-center md:fixed md:top-14 md:w-full md:h-screen md:bg-gray-50 md:flex-col md:items-center ${
+					className={`w-2/4 flex justify-center md:fixed md:top-20 md:w-full md:h-screen md:bg-gray-50 md:flex-col md:items-center ${
 						state.mobileToggle ? 'md:left-0 md:opacity-100' : 'md:-left-full md:opacity-0'
 					} duration-300 ease-in-out`}
 				>
@@ -55,7 +55,8 @@ const Header = () => {
 							<li key={index}>
 								<Link
 									to={link.to}
-									className="inline-block mx-4 md:my-4 text-xs md:text-lg font-light md:font-bold text-black hover:text-black md:hover:text-black/60 uppercase tracking-widest transition-colors"
+									onClick={() => dispatch({ type: 'mobileToggle', payload: false })}
+									className="inline-block mx-6 lg:mx-4 md:my-4 text-xs md:text-lg font-normal md:font-bold text-black hover:text-black/60 md:hover:text-black/60 uppercase tracking-widest transition-colors"
 								>
 									{link.label}
 								</Link>

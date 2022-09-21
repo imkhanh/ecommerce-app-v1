@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { LayoutContext } from '..';
+import ProductHeader from './ProductHeader';
 import { getSingleProduct } from './FetchApi';
 
 const SingleProductSection = () => {
@@ -32,14 +33,14 @@ const SingleProductSection = () => {
 	}
 
 	return (
-		<section className="px-8 md:px-4 max-w-6xl mx-auto w-full">
-			<div>SingleProductMenu</div>
-			<div className="flex">
-				<div>
-					<div></div>
-					<div></div>
+		<section>
+			<ProductHeader />
+			<div className="flex border-t border-l divide-x divide-black/10 border-black/10">
+				<div className="w-1/2">
+					<div>1</div>
+					<div>2</div>
 				</div>
-				<div>Info</div>
+				<div className="w-1/2">Info</div>
 			</div>
 		</section>
 	);
