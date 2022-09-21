@@ -3,7 +3,7 @@ const Categories = require('../models/categories');
 const categoryController = {
 	getAllCategories: async (req, res) => {
 		try {
-			const categories = await categoryModel.find({});
+			const categories = await Categories.find({});
 			if (categories) {
 				return res.json({ categories });
 			}
@@ -13,7 +13,7 @@ const categoryController = {
 	},
 	getSingleCategory: async (req, res) => {
 		try {
-			const category = await categoryModel.findById(req.params.id);
+			const category = await Categories.findById(req.params.id);
 			if (category) {
 				return res.json({ category });
 			}

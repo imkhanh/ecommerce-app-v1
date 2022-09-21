@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
 			<Header />
 			<AuthModal />
 			<CartModal />
-			<div style={{ paddingTop: '80px', minHeight: 'calc(100vh)' }}>{children}</div>
+			<div style={{ paddingTop: '56px', minHeight: 'calc(100vh)' }}>{children}</div>
 		</>
 	);
 };

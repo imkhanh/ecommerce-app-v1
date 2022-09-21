@@ -5,7 +5,7 @@ const ProductHeader = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="py-4 px-6 border-t-0 md:border-b border-black/10 flex items-center">
+		<div className="py-4 px-8 md:px-4 border-b border-black/10 flex items-center">
 			<div className="flex items-center text-sm space-x-2 text-black/50">
 				<p onClick={() => navigate('/')} className="cursor-pointer">
 					Home

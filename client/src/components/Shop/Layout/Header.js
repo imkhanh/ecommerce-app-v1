@@ -30,7 +30,7 @@ const Header = () => {
 	];
 
 	return (
-		<header className="h-20 fixed top-0 inset-x-0 w-full bg-white border-b border-black/10 z-20">
+		<header className="h-14 fixed top-0 inset-x-0 w-full bg-white border-b border-black/10 z-20">
 			<div className="h-full px-8 md:px-4 flex items-center justify-between">
 				<div className="hidden md:block md:w-1/4">
 					<span
@@ -46,7 +46,7 @@ const Header = () => {
 					</Link>
 				</div>
 				<ul
-					className={`w-2/4 flex justify-center md:fixed md:top-20 md:w-full md:h-screen md:bg-gray-50 md:flex-col md:items-center ${
+					className={`w-2/4 flex justify-center md:fixed md:top-14 md:w-full md:h-screen md:bg-gray-50 md:flex-col md:items-center ${
 						state.mobileToggle ? 'md:left-0 md:opacity-100' : 'md:-left-full md:opacity-0'
 					} duration-300 ease-in-out`}
 				>
