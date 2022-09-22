@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { nextSlide, prevSlide } from './Functions';
-import Zoom from 'react-medium-image-zoom';
-import 'react-medium-image-zoom/dist/styles.css';
 
 const SingleProductImages = ({ product }) => {
 	const [currentImage, setCurrentImage] = useState(0);
