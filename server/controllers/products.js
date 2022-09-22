@@ -44,7 +44,7 @@ const productController = {
 			})
 				.populate('category', '_id name')
 				.populate('reviews.user', '_id name email')
-				.sort(-1);
+				.limit(4);
 			if (lists) return res.json({ lists });
 		} catch (error) {
 			console.log(error);

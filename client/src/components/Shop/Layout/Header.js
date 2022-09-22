@@ -56,7 +56,7 @@ const Header = () => {
 								<Link
 									to={link.to}
 									onClick={() => dispatch({ type: 'mobileToggle', payload: false })}
-									className="inline-block mx-6 lg:mx-4 md:my-4 text-xs md:text-lg font-normal md:font-bold text-black hover:text-black/60 md:hover:text-black/60 uppercase tracking-widest transition-colors"
+									className="inline-block mx-6 lg:mx-4 md:my-4 text-sm md:text-lg md:font-bold text-black hover:text-black/60 md:hover:text-black/60 tracking-widest transition-colors"
 								>
 									{link.label}
 								</Link>

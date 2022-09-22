@@ -3,6 +3,7 @@ export const layouteState = {
 	authModal: false,
 	cartModal: false,
 	singleProduct: null,
+	listProduct: null,
 	cartProduct: null,
 	inCart: null,
 	loading: false,
@@ -18,6 +19,8 @@ export const layouteReducer = (state = layouteState, action) => {
 			return { ...state, cartModal: action.payload };
 		case 'singleProduct':
 			return { ...state, singleProduct: action.payload };
+		case 'listProduct':
+			return { ...state, listProduct: action.payload };
 		case 'cartProduct':
 			return { ...state, cartProduct: action.payload };
 		case 'inCart':
