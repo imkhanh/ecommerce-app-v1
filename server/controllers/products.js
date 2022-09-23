@@ -29,7 +29,7 @@ const productController = {
 	},
 	getSingleProduct: async (req, res) => {
 		try {
-			const product = await Products.findById(req.params.id).populate('category', '_id name').populate('reviews.user', '_id name email');
+			const product = await Products.findById(req.params.id).populate('category', '_id name').populate('reviews.user', '_id userName email');
 			if (product) return res.json({ product });
 		} catch (error) {
 			console.log(error);
@@ -43,7 +43,7 @@ const productController = {
 				category: product.category,
 			})
 				.populate('category', '_id name')
-				.populate('reviews.user', '_id name email')
+				.populate('reviews.user', '_id userName email')
 				.limit(4);
 			if (lists) return res.json({ lists });
 		} catch (error) {
@@ -113,12 +113,45 @@ const productController = {
 	},
 	postAddReview: async (req, res) => {
 		try {
+			const { uId, pId, rating, title, review } = req.body;
+
+			if (!uId || !pId || !rating || !title || !review) return res.json({ error: 'All field must be required' });
+
+			const checkReview = await Products.findOne({ _id: pId });
+			if (checkReview.reviews.length > 0) {
+				checkReview.reviews.map((item) => {
+					if (item.user === uId) {
+						return res.json({ error: 'You already reviewed this product' });
+					}
+				});
+			}
+			const newReview = await Products.findByIdAndUpdate(pId, {
+				$push: {
+					reviews: {
+						user: uId,
+						title: title,
+						review: review,
+						rating: rating,
+					},
+				},
+			});
+			await newReview.save();
+			return res.json({ success: 'Thanks for your review' });
 		} catch (error) {
 			console.log(error);
 		}
 	},
 	postDeleteReview: async (req, res) => {
 		try {
+			const { rId, pId } = req.body;
+			if (!rId || !pId) return res.json({ error: 'All field must be required' });
+
+			await Products.findByIdAndUpdate(pId, {
+				$pull: {
+					reviews: { _id: rId },
+				},
+			});
+			return res.json({ success: 'Review deleted successfully' });
 		} catch (error) {
 			console.log(error);
 		}

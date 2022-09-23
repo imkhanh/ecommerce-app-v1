@@ -14,8 +14,9 @@ const productSchema = new mongoose.Schema(
 		reviews: [
 			{
 				user: { type: mongoose.Types.ObjectId, ref: 'users' },
+				title: String,
+				review: String,
 				rating: String,
-				body: String,
 				createdAt: { type: Date, default: Date.now() },
 			},
 		],

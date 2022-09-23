@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { ProductContext } from './Products';
 import { getAllProducts } from './FetchApi';
 import ProductItem from './ProductItem';
-import ProductHeader from './ProductHeader';
-import LoadingListRender from '../Utils/LoadingListRender';
+import { Link } from 'react-router-dom';
+import Loading from '../Utils/Loading';
 
 const ProductSection = () => {
 	const { state, dispatch } = useContext(ProductContext);
@@ -30,11 +30,34 @@ const ProductSection = () => {
 
 	return (
 		<section>
-			<ProductHeader />
+			<div className="py-4 px-8 md:px-4 border-t-0 border-b border-black/10 flex items-center justify-between">
+				<div className="flex items-center text-sm space-x-2 text-black/50">
+					<Link to="/">Home</Link>
+					<span>/</span>
+					<Link to="/">Shop</Link>
+				</div>
+				<div className="flex items-center space-x-8">
+					<select className="w-32 cursor-pointer outline-none text-sm text-black/50 hover:text-black">
+						<option>Collections</option>
+						<option>All</option>
+						<option>Men</option>
+						<option>Women</option>
+					</select>
+					<select className="w-32 cursor-pointer outline-none text-sm text-black/50 hover:text-black">
+						<option>Sort</option>
+						<option>All</option>
+						<option>Men</option>
+						<option>Women</option>
+					</select>
+				</div>
+			</div>
+			<div className="hidden py-14 border-b md:flex items-center justify-center">
+				<h1 className="h-full text-3xl font-semibold ">All Products</h1>
+			</div>
 
 			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
 				{loading ? (
-					<LoadingListRender count={8} />
+					<Loading />
 				) : products.length > 0 ? (
 					products.map((product) => <ProductItem key={product._id} product={product} />)
 				) : (

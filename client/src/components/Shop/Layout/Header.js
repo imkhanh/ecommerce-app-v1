@@ -41,7 +41,7 @@ const Header = () => {
 					</span>
 				</div>
 				<div className="w-1/4 md:w-2/4 md:flex md:justify-center">
-					<Link to="/" className="text-2xl font-black">
+					<Link to="/" className="text-2xl font-black text-black">
 						.K
 					</Link>
 				</div>

@@ -68,3 +68,35 @@ export const addToCart = (id, qty, price, setQty, dispatch, fetchData) => {
 	dispatch({ type: 'inCart', payload: cartList() });
 	fetchData();
 };
+
+export const totalPrice = () => {
+	let total = 0;
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
+	cart.forEach((item) => {
+		total += item.qty * item.price;
+	});
+	return total;
+};
+export const subTotalPrice = (id, price) => {
+	let total = 0;
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
+	cart.forEach((item) => {
+		if (item.id === id) {
+			total = item.qty * price;
+		}
+	});
+	return total;
+};
+export const totalQuantity = (id) => {
+	let total = 0;
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
+	cart.forEach((item) => {
+		if (item.id === id) {
+			total = item.qty;
+		}
+	});
+	return total;
+};
