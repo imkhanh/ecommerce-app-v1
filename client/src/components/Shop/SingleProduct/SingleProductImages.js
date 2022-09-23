@@ -10,11 +10,7 @@ const SingleProductImages = ({ product }) => {
 			<div className="md:hidden grid grid-cols-1 gap-2">
 				{product.images.length > 0 &&
 					product.images.map((img, index) => (
-						<div key={index}>
-							{index === currentImage && (
-								<img alt={product.name} src={`http://localhost:3000/uploads/products/${img}`} className="w-full h-full object-cover" />
-							)}
-						</div>
+						<img key={index} alt={product.name} src={`http://localhost:3000/uploads/products/${img}`} className="w-full h-full object-cover" />
 					))}
 			</div>
 			<div className="hidden md:block relative">

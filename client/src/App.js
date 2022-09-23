@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //shop routes
-import { LayoutContext, layouteReducer, layouteState, Home, Shop, SingleProduct } from './components/Shop';
+import { LayoutContext, layouteReducer, layouteState, Home, Shop, SingleProduct, PageNotFound } from './components/Shop';
 //manager routes
 
 const App = () => {
@@ -15,6 +15,7 @@ const App = () => {
 					<Route path="/" element={<Home />} />
 					<Route path="/shop" element={<Shop />} />
 					<Route path="/shop/product-detail/:id" element={<SingleProduct />} />
+					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

@@ -8,7 +8,7 @@ import SingleProductInfo from './SingleProductInfo';
 import SingleProductHeader from './SingleProductHeader';
 import CustomerReviews from './CustomerReviews';
 import ListRelated from './ListRelated';
-import Loading from '../Layout/Loading';
+import Loading from '../Utils/Loading';
 
 const SingleProductSection = () => {
 	const { id } = useParams();
@@ -65,7 +65,7 @@ const SingleProductSection = () => {
 				<SingleProductInfo product={product} />
 			</div>
 			<CustomerReviews />
-			<div className="p-32 lg:p-28 md:p-24 sm:py-20 sm:px-4 space-y-8 md:space-y-6 sm:space-y-4">
+			<div className="p-32 xl:p-28 lg:p-24 md:py-20 md:px-4 space-y-8 md:space-y-6 sm:space-y-4">
 				<h4 className="text-3xl md:text-2xl sm:text-xl font-bold">Simplicity</h4>
 				<p className="text-justify sm:text-sm">
 					Each Rains product is initiated to honor and challenge traditional perceptions of rainwear. In conjunction to providing quality waterproof
