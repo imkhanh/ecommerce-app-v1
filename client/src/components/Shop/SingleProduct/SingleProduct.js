@@ -2,18 +2,19 @@ import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../Layout/Layout';
 import { LayoutContext } from '..';
-import { getSingleProduct, getListRelated } from './FetchApi';
+import { getSingleProduct, getListRelated, postAddToCart } from './FetchApi';
 import SingleProductImages from './SingleProductImages';
 import SingleProductInfo from './SingleProductInfo';
 import SingleProductHeader from './SingleProductHeader';
 import CustomerReviews from './CustomerReviews';
 import ListRelated from './ListRelated';
 import Loading from '../Utils/Loading';
+import { cartList } from './Functions';
 
 const SingleProductSection = () => {
 	const { id } = useParams();
 	const { state, dispatch } = useContext(LayoutContext);
-	const { singleProduct: product, listProduct: lists, loading } = state;
+	const { singleProduct: product, listProduct: lists, inCart, loading } = state;
 
 	useEffect(() => {
 		fetchAllProducts();
@@ -31,8 +32,22 @@ const SingleProductSection = () => {
 				if (res && res.data.product) {
 					dispatch({ type: 'singleProduct', payload: res.data.product });
 					dispatch({ type: 'loading', payload: false });
+					dispatch({ type: 'inCart', payload: cartList() });
 				}
 			}, 1000);
+		} catch (error) {
+			console.log(error);
+		}
+
+		fetchCartProduct();
+	};
+
+	const fetchCartProduct = async () => {
+		try {
+			const res = await postAddToCart(id);
+			if (res && res.data.products) {
+				dispatch({ type: 'cartProduct', payload: res.data.products });
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -62,7 +77,7 @@ const SingleProductSection = () => {
 				{/* Product images */}
 				<SingleProductImages product={product} />
 				{/* Product detail */}
-				<SingleProductInfo product={product} />
+				<SingleProductInfo product={product} inCart={inCart} dispatch={dispatch} fetchAllProducts={fetchAllProducts} />
 			</div>
 			<CustomerReviews />
 			<div className="p-32 xl:p-28 lg:p-24 md:py-20 md:px-4 space-y-8 md:space-y-6 sm:space-y-4">

@@ -32,7 +32,7 @@ const ProductSection = () => {
 		<section>
 			<ProductHeader />
 
-			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 duration-200 ease-in-out">
+			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
 				{loading ? (
 					<LoadingListRender count={8} />
 				) : products.length > 0 ? (

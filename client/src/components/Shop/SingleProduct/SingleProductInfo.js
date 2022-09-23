@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { updateQuantity } from './Functions';
+import { updateQuantity, addToCart } from './Functions';
 import { isWish, addToWish, removeToWish } from '../Products/Functions';
 import { BsArrowLeft, BsHeartFill } from 'react-icons/bs';
 
-const SingleProductInfo = ({ product }) => {
+const SingleProductInfo = ({ product, inCart, dispatch, fetchAllProducts }) => {
 	const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem('wishList')));
 	const [qty, setQty] = useState(1);
 	const [alert, setAlert] = useState(false);
@@ -76,7 +76,23 @@ const SingleProductInfo = ({ product }) => {
 				)}
 			</div>
 			<div className="grid grid-cols-2 lg:grid-cols-1 md:grid-cols-2 gap-3">
-				<button className="w-full h-14 text-lg font-medium bg-black text-white border border-black rounded-full">Add to Bag</button>
+				{product.quantity !== 0 ? (
+					inCart && inCart.includes(product._id) ? (
+						<button className="w-full h-14 text-lg font-medium bg-black text-white border border-black rounded-full">In Cart</button>
+					) : (
+						<button
+							onClick={() => addToCart(product._id, qty, product.price, setQty, dispatch, fetchAllProducts)}
+							className="w-full h-14 text-lg font-medium bg-black text-white border border-black rounded-full"
+						>
+							Add to Bag
+						</button>
+					)
+				) : inCart && inCart.includes(!product._id) ? (
+					<button className="w-full h-14 text-lg font-medium bg-black text-white border border-black rounded-full">In Cart</button>
+				) : (
+					<button className="w-full h-14 text-lg font-medium bg-black text-white border border-black rounded-full">Out of stock</button>
+				)}
+
 				<button
 					onClick={() => addToWish(product._id, setWishList)}
 					className={`${
