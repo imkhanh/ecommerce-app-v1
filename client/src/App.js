@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useReducer } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { LayoutContext, layoutReducer, layoutState, Home, Products, SingleProduct } from './components/shop';
 
 const App = () => {
-	return <div>App</div>;
+	const [state, dispatch] = useReducer(layoutReducer, layoutState);
+
+	return (
+		<LayoutContext.Provider value={{ state, dispatch }}>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/shop" element={<Products />} />
+					<Route path="/shop/product-detail/:id" element={<SingleProduct />} />
+				</Routes>
+			</BrowserRouter>
+		</LayoutContext.Provider>
+	);
 };
 
 export default App;
