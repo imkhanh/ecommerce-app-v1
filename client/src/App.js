@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { LayoutContext, layoutReducer, layoutState, Home, Products, SingleProduct } from './components/shop';
+import { LayoutContext, layoutReducer, layoutState, Home, Products, SingleProduct, PageNotFound } from './components/shop';
 
 const App = () => {
 	const [state, dispatch] = useReducer(layoutReducer, layoutState);
@@ -12,6 +12,7 @@ const App = () => {
 					<Route path="/" element={<Home />} />
 					<Route path="/shop" element={<Products />} />
 					<Route path="/shop/product-detail/:id" element={<SingleProduct />} />
+					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

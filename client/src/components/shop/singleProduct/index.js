@@ -5,6 +5,7 @@ import { getSingleProduct, getListRelated } from './FetchApi';
 import { BsArrowLeft, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import ListRelated from './ListRelated';
 import Reviews from './Reviews';
+import Loading from '../layout/Loading';
 
 const SingleProductSection = () => {
 	const { id } = useParams();
@@ -51,7 +52,7 @@ const SingleProductSection = () => {
 	};
 
 	if (loading) {
-		return <div>Loading</div>;
+		return <Loading />;
 	} else if (!product) {
 		return <div className="text-sm font-light text-black/50 italic">Product not found</div>;
 	}
@@ -165,7 +166,7 @@ const SingleProductSection = () => {
 					</div>
 				</div>
 			</div>
-			<Reviews />
+			{/* <Reviews /> */}
 			<div className="p-32 xl:p-28 lg:p-24 md:py-20 md:px-4 space-y-8 md:space-y-6 sm:space-y-4">
 				<h4 className="text-3xl md:text-2xl sm:text-xl font-bold">Simplicity</h4>
 				<p className="text-justify sm:text-sm">
@@ -173,7 +174,7 @@ const SingleProductSection = () => {
 					products, Rains apparel, bags, and accessories are designed to mix function with fashion.
 				</p>
 			</div>
-			<ListRelated lists={lists} />
+			{/* <ListRelated lists={lists} /> */}
 		</section>
 	);
 };

@@ -21,8 +21,6 @@ router.post('/add-product', upload.any(), productController.postAddProduct);
 router.patch('/update-product/:id', productController.patchUpateProduct);
 router.delete('/delete-product/:id', productController.deletProduct);
 
-router.post('/add-to-wish', productController.postAddToWish);
-router.post('/add-to-cart', productController.postAddToCart);
 router.post('/add-review', productController.postAddReview);
 router.post('/delete-review', productController.postDeleteReview);
 

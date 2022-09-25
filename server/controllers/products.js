@@ -89,28 +89,6 @@ const productController = {
 			console.log(error);
 		}
 	},
-	postAddToCart: async (req, res) => {
-		try {
-			const { cartArr } = req.body;
-			const products = await Products.find({
-				_id: { $in: cartArr },
-			}).populate('category', '_id name');
-			if (products) return res.json({ products });
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	postAddToWish: async (req, res) => {
-		try {
-			const { wishArr } = req.body;
-			const products = await Products.find({
-				_id: { $in: wishArr },
-			}).populate('category', '_id name');
-			if (products) return res.json({ products });
-		} catch (error) {
-			console.log(error);
-		}
-	},
 	postAddReview: async (req, res) => {
 		try {
 			const { uId, pId, rating, title, review } = req.body;

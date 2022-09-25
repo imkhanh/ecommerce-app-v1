@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductsContext } from './';
 import { getAllProducts } from './FetchApi';
+import Loading from '../layout/Loading';
 import ProductItem from './ProductItem';
 
 const ProductSection = () => {
@@ -56,7 +57,7 @@ const ProductSection = () => {
 
 			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
 				{loading ? (
-					<div>Loading</div>
+					<Loading />
 				) : products.length > 0 ? (
 					products.map((product) => <ProductItem key={product._id} product={product} />)
 				) : (
