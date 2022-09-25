@@ -11,15 +11,19 @@ const Login = () => {
 
 		setData({ ...data, loading: true });
 		try {
-			const res = await axios.post('/api/login', { ...data });
-			window.location.href = '/';
-			localStorage.setItem('jwt', JSON.stringify(res.data.accessToken));
-			setData({ ...data, loading: false });
+			const res = await axios.post('/api/login', { email: data.email, password: data.password });
+			if (res.data.success) {
+				window.location.href = '/';
+				localStorage.setItem('auth', JSON.stringify(res.data));
+				setData({ ...data, loading: false });
+			} else {
+				setData({ ...data, email: '', password: '', error: res.data.error, loading: false });
+				setTimeout(() => {
+					setData({ ...data, email: '', password: '', error: false, loading: false });
+				}, 1000);
+			}
 		} catch (error) {
-			setData({ ...data, email: '', password: '', error: error.response.data.error, loading: false });
-			setTimeout(() => {
-				setData({ ...data, email: '', password: '', error: false, loading: false });
-			}, 1000);
+			console.log(error);
 		}
 	};
 

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { BsEyeSlashFill, BsEyeFill } from 'react-icons/bs';
 
@@ -5,17 +6,11 @@ const Register = () => {
 	const [showPass, setShowPass] = useState(false);
 	const [data, setData] = useState({ fullName: '', userName: '', email: '', password: '', error: '', success: '', loading: false });
 
-	// if (data.error || data.success) {
-	// 	setTimeout(() => {
-	// 		setData({ ...data, fullName: '', userName: '', email: '', password: '', error: '', success: '', loading: false });
-	// 	}, 2000);
-	// }
-
-	const alert = (msg, type) => (
-		<div className={`mb-4 px-2 py-[10px] text-${type}-500 bg-${type}-100 rounded-sm`}>
-			<p className="text-xs font-normal">{msg}</p>
-		</div>
-	);
+	if (data.error || data.success) {
+		setTimeout(() => {
+			setData({ ...data, fullName: '', userName: '', email: '', password: '', error: '', success: '', loading: false });
+		}, 2000);
+	}
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -27,6 +22,13 @@ const Register = () => {
 
 		setData({ ...data, loading: true });
 		try {
+			const res = await axios.post('/api/register', { fullName: data.fullName, userName: data.userName, email: data.email, password: data.password });
+
+			if (res.data.success) {
+				setData({ ...data, fullName: '', userName: '', email: '', password: '', error: false, success: res.data.success, loading: false });
+			} else {
+				setData({ ...data, fullName: '', userName: '', email: '', password: '', error: res.data.error, success: false, loading: false });
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -34,8 +36,16 @@ const Register = () => {
 
 	return (
 		<>
-			{data.error && alert(data.msg, 'red')}
-			{data.success && alert(data.msg, 'green')}
+			{data.error && (
+				<div className="mb-4 px-2 py-[10px] text-red-500 bg-red-100">
+					<p className="text-xs font-normal">{data.error}</p>
+				</div>
+			)}
+			{data.success && (
+				<div className="mb-4 px-2 py-[10px] text-green-500 bg-green-100">
+					<p className="text-xs font-normal">{data.success}</p>
+				</div>
+			)}
 
 			<form onSubmit={handleSubmit}>
 				<div className="mb-4">
