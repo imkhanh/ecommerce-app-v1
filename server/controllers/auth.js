@@ -6,12 +6,15 @@ const authController = {
 	register: async (req, res) => {
 		try {
 			const { fullName, userName, email, password } = req.body;
-			if (!fullName || !userName || !email || !password) return res.json({ error: 'All fields must not be empty' });
+			if (!fullName) return res.json({ error: 'Please enter your full name' });
+			if (!userName) return res.json({ error: 'Please enter your user name' });
+			if (!email) return res.json({ error: 'Please enter your email' });
+			if (!password) return res.json({ error: 'Please enter your password' });
 
 			if (userName.length < 3 || userName.length > 255)
-				return res.json({ error: 'User name must be 3 - 255 character long' });
+				return res.json({ error: 'User name must be 3 - 255 characters long' });
 
-			if (password.length < 6) return res.json({ error: 'Password must be at least 6 character long' });
+			if (password.length < 6) return res.json({ error: 'Password must be at least 6 characters long' });
 
 			const user = await userModel.findOne({ email });
 			if (user) return res.json({ error: 'Email already exists' });
@@ -30,7 +33,7 @@ const authController = {
 					fullName: user.fullName,
 					userName: user.userName,
 					email: user.email,
-					password: user.password,
+					password: '',
 					role: user.role,
 				},
 			});
@@ -41,12 +44,13 @@ const authController = {
 	login: async (req, res) => {
 		try {
 			const { email, password } = req.body;
-			if (!email || !password) return res.json({ error: 'All fields must not be empty' });
+			if (!email) return res.json({ error: 'Please enter your email' });
+			if (!password) return res.json({ error: 'Please enter your password' });
 
 			const user = await userModel.findOne({ email });
 			if (!user) return res.json({ error: 'The email not exists' });
 
-			if (password.length < 6) return res.json({ error: 'Password must be at least 6 character long' });
+			if (password.length < 6) return res.json({ error: 'Password must be at least 6 characters long' });
 
 			const isMatch = await bcrypt.compare(password, user.password);
 			if (!isMatch) return res.json({ error: 'Password is incorrect' });
@@ -61,7 +65,7 @@ const authController = {
 					fullName: user.fullName,
 					userName: user.userName,
 					email: user.email,
-					password: user.password,
+					password: '',
 					role: user.role,
 				},
 			});
