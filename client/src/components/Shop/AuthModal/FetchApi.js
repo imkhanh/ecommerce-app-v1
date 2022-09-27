@@ -9,9 +9,9 @@ export const login = async ({ email, password }) => {
 	}
 };
 
-export const register = async (data) => {
+export const register = async ({ fullName, userName, email, password }) => {
 	try {
-		const res = await axios.post('/api/register', { data });
+		const res = await axios.post('/api/register', { fullName, userName, email, password });
 		return res;
 	} catch (error) {
 		console.log(error);

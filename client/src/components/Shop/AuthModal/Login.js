@@ -11,16 +11,23 @@ const Login = () => {
 		loading: false,
 	});
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setData({ ...data, [name]: value });
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		setData({ ...data, loading: true });
 		try {
 			const res = await login({ email: data.email, password: data.password });
-			console.log(res);
+			if (res && res.data.success) {
+				localStorage.setItem('auth', JSON.stringify(res.data));
+				window.location.href = '/';
+				setData({ ...data, loading: false });
+			} else {
+				setData({ ...data, error: res.data.error, loading: false });
+
+				setTimeout(() => {
+					setData({ ...data, error: res.data.error, loading: false });
+				}, 2000);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -28,6 +35,11 @@ const Login = () => {
 
 	return (
 		<>
+			{data.error && (
+				<div className="mb-4 pl-2 h-10 flex items-center border-l-2 border-red-700 bg-red-100 text-red-700">
+					<p className="text-xs font-medium">{data.error}</p>
+				</div>
+			)}
 			<form onSubmit={handleSubmit}>
 				<div className="mb-4">
 					<span className="mb-1 block text-sm text-black">Email address</span>
@@ -35,9 +47,9 @@ const Login = () => {
 						type="text"
 						name="email"
 						value={data.email}
-						onChange={handleChange}
+						onChange={(e) => setData({ ...data, email: e.target.value, error: false })}
 						placeholder="Please enter your email address"
-						className="px-2 text-sm w-full h-10 outline-none text-black bg-white border border-black/10 placeholder:text-sm  focus-within:border-black rounded-sm duration-200 ease-in-out"
+						className="px-2 text-sm w-full h-10 outline-none text-black bg-white border border-black/10 placeholder:text-xs  focus:border-black rounded-sm"
 					/>
 				</div>
 				<div className="mb-4">
@@ -47,9 +59,9 @@ const Login = () => {
 							type={showPassword ? 'text' : 'password'}
 							name="password"
 							value={data.password}
-							onChange={handleChange}
+							onChange={(e) => setData({ ...data, password: e.target.value, error: false })}
 							placeholder="Please enter your password"
-							className="px-2 text-sm w-full h-10 outline-none text-black bg-white border border-black/10 placeholder:text-sm  focus-within:border-black rounded-sm duration-200 ease-in-out"
+							className="px-2 text-sm w-full h-10 outline-none text-black bg-white border border-black/10 placeholder:text-xs  focus:border-black rounded-sm"
 						/>
 						<span
 							onClick={() => setShowPassword(!showPassword)}

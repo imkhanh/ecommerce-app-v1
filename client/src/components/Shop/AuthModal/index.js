@@ -16,14 +16,14 @@ const AuthModal = () => {
 					state.authToggle ? '' : 'hidden'
 				} fixed top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 max-w-sm w-full rounded-sm shadow-lg bg-white z-[70]`}
 			>
-				<div className="mb-8 py-4 px-8 flex flex-col items-center justify-center space-y-4">
-					<h4 className="text-black font-bold">Blancos</h4>
-					<p className="text-center text-[22px] text-black font-medium uppercase leading-5">
+				<div className="mb-4 py-4 px-8 flex flex-col items-center justify-center space-y-4">
+					<h4 className="text-sm text-black font-bold">Blancos</h4>
+					<p className="text-center text-[22px] text-black font-medium uppercase leading-6">
 						{login ? 'Your account for everything shop' : 'Become a member shop'}
 					</p>
 				</div>
 
-				<div className="mb-8 px-12">{login ? <Login /> : <Register />}</div>
+				<div className="mb-8 px-14">{login ? <Login /> : <Register />}</div>
 				<div className="py-6 border-t border-black/10 flex items-center justify-center">
 					<p className="text-xs text-black/50 font-light">
 						{login ? 'Not a member?' : 'Already an account?'}

@@ -1,11 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BsPerson, BsHeart, BsHandbag } from 'react-icons/bs';
+import {
+	BsPerson,
+	BsHeart,
+	BsHandbag,
+	BsPersonCircle,
+	BsAppIndicator,
+	BsPower,
+	BsKey,
+	BsReceipt,
+} from 'react-icons/bs';
 import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import { LayoutContext } from '..';
+import { isAuth, isAdmin, logout } from '../AuthModal/Authenticated';
 
 const Header = () => {
 	const { state, dispatch } = useContext(LayoutContext);
+	const dropRef = useRef(null);
+	const [isVisible, setIsVisible] = useState(false);
+
+	useEffect(() => {
+		const handleClick = (e) => {
+			if (dropRef.current && !dropRef.current.contains(e.target)) {
+				setIsVisible(false);
+			}
+		};
+		window.addEventListener('click', handleClick);
+		return () => window.removeEventListener('click', handleClick);
+	}, []);
 
 	const menuLinks = [
 		{ id: 1, label: 'Home', to: '/' },
@@ -20,7 +42,7 @@ const Header = () => {
 			<li key={link.id}>
 				<Link
 					to={link.to}
-					className="block mx-6 lg:mx-4 md:mx-0 md:my-4 text-xs md:text-lg font-normal md:font-medium text-black/70 hover:text-black uppercase "
+					className="block mx-6 lg:mx-4 md:mx-0 md:my-4 text-xs md:text-lg font-normal md:font-medium  hover:text-black uppercase "
 				>
 					{link.label}
 				</Link>
@@ -57,10 +79,81 @@ const Header = () => {
 							<BsHeart />
 						</span>
 					</div>
-					<div className="cursor-pointer">
-						<span onClick={() => dispatch({ type: 'authToggle', payload: true })}>
-							<BsPerson />
-						</span>
+					<div ref={dropRef} className="relative cursor-pointer">
+						{isAuth() ? (
+							<>
+								<span onClick={() => setIsVisible(!isVisible)}>
+									<BsPersonCircle />
+								</span>
+								{isVisible && (
+									<ul className="absolute top-12 right-0 origin-top-right bg-white w-48 h-auto shadow-sm round-sm border border-gray-200 z-20">
+										{isAdmin() ? (
+											<li>
+												<Link
+													to="/admin/dashboard"
+													className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
+												>
+													<BsAppIndicator />
+													<span className="ml-4 text-sm">Admin</span>
+												</Link>
+											</li>
+										) : (
+											<>
+												<li>
+													<Link
+														to="/user/profile"
+														className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
+													>
+														<BsPerson />
+														<span className="ml-4 text-sm">Profile</span>
+													</Link>
+												</li>
+												<li>
+													<Link
+														to="/user/wish-list"
+														className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
+													>
+														<BsHeart />
+														<span className="ml-4 text-sm">Wish List</span>
+													</Link>
+												</li>
+												<li>
+													<Link
+														to="/user/order-list"
+														className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
+													>
+														<BsReceipt />
+														<span className="ml-4 text-sm">Order List</span>
+													</Link>
+												</li>
+												<li>
+													<Link
+														to="/user/change-password"
+														className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
+													>
+														<BsKey />
+														<span className="ml-4 text-sm">Change Password</span>
+													</Link>
+												</li>
+											</>
+										)}
+										<li>
+											<div
+												onClick={() => logout()}
+												className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
+											>
+												<BsPower />
+												<span className="ml-4 text-sm">Logout</span>
+											</div>
+										</li>
+									</ul>
+								)}
+							</>
+						) : (
+							<span onClick={() => dispatch({ type: 'authToggle', payload: true })}>
+								<BsPerson />
+							</span>
+						)}
 					</div>
 					<div onClick={() => dispatch({ type: 'cartToggle', payload: true })} className="relative cursor-pointer">
 						<BsHandbag />
