@@ -51,7 +51,7 @@ const Header = () => {
 	});
 
 	return (
-		<header className="w-full fixed top-0 inset-x-0 border-b border-black/10 bg-white z-20">
+		<header className="w-full fixed top-0 inset-x-0 border-b border-black/10 bg-white z-40">
 			<div className="h-14 px-8 lg:px-4 flex items-center justify-between duration-200 ease-in-out">
 				<div className="hidden md:block md:w-1/3">
 					<span

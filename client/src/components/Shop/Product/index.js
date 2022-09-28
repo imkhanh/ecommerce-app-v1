@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight, BsDash, BsPlus } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import Layout, { LayoutContext } from '../Layout';
 import { getSingleProduct } from './FetchApi';
@@ -54,8 +54,10 @@ const ProductSection = () => {
 										key={index}
 										alt={product.name}
 										onClick={() => setCurrentImage(index)}
-										className={`w-24 h-24 md:w-20 md:h-20 object-cover border-r-2 ${
-											currentImage === index ? 'border-black opacity-100' : 'border-r-white opacity-50'
+										className={`w-24 h-24 md:w-20 md:h-20 object-cover border-r-2 lg:border-t-2 lg:border-r-0 ${
+											currentImage === index
+												? 'border-black opacity-100'
+												: 'border-r-white lg:border-t-white opacity-50'
 										} cursor-pointer duration-200 ease-in-out`}
 										src={`http://localhost:3000/uploads/products/${img}`}
 									/>
@@ -133,12 +135,12 @@ const ProductSection = () => {
 					<div className="mb-8 flex flex-col">
 						<span className="mb-2">Quantity: {product.quantity}</span>
 						<div className="flex items-center">
-							<span className="w-8 h-8 rounded-md cursor-pointer border border-black/10 flex items-center justify-center">
-								-
+							<span className="w-8 h-8 rounded-md cursor-pointer border border-black/10 hover:border-black flex items-center justify-center duration-200 ease-in-out">
+								<BsDash />
 							</span>
-							<span className="w-12 text-center">1</span>
-							<span className="w-8 h-8 rounded-md cursor-pointer border border-black/10 flex items-center justify-center">
-								+
+							<span className="w-12 text-center text-sm">1</span>
+							<span className="w-8 h-8 rounded-md cursor-pointer border border-black/10 hover:border-black flex items-center justify-center duration-200 ease-in-out">
+								<BsPlus />
 							</span>
 						</div>
 					</div>

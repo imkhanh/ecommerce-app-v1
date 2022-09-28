@@ -6,7 +6,7 @@ const ProductItem = ({ product }) => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="relative flex flex-col w-full h-full bg-white border-r border-b border-black/10 select-none">
+		<div className="mb-8 relative flex flex-col w-full h-full bg-white select-none">
 			{product.status && (
 				<div className="absolute top-4 left-8 z-20">
 					<span
@@ -34,7 +34,7 @@ const ProductItem = ({ product }) => {
 					alt={product.name}
 					onClick={() => navigate(`/shop/product-detail/${product._id}`)}
 					src={`http://localhost:3000/uploads/products/${product.images[0]}`}
-					className="w-full h-[280px] md:h-full object-contain hover:scale-110 duration-200 ease-in-out cursor-pointer"
+					className="w-full h-[280px] md:h-full object-contain cursor-pointer"
 				/>
 			</div>
 			<div className="flex-shrink py-4 px-8 lg:px-4">

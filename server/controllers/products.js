@@ -18,6 +18,76 @@ const deleteImages = (type, images) => {
 	}
 };
 
+const handleQuery = async (req, res, query) => {
+	try {
+		const products = await Products.find({ $name: { $search: query } }).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+const handlePrice = async (req, res, price) => {
+	try {
+		const products = await Products.find({
+			price: {
+				$gte: price[0],
+				$lte: price[1],
+			},
+		}).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+const handleCategory = async (req, res, category) => {
+	try {
+		const products = await Products.find({ category }).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+const handleBrand = async (req, res, brand) => {
+	try {
+		const products = await Products.find({ brand }).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+const handleColor = async (req, res, color) => {
+	try {
+		const products = await Products.find({ color }).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+const handleSize = async (req, res, size) => {
+	try {
+		const products = await Products.find({ size }).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+const handleShipping = async (req, res, shipping) => {
+	try {
+		const products = await Products.find({ shipping }).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+const handleStatus = async (req, res, status) => {
+	try {
+		const products = await Products.find({ status }).populate('category', '_id name');
+		if (products) return res.json({ products });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 const productController = {
 	getAllProducts: async (req, res) => {
 		try {
@@ -29,7 +99,9 @@ const productController = {
 	},
 	getSingleProduct: async (req, res) => {
 		try {
-			const product = await Products.findById(req.params.id).populate('category', '_id name').populate('reviews.user', '_id userName email');
+			const product = await Products.findById(req.params.id)
+				.populate('category', '_id name')
+				.populate('reviews.user', '_id userName email');
 			if (product) return res.json({ product });
 		} catch (error) {
 			console.log(error);
@@ -54,7 +126,8 @@ const productController = {
 		try {
 			const imageArray = [];
 			const files = req.files;
-			const { name, description, category, price, quantity, status, offer, images } = req.body;
+			const { name, description, category, price, quantity, status, offer, images, color, size, brand, shipping } =
+				req.body;
 
 			const productName = await Products.findOne({ name });
 			if (productName) {
@@ -70,7 +143,20 @@ const productController = {
 				imageArray.push(img.filename);
 			}
 
-			const newProduct = new Products({ name, description, category, price, quantity, status, offer, images: imageArray });
+			const newProduct = new Products({
+				name,
+				description,
+				category,
+				price,
+				quantity,
+				status,
+				offer,
+				images: imageArray,
+				color,
+				size,
+				brand,
+				shipping,
+			});
 			await newProduct.save();
 			return res.json({ success: 'Product created successfully', product: newProduct });
 		} catch (error) {
@@ -132,6 +218,34 @@ const productController = {
 			return res.json({ success: 'Review deleted successfully' });
 		} catch (error) {
 			console.log(error);
+		}
+	},
+	//search filter
+	getProductsByFilters: async (req, res) => {
+		const { query, price, category, brand, color, size, shipping, status } = req.body;
+		if (query) {
+			await handleQuery(req, res, query);
+		}
+		if (price !== undefined) {
+			await handlePrice(req, res, price);
+		}
+		if (category) {
+			await handleCategory(req, res, category);
+		}
+		if (brand) {
+			await handleBrand(req, res, brand);
+		}
+		if (color) {
+			await handleColor(req, res, color);
+		}
+		if (size) {
+			await handleSize(req, res, size);
+		}
+		if (shipping) {
+			await handleShipping(req, res, shipping);
+		}
+		if (status) {
+			await handleStatus(req, res, status);
 		}
 	},
 };

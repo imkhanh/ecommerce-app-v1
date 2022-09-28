@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { ProductsContext } from './';
 import { getAllProducts } from './FetchApi';
 import ProductItem from './ProductItem';
+import ProductSidebar from './ProductSidebar';
 
 const ProductSection = () => {
 	const { state, dispatch } = useContext(ProductsContext);
@@ -12,33 +13,41 @@ const ProductSection = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	const fetchProducts = async () => {
+	const fetchProducts = () => {
 		dispatch({ type: 'loading', payload: true });
-		try {
-			const res = await getAllProducts();
-			dispatch({ type: 'products', payload: res.data.products });
-			dispatch({ type: 'loading', payload: false });
-		} catch (error) {
-			console.log(error);
-		}
+
+		getAllProducts()
+			.then((res) => {
+				dispatch({ type: 'products', payload: res.data.products });
+				dispatch({ type: 'loading', payload: false });
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (
 		<section>
-			<div className="py-4 px-8 lg:px-4 flex items-center justify-between">
-				<div>1</div>
-				<div>2</div>
-			</div>
-			<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 border-t border-l border-black/10">
-				{loading ? (
-					<div>Loading</div>
-				) : products.length > 0 ? (
-					products.map((product) => {
-						return <ProductItem key={product._id} product={product} />;
-					})
-				) : (
-					<div>No product found</div>
-				)}
+			<ProductSidebar />
+			<div>
+				<div className="py-4 px-8 lg:px-4 flex items-center justify-between">
+					<div>{products.length} products</div>
+					<div
+						onClick={() => dispatch({ type: 'sideBarToggle', payload: true })}
+						className="cursor-pointer select-none"
+					>
+						Filters
+					</div>
+				</div>
+				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+					{loading ? (
+						<div>Loading</div>
+					) : products.length > 0 ? (
+						products.map((product) => {
+							return <ProductItem key={product._id} product={product} />;
+						})
+					) : (
+						<div>No product found</div>
+					)}
+				</div>
 			</div>
 		</section>
 	);

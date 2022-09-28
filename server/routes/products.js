@@ -24,4 +24,6 @@ router.delete('/delete-product/:id', productController.deletProduct);
 router.post('/add-review', productController.postAddReview);
 router.post('/delete-review', productController.postDeleteReview);
 
+router.post('/search/filters', productController.getProductsByFilters);
+
 module.exports = router;
