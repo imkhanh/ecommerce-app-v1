@@ -25,7 +25,7 @@ const Login = () => {
 				setData({ ...data, error: res.data.error, loading: false });
 
 				setTimeout(() => {
-					setData({ ...data, error: res.data.error, loading: false });
+					setData({ ...data, error: false, loading: false });
 				}, 2000);
 			}
 		} catch (error) {

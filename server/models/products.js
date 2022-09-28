@@ -10,11 +10,9 @@ const productSchema = new mongoose.Schema(
 		quantity: { type: Number, required: true },
 		category: { type: ObjectId, ref: 'categories' },
 		offer: { type: Number, default: 0 },
-		color: { type: String, enum: ['Black', 'White', 'Silver', 'Gray', 'Teal'] },
-		size: { type: String, enum: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] },
-		brand: { type: String, enum: ['Nike', 'Adidas', 'Puma', 'New Blance', 'Under Armour'] },
-		status: { type: String, enum: ['New', 'Pre Order', 'Sale', 'Sold Out'] },
-		shipping: { type: String, enum: ['Yes', 'No'] },
+		brand: { type: String },
+		status: { type: String },
+		shipping: { type: String, default: 'Yes' },
 		reviews: [
 			{
 				user: { type: mongoose.Types.ObjectId, ref: 'users' },

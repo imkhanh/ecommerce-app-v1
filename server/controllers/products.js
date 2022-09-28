@@ -26,6 +26,7 @@ const handleQuery = async (req, res, query) => {
 		console.log(error);
 	}
 };
+
 const handlePrice = async (req, res, price) => {
 	try {
 		const products = await Products.find({
@@ -39,49 +40,10 @@ const handlePrice = async (req, res, price) => {
 		console.log(error);
 	}
 };
+
 const handleCategory = async (req, res, category) => {
 	try {
 		const products = await Products.find({ category }).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-const handleBrand = async (req, res, brand) => {
-	try {
-		const products = await Products.find({ brand }).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-const handleColor = async (req, res, color) => {
-	try {
-		const products = await Products.find({ color }).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-const handleSize = async (req, res, size) => {
-	try {
-		const products = await Products.find({ size }).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-const handleShipping = async (req, res, shipping) => {
-	try {
-		const products = await Products.find({ shipping }).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-const handleStatus = async (req, res, status) => {
-	try {
-		const products = await Products.find({ status }).populate('category', '_id name');
 		if (products) return res.json({ products });
 	} catch (error) {
 		console.log(error);
@@ -126,8 +88,7 @@ const productController = {
 		try {
 			const imageArray = [];
 			const files = req.files;
-			const { name, description, category, price, quantity, status, offer, images, color, size, brand, shipping } =
-				req.body;
+			const { name, description, category, price, quantity, status, offer, images, brand, shipping } = req.body;
 
 			const productName = await Products.findOne({ name });
 			if (productName) {
@@ -151,11 +112,9 @@ const productController = {
 				quantity,
 				status,
 				offer,
-				images: imageArray,
-				color,
-				size,
 				brand,
 				shipping,
+				images: imageArray,
 			});
 			await newProduct.save();
 			return res.json({ success: 'Product created successfully', product: newProduct });
@@ -222,7 +181,7 @@ const productController = {
 	},
 	//search filter
 	getProductsByFilters: async (req, res) => {
-		const { query, price, category, brand, color, size, shipping, status } = req.body;
+		const { query, price, category } = req.body;
 		if (query) {
 			await handleQuery(req, res, query);
 		}
@@ -231,21 +190,6 @@ const productController = {
 		}
 		if (category) {
 			await handleCategory(req, res, category);
-		}
-		if (brand) {
-			await handleBrand(req, res, brand);
-		}
-		if (color) {
-			await handleColor(req, res, color);
-		}
-		if (size) {
-			await handleSize(req, res, size);
-		}
-		if (shipping) {
-			await handleShipping(req, res, shipping);
-		}
-		if (status) {
-			await handleStatus(req, res, status);
 		}
 	},
 };

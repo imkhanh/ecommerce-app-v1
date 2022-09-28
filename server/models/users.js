@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const { ObjectId } = mongoose.Schema;
 const userSchema = new mongoose.Schema(
 	{
 		fullName: { type: String, required: true },
@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema(
 		password: { type: String, required: true },
 		avatar: { type: String, default: 'https://res.cloudinary.com/imkhanh/image/upload/v1631617369/user.png' },
 		role: { type: Number, default: 0 },
-		cart: [{ type: Array, default: [] }],
-		wish: [{ type: Array, default: [] }],
+		cart: { type: Array, default: [] },
+		wish: [{ type: ObjectId, ref: 'Products' }],
 		phoneNumber: String,
 	},
 	{ timestamps: true }

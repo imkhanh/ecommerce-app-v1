@@ -46,7 +46,7 @@ const ProductSection = () => {
 			<div className="p-8 lg:p-4 flex md:flex-col space-x-12 lg:space-x-4 md:space-x-0 md:space-y-12 select-none">
 				{/* Product images */}
 				<div className="w-1/2 md:w-full flex lg:flex-col-reverse">
-					<div className="md:hidden w-1/6 mt-0 lg:mt-4 lg:w-full flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 overflow-x-scroll">
+					<div className="md:hidden w-1/6 mt-0 lg:mt-8 lg:w-full flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 overflow-x-scroll">
 						{product.images.length > 0 &&
 							product.images.map((img, index) => {
 								return (
@@ -54,10 +54,8 @@ const ProductSection = () => {
 										key={index}
 										alt={product.name}
 										onClick={() => setCurrentImage(index)}
-										className={`w-24 h-24 md:w-20 md:h-20 object-cover border-r-2 lg:border-t-2 lg:border-r-0 ${
-											currentImage === index
-												? 'border-black opacity-100'
-												: 'border-r-white lg:border-t-white opacity-50'
+										className={`p-1 w-24 h-24 lg:w-16 lg:h-16 object-contain border ${
+											currentImage === index ? 'border-black' : 'border-black/10'
 										} cursor-pointer duration-200 ease-in-out`}
 										src={`http://localhost:3000/uploads/products/${img}`}
 									/>
@@ -70,7 +68,7 @@ const ProductSection = () => {
 						</span>
 						<span
 							onClick={() => prevSlide()}
-							className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 bg-gray-50 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center border border-gray-50 hover:border-black duration-200 ease-in-out cursor-pointer"
+							className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
 						>
 							<BsChevronLeft />
 						</span>
@@ -83,7 +81,7 @@ const ProductSection = () => {
 						)}
 						<span
 							onClick={() => nextSlide()}
-							className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 bg-gray-50 hover:bg-white w-10 h-10  rounded-full flex items-center justify-center border border-gray-50 hover:border-black duration-200 ease-in-out cursor-pointer"
+							className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 hover:bg-gray-100 w-10 h-10  rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
 						>
 							<BsChevronRight />
 						</span>

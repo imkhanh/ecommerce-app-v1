@@ -67,7 +67,7 @@ const Header = () => {
 					</Link>
 				</div>
 				<ul
-					className={`w-1/3 flex items-center justify-center md:flex-col  md:absolute md:top-14 md:w-full md:h-screen ${
+					className={`w-1/3 flex items-center justify-center md:flex-col md:absolute md:top-14 md:w-full md:h-screen ${
 						state.mobileToggle ? 'md:left-0 md:bg-gray-50' : 'md:-left-full'
 					} duration-300 ease-in-out z-20`}
 				>
@@ -86,7 +86,7 @@ const Header = () => {
 									<BsPersonCircle />
 								</span>
 								{isVisible && (
-									<ul className="absolute top-12 right-0 origin-top-right bg-white w-48 h-auto shadow-sm round-sm border border-gray-200 z-20">
+									<ul className="absolute top-12 right-0 origin-top-right bg-white w-48 h-auto shadow-lg rounded border border-gray-200 z-20">
 										{isAdmin() ? (
 											<li>
 												<Link
