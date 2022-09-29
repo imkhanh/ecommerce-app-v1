@@ -13,7 +13,7 @@ const deleteImages = (type, images) => {
 			filePath = basePath + `${images[i]}`;
 		}
 		fs.unlink(filePath, (err) => {
-			if (err) console.log(err);
+			if (err) return err;
 		});
 	}
 };
@@ -51,6 +51,19 @@ const handleCategory = async (req, res, category) => {
 };
 
 const productController = {
+	//search filter
+	getProductsByFilters: async (req, res) => {
+		const { query, price, category } = req.body;
+		if (query) {
+			await handleQuery(req, res, query);
+		}
+		if (price !== undefined) {
+			await handlePrice(req, res, price);
+		}
+		if (category) {
+			await handleCategory(req, res, category);
+		}
+	},
 	getAllProducts: async (req, res) => {
 		try {
 			const products = await Products.find({}).populate('category', '_id name').sort('-createdAt');
@@ -87,20 +100,20 @@ const productController = {
 	postAddProduct: async (req, res) => {
 		try {
 			const imageArray = [];
-			const files = req.files;
-			const { name, description, category, price, quantity, status, offer, images, brand, shipping } = req.body;
+			const images = req.files;
+			const { name, description, category, price, quantity, status, offer, brand, shipping } = req.body;
 
 			const productName = await Products.findOne({ name });
 			if (productName) {
-				deleteImages('file', files);
+				deleteImages('file', images);
 				return res.json({ error: 'This product already exists' });
 			}
-			if (files.length < 1) {
-				deleteImages('file', files);
-				return res.json({ error: 'Must be at least 1 image' });
+			if (images.length < 1) {
+				deleteImages('file', images);
+				return res.json({ error: 'Must need to provide 1 image' });
 			}
 
-			for (const img of files) {
+			for (const img of images) {
 				imageArray.push(img.filename);
 			}
 
@@ -122,14 +135,45 @@ const productController = {
 			console.log(error);
 		}
 	},
-	patchUpateProduct: async (req, res) => {
+	editProduct: async (req, res) => {
 		try {
+			const editImages = req.files;
+			const { name, description, category, price, quantity, status, offer, images, brand, shipping } = req.body;
+
+			const productName = await Products.findOne({ name });
+			if (productName) {
+				deleteImages('file', editImages);
+				return res.json({ error: 'This product already exists' });
+			}
+			if (editImages && editImages.length < 1) {
+				deleteImages('file', editImages);
+				return res.json({ error: 'Must need to provide 1 image' });
+			} else if (editImages.length === 1) {
+				let editProductData = { name, description, category, price, quantity, status, offer, brand, shipping };
+				let imageArray = [];
+
+				for (const img of editImages) {
+					imageArray.push(img.filename);
+				}
+				editProductData = { ...editProductData, images: imageArray };
+				deleteImages('string', images.split(','));
+
+				await Products.findByIdAndUpdate({ _id: req.params.id }, editProductData);
+				return res.json({ success: 'Product edited successfully' });
+			}
 		} catch (error) {
 			console.log(error);
 		}
 	},
 	deletProduct: async (req, res) => {
 		try {
+			const productFolder = await Products.findById(req.params.id);
+			const deleted = await Products.findByIdAndDelete(req.params.id);
+
+			if (deleted) {
+				deleteImages('string', productFolder.images);
+				return res.json({ success: 'Product deleted successfully' });
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -177,19 +221,6 @@ const productController = {
 			return res.json({ success: 'Review deleted successfully' });
 		} catch (error) {
 			console.log(error);
-		}
-	},
-	//search filter
-	getProductsByFilters: async (req, res) => {
-		const { query, price, category } = req.body;
-		if (query) {
-			await handleQuery(req, res, query);
-		}
-		if (price !== undefined) {
-			await handlePrice(req, res, price);
-		}
-		if (category) {
-			await handleCategory(req, res, category);
 		}
 	},
 };

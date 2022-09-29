@@ -3,10 +3,10 @@ import Siderbar from './Siderbar';
 
 const Layout = ({ children }) => {
 	return (
-		<>
+		<div className="flex items-start">
 			<Siderbar />
-			<div className="ml-[240px] w-full h-full bg-gray-50 min-h-screen">{children}</div>
-		</>
+			<div className="w-full h-full bg-gray-50 min-h-screen">{children}</div>
+		</div>
 	);
 };
 

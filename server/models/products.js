@@ -10,9 +10,9 @@ const productSchema = new mongoose.Schema(
 		quantity: { type: Number, required: true },
 		category: { type: ObjectId, ref: 'categories' },
 		offer: { type: Number, default: 0 },
-		brand: { type: String },
-		status: { type: String },
-		shipping: { type: String, default: 'Yes' },
+		brand: String,
+		status: String,
+		shipping: String,
 		reviews: [
 			{
 				user: { type: mongoose.Types.ObjectId, ref: 'users' },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	BsAppIndicator,
 	BsCollection,
@@ -8,14 +8,11 @@ import {
 	BsBack,
 	BsPower,
 	BsEmojiSmile,
-	BsChevronRight,
-	BsChevronLeft,
 } from 'react-icons/bs';
 import { Link, useLocation } from 'react-router-dom';
 
 const Siderbar = () => {
 	const location = useLocation();
-	const [show, setShow] = useState(false);
 
 	const sideBarLinks = [
 		{ label: 'Dashboard', icon: <BsAppIndicator />, to: '/admin/dashboard' },
@@ -25,10 +22,15 @@ const Siderbar = () => {
 		{ label: 'Orders', icon: <BsReceipt />, to: '/admin/orders' },
 	];
 
+	const logout = () => {
+		localStorage.clear();
+		window.location.href = '/';
+	};
+
 	return (
-		<div className="fixed top-0 left-0 max-w-[240px] w-full h-screen bg-white border-r border-black/10 z-10">
+		<div className="sticky top-0 left-0 max-w-[240px] w-full h-screen bg-white shadow-xl z-10">
 			<div className="flex flex-col w-full h-full">
-				<div className="h-14 flex items-center justify-center">
+				<div className="h-16 flex items-center justify-center">
 					<Link to="/admin/dashboard" className="flex items-center space-x-2">
 						<BsEmojiSmile />
 						<span className="uppercase text-lg font-bold tracking-widest">Admin</span>
@@ -76,23 +78,10 @@ const Siderbar = () => {
 				</div>
 
 				<div className="relative h-14 px-4 flex items-center border-t">
-					<div onClick={() => setShow(!show)} className="flex items-center space-x-2 cursor-pointer select-none">
-						<span className="text-sm font-medium">Wellcome: Admin </span>
-						<span> {show ? <BsChevronLeft /> : <BsChevronRight />}</span>
+					<div onClick={() => logout()} className="py-2 px-4 flex items-center cursor-pointer">
+						<BsPower />
+						<span className="ml-4 text-sm">Logout</span>
 					</div>
-					{show && (
-						<ul className="absolute bottom-full right-0 origin-top-right bg-white w-48 h-auto shadow-lg rounded border border-gray-200 z-20">
-							<li>
-								<Link
-									to="/"
-									className="m-2 py-2 px-4 flex items-center hover:text-black hover:bg-gray-100 rounded-sm"
-								>
-									<BsPower />
-									<span className="ml-4 text-sm">Logout</span>
-								</Link>
-							</li>
-						</ul>
-					)}
 				</div>
 			</div>
 		</div>
