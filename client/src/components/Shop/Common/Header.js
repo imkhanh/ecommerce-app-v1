@@ -83,7 +83,7 @@ const Header = () => {
 						{isAuth() ? (
 							<>
 								<span onClick={() => setIsVisible(!isVisible)}>
-									<BsPersonCircle />
+									{isAdmin() ? <BsAppIndicator /> : <BsPersonCircle />}
 								</span>
 								{isVisible && (
 									<ul className="absolute top-12 right-0 origin-top-right bg-white w-48 h-auto shadow-lg rounded border border-gray-200 z-20">
@@ -94,7 +94,7 @@ const Header = () => {
 													className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
 												>
 													<BsAppIndicator />
-													<span className="ml-4 text-sm">Admin</span>
+													<span className="ml-4 text-sm">Admin </span>
 												</Link>
 											</li>
 										) : (

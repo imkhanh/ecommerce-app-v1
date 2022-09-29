@@ -46,7 +46,7 @@ const ProductSection = () => {
 			<div className="p-8 lg:p-4 flex md:flex-col space-x-12 lg:space-x-4 md:space-x-0 md:space-y-12 select-none">
 				{/* Product images */}
 				<div className="w-1/2 md:w-full flex lg:flex-col-reverse">
-					<div className="md:hidden w-1/6 mt-0 lg:mt-8 lg:w-full flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 overflow-x-scroll">
+					<div className="w-1/6 mt-0 lg:mt-8 md:mt-4 lg:w-full flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 overflow-x-scroll">
 						{product.images.length > 0 &&
 							product.images.map((img, index) => {
 								return (
@@ -54,34 +54,35 @@ const ProductSection = () => {
 										key={index}
 										alt={product.name}
 										onClick={() => setCurrentImage(index)}
-										className={`p-1 w-24 h-24 lg:w-16 lg:h-16 object-contain border ${
-											currentImage === index ? 'border-black' : 'border-black/10'
+										className={`p-1 w-20 h-20 lg:w-16 lg:h-16 md:w-14 md:h-14 object-contain border ${
+											currentImage === index ? 'border-black opacity-100' : 'border-black/10 opacity-70'
 										} cursor-pointer duration-200 ease-in-out`}
 										src={`http://localhost:3000/uploads/products/${img}`}
 									/>
 								);
 							})}
 					</div>
-					<div className="w-5/6 lg:w-full h-[620px] sm:h-full relative">
+					<div
+						className="w-5/6 lg:w-full h-[620px] relative"
+						style={{
+							backgroundImage: `url(http://localhost:3000/uploads/products/${product.images[currentImage]})`,
+							backgroundSize: 'cover',
+							backgroundPosition: 'center',
+							backgroundRepeat: 'no-repeat',
+						}}
+					>
 						<span className="absolute bottom-0 right-4 md:right-2 transform -translate-y-1/2 text-sm font-semibold mix-blend-difference text-white">
 							{currentImage + 1} / {product.images.length}
 						</span>
 						<span
 							onClick={() => prevSlide()}
-							className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
+							className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
 						>
 							<BsChevronLeft />
 						</span>
-						{product.images.length > 0 && (
-							<img
-								alt={product.name}
-								className="w-full h-full object-cover hover:cursor-zoom-in"
-								src={`http://localhost:3000/uploads/products/${product.images[currentImage]}`}
-							/>
-						)}
 						<span
 							onClick={() => nextSlide()}
-							className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 hover:bg-gray-100 w-10 h-10  rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
+							className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10  rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
 						>
 							<BsChevronRight />
 						</span>

@@ -1,9 +1,13 @@
 import React, { useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { LayoutContext, layoutReducer, layoutState, Home, Product, Products } from './components/Shop';
 import RequireAuth from './components/Shop/AuthModal/RequireAuth';
 import RequireAdmin from './components/Shop/AuthModal/RequireAdmin';
+//shop routes
+import { LayoutContext, layoutReducer, layoutState, Home, Product, Products } from './components/Shop';
+
+//manager routes
+import { Dashboard, AdminProducts, AdminCategories } from './components/Admin';
 
 const App = () => {
 	const [state, dispatch] = useReducer(layoutReducer, layoutState);
@@ -21,11 +25,11 @@ const App = () => {
 					</Route>
 
 					<Route element={<RequireAdmin />}>
-						<Route path="/admin/dashboard" element={<div>dashboard</div>} />
-						<Route path="/admin/products" element={<div>products</div>} />
-						<Route path="/admin/categories" element={<div>categories</div>} />
-						<Route path="/admin/users" element={<div>users</div>} />
-						<Route path="/admin/orders" element={<div>orders</div>} />
+						<Route path="/admin/dashboard" element={<Dashboard />} />
+						<Route path="/admin/products" element={<AdminProducts />} />
+						<Route path="/admin/categories" element={<AdminCategories />} />
+						<Route path="/admin/users" element={<AdminProducts />} />
+						<Route path="/admin/orders" element={<AdminProducts />} />
 					</Route>
 
 					<Route path="*" element={<div>Page not found</div>} />
