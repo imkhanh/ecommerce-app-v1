@@ -8,7 +8,7 @@ export const ProductsContext = createContext();
 
 const ProductSection = () => {
 	return (
-		<section>
+		<section className="p-8">
 			<ProductMenu />
 			<ProductTable />
 		</section>

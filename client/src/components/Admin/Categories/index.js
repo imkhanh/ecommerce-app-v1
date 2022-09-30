@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { createContext, useReducer } from 'react';
 import Layout from '../Layout';
+import CategoryMenu from './CategoryMenu';
+import CategoryTable from './CategoryTable';
+import { categoryReducer, categoryState } from './CategoryContext';
 
-const CategoriesComponent = () => {
+export const CategoryContext = createContext();
+
+const CategoryComponent = () => {
 	return (
-		<div className="h-[2000px]">
-			<div className="text-sm">CategoriesComponent </div>
-			<div></div>
-		</div>
+		<section className="p-8">
+			<CategoryMenu />
+			<CategoryTable />
+		</section>
 	);
 };
 
 const Categories = () => {
-	return <Layout children={<CategoriesComponent />} />;
+	const [state, dispatch] = useReducer(categoryReducer, categoryState);
+
+	return (
+		<CategoryContext.Provider value={{ state, dispatch }}>
+			<Layout children={<CategoryComponent />} />;
+		</CategoryContext.Provider>
+	);
 };
 
 export default Categories;

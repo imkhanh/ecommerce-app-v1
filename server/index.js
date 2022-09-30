@@ -30,6 +30,8 @@ mongoose
 app.use('/api', require('./routes/auth'));
 app.use('/api/category', require('./routes/categories'));
 app.use('/api/product', require('./routes/products'));
+app.use('/api/user', require('./routes/users'));
+app.use('/api/customize', require('./routes/customizes'));
 
 // Run server
 const PORT = process.env.PORT || 5000;

@@ -103,7 +103,7 @@ const AddProductModal = () => {
 			<div
 				className={`${
 					state.addProduct ? '' : 'hidden'
-				} bg-white fixed top-10 left-1/2 transform -translate-x-1/2 max-w-lg w-full h-auto rounded-sm z-[70]`}
+				} bg-white fixed top-12 left-1/2 transform -translate-x-1/2 max-w-lg w-full h-auto rounded-sm z-[70]`}
 			>
 				<div className="h-14 flex items-center justify-center">
 					<h2 className="font-semibold text-xl uppercase">Add Product</h2>
@@ -112,7 +112,7 @@ const AddProductModal = () => {
 				{data.success && <div className="py-3 px-2 mx-12 text-sm bg-green-100 text-green-700">{data.success}</div>}
 				{data.error && <div className="py-3 px-2 mx-12 text-sm bg-red-100 text-red-700">{data.error}</div>}
 
-				<form onSubmit={handleSubmit} className="py-4 px-12 space-y-4">
+				<form onSubmit={handleSubmit} className="pt-4 pb-6 px-12 space-y-3">
 					<div className=" space-y-1">
 						<span className="text-sm">Name</span>
 						<input
@@ -120,7 +120,7 @@ const AddProductModal = () => {
 							name="name"
 							value={data.name}
 							onChange={(e) => setData({ ...data, success: false, error: false, name: e.target.value })}
-							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 					<div className=" space-y-1">
@@ -131,7 +131,7 @@ const AddProductModal = () => {
 							rows={4}
 							value={data.description}
 							onChange={(e) => setData({ ...data, success: false, error: false, description: e.target.value })}
-							className="p-2 w-full text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="p-2 w-full text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 					<div className=" grid grid-cols-2 gap-2">
@@ -141,7 +141,7 @@ const AddProductModal = () => {
 								name="category"
 								value={data.category}
 								onChange={(e) => setData({ ...data, success: false, error: false, category: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
 									Select category
@@ -161,7 +161,7 @@ const AddProductModal = () => {
 								name="shipping"
 								value={data.shipping}
 								onChange={(e) => setData({ ...data, success: false, error: false, shipping: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
 									Select shipping
@@ -181,7 +181,7 @@ const AddProductModal = () => {
 							onChange={(e) =>
 								setData({ ...data, success: false, error: false, brand: e.target.value.split(',') })
 							}
-							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 
@@ -193,7 +193,7 @@ const AddProductModal = () => {
 								name="price"
 								value={data.price}
 								onChange={(e) => setData({ ...data, success: false, error: false, price: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
 						<div className="space-y-1">
@@ -203,7 +203,7 @@ const AddProductModal = () => {
 								name="offer"
 								value={data.offer}
 								onChange={(e) => setData({ ...data, success: false, error: false, offer: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
 					</div>
@@ -215,7 +215,7 @@ const AddProductModal = () => {
 								name="quantity"
 								value={data.quantity}
 								onChange={(e) => setData({ ...data, success: false, error: false, quantity: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
 						<div className="space-y-1">
@@ -224,7 +224,7 @@ const AddProductModal = () => {
 								name="status"
 								value={data.status}
 								onChange={(e) => setData({ ...data, success: false, error: false, status: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
 									Select status
@@ -245,7 +245,7 @@ const AddProductModal = () => {
 							multiple
 							accept="*/images"
 							onChange={(e) => setData({ ...data, success: false, error: false, images: [...e.target.files] })}
-							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 					<button className="w-full h-10 text-sm bg-black text-white rounded-sm border border-black">Add</button>

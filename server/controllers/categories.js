@@ -3,7 +3,7 @@ const Categories = require('../models/categories');
 const categoryController = {
 	getAllCategories: async (req, res) => {
 		try {
-			const categories = await Categories.find({});
+			const categories = await Categories.find({}).sort('-createdAt');
 			if (categories) {
 				return res.json({ categories });
 			}
@@ -25,6 +25,8 @@ const categoryController = {
 		try {
 			const { name, description, status } = req.body;
 
+			if (!name) return res.json({ error: 'Please enter name category' });
+
 			const categoryName = await Categories.findOne({ name });
 			if (categoryName) return res.json({ error: 'This category already exists' });
 
@@ -36,14 +38,29 @@ const categoryController = {
 			console.log(error);
 		}
 	},
-	pathUpdateCategory: async (req, res) => {
+	editCategory: async (req, res) => {
 		try {
+			const { name, description, status } = req.body;
+			const editCategory = await Categories.findByIdAndUpdate(
+				{ _id: req.params.id },
+				{
+					name,
+					description,
+					status,
+					updatedAt: Date.now(),
+				},
+				{ new: true }
+			);
+
+			if (editCategory) return res.json({ success: 'Category edited successfully' });
 		} catch (error) {
 			console.log(error);
 		}
 	},
 	deleteCategory: async (req, res) => {
 		try {
+			const deleteCategory = await Categories.findByIdAndDelete(req.params.id);
+			if (deleteCategory) return res.json({ success: 'Category deleted successfully' });
 		} catch (error) {
 			console.log(error);
 		}

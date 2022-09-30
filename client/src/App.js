@@ -7,7 +7,7 @@ import RequireAdmin from './components/Shop/AuthModal/RequireAdmin';
 import { LayoutContext, layoutReducer, layoutState, Home, Product, Products } from './components/Shop';
 
 //manager routes
-import { Dashboard, AdminProducts, AdminCategories } from './components/Admin';
+import { Dashboard, AdminProducts, AdminCategories, AdminUsers } from './components/Admin';
 
 const App = () => {
 	const [state, dispatch] = useReducer(layoutReducer, layoutState);
@@ -28,7 +28,7 @@ const App = () => {
 						<Route path="/admin/dashboard" element={<Dashboard />} />
 						<Route path="/admin/products" element={<AdminProducts />} />
 						<Route path="/admin/categories" element={<AdminCategories />} />
-						<Route path="/admin/users" element={<AdminProducts />} />
+						<Route path="/admin/users" element={<AdminUsers />} />
 						<Route path="/admin/orders" element={<AdminProducts />} />
 					</Route>
 

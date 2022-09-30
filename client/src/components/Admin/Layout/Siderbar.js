@@ -39,20 +39,7 @@ const Siderbar = () => {
 
 				<div className="flex-1 overflow-y-scroll">
 					<div className="space-y-2">
-						<span className="p-4 text-xs font-medium uppercase text-black/50">Shop</span>
-						<ul>
-							<li>
-								<Link to="/" className="px-6 py-3 flex items-center duration-200 ease-in-out">
-									<span className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-										<BsBack />
-									</span>
-									<span className="ml-4 text-sm uppercase">SHop</span>
-								</Link>
-							</li>
-						</ul>
-					</div>
-					<div className="space-y-2">
-						<span className="p-4 text-xs font-medium uppercase text-black/50">Manager</span>
+						<span className="p-4 text-xs font-light uppercase text-black/50">Manager</span>
 						<ul>
 							{sideBarLinks.map((link, index) => {
 								return (
@@ -61,18 +48,34 @@ const Siderbar = () => {
 											to={link.to}
 											className={`${
 												location.pathname === link.to
-													? 'border-r-2 border-sky-800 text-black'
-													: 'text-black bg-white'
-											} px-6 py-3 flex items-center duration-200 ease-in-out`}
+													? 'border-r-2 border-black text-black'
+													: 'text-black/70 bg-white'
+											} px-6 py-3 flex items-center hover:text-black duration-200 ease-in-out`}
 										>
 											<span className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
 												{link.icon}
 											</span>
-											<span className="ml-4 text-sm uppercase ">{link.label}</span>
+											<span className="ml-4 text-xs uppercase font-light">{link.label}</span>
 										</Link>
 									</li>
 								);
 							})}
+						</ul>
+					</div>
+					<div className="space-y-2">
+						<span className="p-4 text-xs font-light uppercase text-black/50">Shop</span>
+						<ul>
+							<li>
+								<Link
+									to="/"
+									className="px-6 py-3 text-black/70 hover:text-black flex items-center duration-200 ease-in-out"
+								>
+									<span className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+										<BsBack />
+									</span>
+									<span className="ml-4 text-xs uppercase font-light">SHop</span>
+								</Link>
+							</li>
 						</ul>
 					</div>
 				</div>

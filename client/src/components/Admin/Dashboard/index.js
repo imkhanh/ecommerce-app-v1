@@ -1,14 +1,16 @@
 import React, { createContext, useReducer } from 'react';
 import { dashboardReducer, dashboardState } from './DashboardContext';
 import Layout from '../Layout';
+import CardItem from './CardItem';
+import SlideUpload from './SlideUpload';
 
 export const DashboardContext = createContext();
 
 const DashboardComponent = () => {
 	return (
-		<section>
-			<div></div>
-			<div></div>
+		<section className="p-8 space-y-8">
+			<CardItem />
+			<SlideUpload />
 		</section>
 	);
 };

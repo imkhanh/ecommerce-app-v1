@@ -85,7 +85,7 @@ const EditProductModal = () => {
 			<div
 				className={`${
 					state.editProduct.modal ? '' : 'hidden'
-				} bg-white fixed top-4 left-1/2 transform -translate-x-1/2 max-w-lg w-full h-auto rounded-sm z-[70]`}
+				} bg-white fixed top-6 left-1/2 transform -translate-x-1/2 max-w-lg w-full h-auto rounded-sm z-[70]`}
 			>
 				<div className="h-14 flex items-center justify-center">
 					<h2 className="font-semibold text-xl uppercase">Edit Product</h2>
@@ -94,7 +94,7 @@ const EditProductModal = () => {
 				{data.success && <div className="py-3 px-2 mx-12 text-sm bg-green-100 text-green-700">{data.success}</div>}
 				{data.error && <div className="py-3 px-2 mx-12 text-sm bg-red-100 text-red-700">{data.error}</div>}
 
-				<form onSubmit={handleSubmit} className="py-4 px-12 space-y-4">
+				<form onSubmit={handleSubmit} className="py-4 px-12 space-y-3">
 					<div className=" space-y-1">
 						<span className="text-sm">Name</span>
 						<input
@@ -102,7 +102,7 @@ const EditProductModal = () => {
 							name="name"
 							value={data.name}
 							onChange={(e) => setData({ ...data, success: false, error: false, name: e.target.value })}
-							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 					<div className=" space-y-1">
@@ -113,7 +113,7 @@ const EditProductModal = () => {
 							rows={4}
 							value={data.description}
 							onChange={(e) => setData({ ...data, success: false, error: false, description: e.target.value })}
-							className="p-2 w-full text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="p-2 w-full text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 					<div className=" grid grid-cols-2 gap-2">
@@ -123,7 +123,7 @@ const EditProductModal = () => {
 								name="category"
 								value={data.category}
 								onChange={(e) => setData({ ...data, success: false, error: false, category: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
 									Select category
@@ -153,7 +153,7 @@ const EditProductModal = () => {
 								name="shipping"
 								value={data.shipping}
 								onChange={(e) => setData({ ...data, success: false, error: false, shipping: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
 									Select shipping
@@ -173,7 +173,7 @@ const EditProductModal = () => {
 							onChange={(e) =>
 								setData({ ...data, success: false, error: false, brand: e.target.value.split(',') })
 							}
-							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 
@@ -185,7 +185,7 @@ const EditProductModal = () => {
 								name="price"
 								value={data.price}
 								onChange={(e) => setData({ ...data, success: false, error: false, price: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
 						<div className="space-y-1">
@@ -195,7 +195,7 @@ const EditProductModal = () => {
 								name="offer"
 								value={data.offer}
 								onChange={(e) => setData({ ...data, success: false, error: false, offer: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
 					</div>
@@ -207,7 +207,7 @@ const EditProductModal = () => {
 								name="quantity"
 								value={data.quantity}
 								onChange={(e) => setData({ ...data, success: false, error: false, quantity: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
 						<div className="space-y-1">
@@ -216,7 +216,7 @@ const EditProductModal = () => {
 								name="status"
 								value={data.status}
 								onChange={(e) => setData({ ...data, success: false, error: false, status: e.target.value })}
-								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
 									Select status
@@ -231,7 +231,7 @@ const EditProductModal = () => {
 					</div>
 					<div className="mb-4 space-y-1">
 						<span className="text-sm">Images</span>
-						<div className="flex space-x-1">
+						<div className="pb-1 flex space-x-1">
 							{data.images &&
 								data.images.length > 0 &&
 								data.images.map((img, index) => {
@@ -240,7 +240,7 @@ const EditProductModal = () => {
 											alt={index}
 											key={index}
 											src={`http://localhost:3000/uploads/products/${img}`}
-											className="w-10 h-10 object-cover border border-black/10"
+											className="p-1 w-10 h-10 object-cover border border-black/10"
 										/>
 									);
 								})}
@@ -252,7 +252,7 @@ const EditProductModal = () => {
 							onChange={(e) =>
 								setData({ ...data, success: false, error: false, editImages: [...e.target.files] })
 							}
-							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black"
+							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
 					<button className="w-full h-10 text-sm bg-black text-white rounded-sm border border-black">Edit</button>

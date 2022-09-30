@@ -12,13 +12,7 @@ const userController = {
 	getSingleUser: async (req, res) => {
 		try {
 			const user = await Users.findById(req.params.id);
-			if (user) return res.json({ users });
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	updateUser: async (req, res) => {
-		try {
+			if (user) return res.json({ user });
 		} catch (error) {
 			console.log(error);
 		}
