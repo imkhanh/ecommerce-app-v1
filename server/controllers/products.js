@@ -18,52 +18,9 @@ const deleteImages = (type, images) => {
 	}
 };
 
-const handleQuery = async (req, res, query) => {
-	try {
-		const products = await Products.find({ $name: { $search: query } }).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-const handlePrice = async (req, res, price) => {
-	try {
-		const products = await Products.find({
-			price: {
-				$gte: price[0],
-				$lte: price[1],
-			},
-		}).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-const handleCategory = async (req, res, category) => {
-	try {
-		const products = await Products.find({ category }).populate('category', '_id name');
-		if (products) return res.json({ products });
-	} catch (error) {
-		console.log(error);
-	}
-};
-
 const productController = {
 	//search filter
-	getProductsByFilters: async (req, res) => {
-		const { query, price, category } = req.body;
-		if (query) {
-			await handleQuery(req, res, query);
-		}
-		if (price !== undefined) {
-			await handlePrice(req, res, price);
-		}
-		if (category) {
-			await handleCategory(req, res, category);
-		}
-	},
+	getProductsByFilters: async (req, res) => {},
 	getAllProducts: async (req, res) => {
 		try {
 			const products = await Products.find({}).populate('category', '_id name').sort('-createdAt');
@@ -140,27 +97,17 @@ const productController = {
 			const editImages = req.files;
 			const { name, description, category, price, quantity, status, offer, images, brand, shipping } = req.body;
 
-			const productName = await Products.findOne({ name });
-			if (productName) {
-				deleteImages('file', editImages);
-				return res.json({ error: 'This product already exists' });
-			}
-			if (editImages && editImages.length < 1) {
-				deleteImages('file', editImages);
-				return res.json({ error: 'Must need to provide 1 image' });
-			} else if (editImages.length === 1) {
-				let editProductData = { name, description, category, price, quantity, status, offer, brand, shipping };
+			if (editImages.length > 1) {
 				let imageArray = [];
-
+				let editData = { name, description, category, price, quantity, status, offer, brand, shipping };
 				for (const img of editImages) {
 					imageArray.push(img.filename);
 				}
-				editProductData = { ...editProductData, images: imageArray };
+				editData = { ...editData, images: imageArray };
 				deleteImages('string', images.split(','));
-
-				await Products.findByIdAndUpdate({ _id: req.params.id }, editProductData);
-				return res.json({ success: 'Product edited successfully' });
 			}
+			const editProduct = await Products.findByIdAndUpdate({ _id: req.params.id }, editData, { new: true });
+			if (editProduct) return res.json({ success: 'Product edited successfully' });
 		} catch (error) {
 			console.log(error);
 		}

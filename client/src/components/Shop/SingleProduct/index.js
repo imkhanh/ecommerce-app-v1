@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BsChevronLeft, BsChevronRight, BsDash, BsPlus } from 'react-icons/bs';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Layout, { LayoutContext } from '../Layout';
 import { getSingleProduct } from './FetchApi';
+import { isWish, addToWishList, removeToWishList } from '../Products/Functions';
+import Loading from '../Common/Loading';
 
 const ProductSection = () => {
 	const { id } = useParams();
 	const { state, dispatch } = useContext(LayoutContext);
 	const product = state.singleProduct;
 
-	const [currentImage, setCurrentImage] = useState(0);
 	const [readMore, setReadMore] = useState(false);
+	const [currentImage, setCurrentImage] = useState(0);
+	const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem('wishList')));
 
 	useEffect(() => {
 		fetchSingleProduct();
@@ -32,16 +35,21 @@ const ProductSection = () => {
 	const prevSlide = () => setCurrentImage(currentImage === 0 ? product.images.length - 1 : currentImage - 1);
 
 	if (state.loading) {
-		return <div>Loading</div>;
+		return <Loading />;
 	} else if (!product) {
 		return <div>No product found</div>;
 	}
 
 	return (
 		<section>
-			<div className="py-4 px-8 border-b border-black/10 lg:px-4 flex items-center justify-between">
-				<div>1</div>
-				<div>2</div>
+			<div className="py-4 px-8 lg:px-4 border-b border-black/10">
+				<div className="text-sm flex items-center text-black/50 space-x-1">
+					<Link to="/">Home</Link>
+					<div>/</div>
+					<Link to="/shop">Shop</Link>
+					<div>/</div>
+					<div className="text-black">{product && product.name}</div>
+				</div>
 			</div>
 			<div className="p-8 lg:p-4 flex md:flex-col space-x-12 lg:space-x-4 md:space-x-0 md:space-y-12 select-none">
 				{/* Product images */}
@@ -63,7 +71,7 @@ const ProductSection = () => {
 							})}
 					</div>
 					<div
-						className="w-5/6 lg:w-full h-[620px] relative"
+						className="w-5/6 lg:w-full h-[640px] relative"
 						style={{
 							backgroundImage: `url(http://localhost:3000/uploads/products/${product.images[currentImage]})`,
 							backgroundSize: 'cover',

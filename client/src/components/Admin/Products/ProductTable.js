@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { getAllProducts, deleteProduct } from './FetchApi';
 import { BsPencilFill, BsTrashFill } from 'react-icons/bs';
 import { ProductsContext } from '.';
+import Loading from '../Layout/Loading';
 import dayjs from 'dayjs';
 
 const ProductTable = () => {
@@ -39,7 +40,7 @@ const ProductTable = () => {
 		dispatch({ type: 'editProductOpen', payload: { id, ...product } });
 	};
 
-	if (loading) return <div>Loading</div>;
+	if (loading) return <Loading />;
 
 	return (
 		<div className="mt-4 bg-white overflow-x-auto border border-gray-200 rounded-sm shadow-lg">
@@ -55,6 +56,7 @@ const ProductTable = () => {
 						<th className="py-2 font-medium text-left text-black">Offer (%)</th>
 						<th className="py-2 font-medium text-left text-black">Price ($)</th>
 						<th className="py-2 font-medium text-left text-black">Status</th>
+						<th className="py-2 font-medium text-left text-black">Shipping</th>
 						<th className="py-2 font-medium text-left text-black">Created At</th>
 						<th className="py-2 font-medium text-left text-black">Updated At</th>
 						<th className="py-2 font-medium text-left text-black">Action</th>
@@ -98,6 +100,7 @@ const ProductTable = () => {
 											{product.status}
 										</span>
 									</td>
+									<td className="py-2 text-black/70">{product.shipping}</td>
 									<td className="py-2 text-black/70">{dayjs(product.createdAt).format('DD/MM/YYYY')}</td>
 									<td className="py-2 text-black/70">{dayjs(product.updatedAt).format('DD/MM/YYYY')}</td>
 									<td className="py-2 text-black/70">

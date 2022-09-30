@@ -3,6 +3,7 @@ import { ProductsContext } from './';
 import { getAllProducts } from './FetchApi';
 import ProductItem from './ProductItem';
 import ProductSidebar from './ProductSidebar';
+import Loading from '../Common/Loading';
 
 const ProductSection = () => {
 	const { state, dispatch } = useContext(ProductsContext);
@@ -37,9 +38,9 @@ const ProductSection = () => {
 						Filters
 					</div>
 				</div>
-				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 border-t border-l border-black/10">
 					{loading ? (
-						<div>Loading</div>
+						<Loading />
 					) : products.length > 0 ? (
 						products.map((product) => {
 							return <ProductItem key={product._id} product={product} />;

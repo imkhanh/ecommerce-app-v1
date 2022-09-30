@@ -8,20 +8,20 @@ const fs = require('fs');
 const customizeController = {
 	getAllDocuments: async (req, res) => {
 		try {
-			const users = await Users.find({}).count();
-			const products = await Products.find({}).count();
-			const categories = await Categories.find({}).count();
+			const users = await Users.find({}).estimatedDocumentCount();
+			const products = await Products.find({}).estimatedDocumentCount();
+			const categories = await Categories.find({}).estimatedDocumentCount();
 
 			if (users && categories && products) return res.json({ users, products, categories });
 		} catch (error) {
 			console.log(error);
 		}
 	},
-	getAllCustomizes: async (req, res) => {
+	getAllSlideImages: async (req, res) => {
 		try {
-			const customizes = await Customizes.find({}).sort('-createdAt');
-			if (customizes) {
-				return res.json({ customizes });
+			const images = await Customizes.find({}).sort('-createdAt');
+			if (images) {
+				return res.json({ images });
 			}
 		} catch (error) {
 			console.log(error);

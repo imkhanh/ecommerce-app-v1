@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getAllCustomizes = async () => {
+export const getAllSlideImages = async () => {
 	try {
 		const res = axios.get('/api/customize/get-all');
 		return res;
@@ -18,11 +18,7 @@ export const getAllDocuments = async () => {
 	}
 };
 
-export const uploadSlideImage = async (image) => {
-	const formData = new FormData();
-
-	formData.append('slideImage', image);
-
+export const uploadSlideImage = async (formData) => {
 	try {
 		const res = axios.post('/api/customize/upload-slide', formData);
 		return res;
@@ -33,7 +29,7 @@ export const uploadSlideImage = async (image) => {
 
 export const deleteSlideImage = async (id) => {
 	try {
-		const res = axios.post(`/api/customize/delete-slide/${id}`);
+		const res = axios.delete(`/api/customize/delete-slide/${id}`);
 		return res;
 	} catch (error) {
 		console.log(error);

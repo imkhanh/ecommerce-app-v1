@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { CategoryContext } from '.';
 import { getAllCategories, deleteProduct } from './FetchApi';
 import { BsPencilFill, BsTrashFill } from 'react-icons/bs';
+import Loading from '../Layout/Loading';
 import dayjs from 'dayjs';
 
 const CategoryTable = () => {
@@ -40,7 +41,7 @@ const CategoryTable = () => {
 		dispatch({ type: 'editCategoryOpen', id: id, name: name, description: description, status: status });
 	};
 
-	if (loading) return <div>Loading</div>;
+	if (loading) return <Loading />;
 
 	return (
 		<div className="mt-4 bg-white overflow-x-auto border border-gray-200 rounded-sm shadow-lg">

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { UserContext } from '.';
 import { getAllUsers, deleteUser } from './FetchApi';
 import { BsTrashFill } from 'react-icons/bs';
+import Loading from '../Layout/Loading';
 import dayjs from 'dayjs';
 
 const UserTable = () => {
@@ -36,7 +37,7 @@ const UserTable = () => {
 		}
 	};
 
-	if (loading) return <div>Loading</div>;
+	if (loading) return <Loading />;
 
 	return (
 		<div className="mt-4 bg-white overflow-x-auto border border-gray-200 rounded-sm shadow-lg">

@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get('/get-all', customizeController.getAllCustomizes);
+router.get('/get-all', customizeController.getAllSlideImages);
 router.get('/get-all-documents', customizeController.getAllDocuments);
 router.post('/upload-slide', upload.single('slideImage'), customizeController.postUploadSlideImage);
 router.delete('/delete-slide/:id', customizeController.deleteImage);

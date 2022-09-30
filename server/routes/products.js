@@ -18,7 +18,7 @@ router.get('/get-all', productController.getAllProducts);
 router.get('/get-single-product/:id', productController.getSingleProduct);
 router.get('/get-list-related/:id', productController.getListRelated);
 router.post('/add-product', upload.any(), productController.postAddProduct);
-router.patch('/edit-product/:id', productController.editProduct);
+router.post('/edit-product', upload.any(), productController.editProduct);
 router.delete('/delete-product/:id', productController.deletProduct);
 
 router.post('/add-review', productController.postAddReview);

@@ -6,7 +6,7 @@ import { ProductsContext } from '.';
 const EditProductModal = () => {
 	const { state, dispatch } = useContext(ProductsContext);
 	const [categories, setCategories] = useState([]);
-	const [data, setData] = useState({
+	const [editdata, setEditData] = useState({
 		id: '',
 		name: '',
 		description: '',
@@ -24,7 +24,7 @@ const EditProductModal = () => {
 	});
 
 	useEffect(() => {
-		setData({
+		setEditData({
 			id: state.editProduct.id,
 			name: state.editProduct.name,
 			description: state.editProduct.description,
@@ -58,21 +58,21 @@ const EditProductModal = () => {
 		e.preventDefault();
 
 		try {
-			const res = await editProduct(data);
+			const res = await editProduct(editdata);
 			if (res && res.data.success) {
-				setData({ ...data, success: res.data.success, error: false });
+				setEditData({ ...editdata, success: res.data.success, error: false });
 				dispatch({ type: 'editProductClose', payload: true });
 			} else {
-				setData({ ...data, success: false, error: res.data.error });
+				setEditData({ ...editdata, success: false, error: res.data.error });
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	if (data.error || data.success) {
+	if (editdata.error || editdata.success) {
 		setTimeout(() => {
-			setData({ ...data, success: false, error: false, loading: false });
+			setEditData({ ...editdata, success: false, error: false, loading: false });
 		}, 2000);
 	}
 
@@ -91,8 +91,10 @@ const EditProductModal = () => {
 					<h2 className="font-semibold text-xl uppercase">Edit Product</h2>
 				</div>
 
-				{data.success && <div className="py-3 px-2 mx-12 text-sm bg-green-100 text-green-700">{data.success}</div>}
-				{data.error && <div className="py-3 px-2 mx-12 text-sm bg-red-100 text-red-700">{data.error}</div>}
+				{editdata.success && (
+					<div className="py-3 px-2 mx-12 text-sm bg-green-100 text-green-700">{editdata.success}</div>
+				)}
+				{editdata.error && <div className="py-3 px-2 mx-12 text-sm bg-red-100 text-red-700">{editdata.error}</div>}
 
 				<form onSubmit={handleSubmit} className="py-4 px-12 space-y-3">
 					<div className=" space-y-1">
@@ -100,8 +102,8 @@ const EditProductModal = () => {
 						<input
 							type="text"
 							name="name"
-							value={data.name}
-							onChange={(e) => setData({ ...data, success: false, error: false, name: e.target.value })}
+							value={editdata.name}
+							onChange={(e) => setEditData({ ...editdata, success: false, error: false, name: e.target.value })}
 							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
@@ -111,8 +113,10 @@ const EditProductModal = () => {
 							type="text"
 							name="description"
 							rows={4}
-							value={data.description}
-							onChange={(e) => setData({ ...data, success: false, error: false, description: e.target.value })}
+							value={editdata.description}
+							onChange={(e) =>
+								setEditData({ ...editdata, success: false, error: false, description: e.target.value })
+							}
 							className="p-2 w-full text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
@@ -121,8 +125,10 @@ const EditProductModal = () => {
 							<span className="text-sm">Category</span>
 							<select
 								name="category"
-								value={data.category}
-								onChange={(e) => setData({ ...data, success: false, error: false, category: e.target.value })}
+								value={editdata.category}
+								onChange={(e) =>
+									setEditData({ ...editdata, success: false, error: false, category: e.target.value })
+								}
 								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
@@ -132,8 +138,8 @@ const EditProductModal = () => {
 									? categories.map((item) => {
 											return (
 												<Fragment key={item._id}>
-													{data.category._id === item._id ? (
-														<option key={item._id} value={item._id}>
+													{editdata.category && editdata.category._id === item._id ? (
+														<option key={item._id} value={item._id} selected>
 															{item.name}
 														</option>
 													) : (
@@ -151,8 +157,10 @@ const EditProductModal = () => {
 							<span className="text-sm">Shipping</span>
 							<select
 								name="shipping"
-								value={data.shipping}
-								onChange={(e) => setData({ ...data, success: false, error: false, shipping: e.target.value })}
+								value={editdata.shipping}
+								onChange={(e) =>
+									setEditData({ ...editdata, success: false, error: false, shipping: e.target.value })
+								}
 								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
@@ -169,9 +177,9 @@ const EditProductModal = () => {
 						<input
 							type="text"
 							name="brand"
-							value={data.brand}
+							value={editdata.brand}
 							onChange={(e) =>
-								setData({ ...data, success: false, error: false, brand: e.target.value.split(',') })
+								setEditData({ ...editdata, success: false, error: false, brand: e.target.value.split(',') })
 							}
 							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
@@ -183,8 +191,10 @@ const EditProductModal = () => {
 							<input
 								type="text"
 								name="price"
-								value={data.price}
-								onChange={(e) => setData({ ...data, success: false, error: false, price: e.target.value })}
+								value={editdata.price}
+								onChange={(e) =>
+									setEditData({ ...editdata, success: false, error: false, price: e.target.value })
+								}
 								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
@@ -193,8 +203,10 @@ const EditProductModal = () => {
 							<input
 								type="text"
 								name="offer"
-								value={data.offer}
-								onChange={(e) => setData({ ...data, success: false, error: false, offer: e.target.value })}
+								value={editdata.offer}
+								onChange={(e) =>
+									setEditData({ ...editdata, success: false, error: false, offer: e.target.value })
+								}
 								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
@@ -205,8 +217,10 @@ const EditProductModal = () => {
 							<input
 								type="text"
 								name="quantity"
-								value={data.quantity}
-								onChange={(e) => setData({ ...data, success: false, error: false, quantity: e.target.value })}
+								value={editdata.quantity}
+								onChange={(e) =>
+									setEditData({ ...editdata, success: false, error: false, quantity: e.target.value })
+								}
 								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							/>
 						</div>
@@ -214,8 +228,10 @@ const EditProductModal = () => {
 							<span className="text-sm">Status</span>
 							<select
 								name="status"
-								value={data.status}
-								onChange={(e) => setData({ ...data, success: false, error: false, status: e.target.value })}
+								value={editdata.status}
+								onChange={(e) =>
+									setEditData({ ...editdata, success: false, error: false, status: e.target.value })
+								}
 								className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 							>
 								<option disabled value="">
@@ -232,9 +248,9 @@ const EditProductModal = () => {
 					<div className="mb-4 space-y-1">
 						<span className="text-sm">Images</span>
 						<div className="pb-1 flex space-x-1">
-							{data.images &&
-								data.images.length > 0 &&
-								data.images.map((img, index) => {
+							{editdata.images &&
+								editdata.images.length > 0 &&
+								editdata.images.map((img, index) => {
 									return (
 										<img
 											alt={index}
@@ -250,12 +266,14 @@ const EditProductModal = () => {
 							multiple
 							accept="*/images"
 							onChange={(e) =>
-								setData({ ...data, success: false, error: false, editImages: [...e.target.files] })
+								setEditData({ ...editdata, success: false, error: false, editImages: [...e.target.files] })
 							}
 							className="px-2 w-full h-10 text-sm bg-white border border-black/10 rounded-sm outline-none focus:border-black duration-200 ease-in-out"
 						/>
 					</div>
-					<button className="w-full h-10 text-sm bg-black text-white rounded-sm border border-black">Edit</button>
+					<button type="submit" className="w-full h-10 text-sm bg-black text-white rounded-sm border border-black">
+						Edit
+					</button>
 				</form>
 			</div>
 		</div>

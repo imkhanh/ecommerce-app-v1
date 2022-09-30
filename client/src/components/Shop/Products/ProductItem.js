@@ -1,12 +1,14 @@
-import React from 'react';
-import { BsHeart } from 'react-icons/bs';
+import React, { useState } from 'react';
+import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { isWish, addToWishList, removeToWishList } from './Functions';
 
 const ProductItem = ({ product }) => {
 	const navigate = useNavigate();
+	const [wishList, setWishList] = useState(JSON.parse(localStorage.getItem('wishList')));
 
 	return (
-		<div className="mb-8 relative flex flex-col w-full h-full bg-white select-none">
+		<div className="mb-8 relative flex flex-col w-full h-full bg-white border-b border-r border-black/10 select-none">
 			{product.status && (
 				<div className="absolute top-4 left-8 z-20">
 					<span
@@ -25,8 +27,17 @@ const ProductItem = ({ product }) => {
 				</div>
 			)}
 			<div className="absolute top-4 right-8 z-20">
-				<span className="text-xl cursor-pointer">
+				<span
+					onClick={() => addToWishList(product._id, setWishList)}
+					className={`${isWish(product._id, wishList) ? 'hidden' : ''}  text-xl cursor-pointer`}
+				>
 					<BsHeart />
+				</span>
+				<span
+					onClick={() => removeToWishList(product._id, setWishList)}
+					className={`${!isWish(product._id, wishList) ? 'hidden' : ''} text-xl cursor-pointer text-red-500`}
+				>
+					<BsHeartFill />
 				</span>
 			</div>
 			<div className="overflow-hidden">

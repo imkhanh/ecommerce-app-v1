@@ -64,9 +64,7 @@ export const postAddProduct = async ({
 };
 
 export const editProduct = async (product) => {
-	console.log(product);
 	const formData = new FormData();
-
 	if (product.editImages) {
 		for (const img of product.editImages) {
 			formData.append('editImages', img);
@@ -86,7 +84,7 @@ export const editProduct = async (product) => {
 	formData.append('images', product.images);
 
 	try {
-		const res = await axios.patch(`/api/product/edit-product/${product.id}`, formData);
+		const res = await axios.post(`/api/product/edit-product`, formData);
 		return res;
 	} catch (error) {
 		console.log(error);

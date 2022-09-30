@@ -4,7 +4,7 @@ import { DashboardContext } from '.';
 import { getAllDocuments } from './FetchApi';
 const CardItem = () => {
 	const { state, dispatch } = useContext(DashboardContext);
-	console.log(state.getAllDocuments);
+
 	useEffect(() => {
 		fetchAllDocuments();
 		// eslint-disable-next-line
