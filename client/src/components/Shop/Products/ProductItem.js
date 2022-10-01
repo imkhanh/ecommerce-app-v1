@@ -35,7 +35,7 @@ const ProductItem = ({ product }) => {
 				</span>
 				<span
 					onClick={() => removeToWishList(product._id, setWishList)}
-					className={`${!isWish(product._id, wishList) ? 'hidden' : ''} text-xl cursor-pointer text-red-500`}
+					className={`${!isWish(product._id, wishList) ? 'hidden' : ''} text-xl cursor-pointer text-blue-500`}
 				>
 					<BsHeartFill />
 				</span>
@@ -49,12 +49,7 @@ const ProductItem = ({ product }) => {
 				/>
 			</div>
 			<div className="flex-shrink py-4 px-8 lg:px-4">
-				<h4
-					onClick={() => navigate(`/shop/product-detail/${product._id}`)}
-					className="font-medium truncate cursor-pointer"
-				>
-					{product.name}
-				</h4>
+				<h4 className="font-medium truncate cursor-pointer">{product.name}</h4>
 				<p className="font-normal">${product.price}.00</p>
 			</div>
 		</div>
