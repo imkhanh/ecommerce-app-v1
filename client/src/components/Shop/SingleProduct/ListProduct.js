@@ -36,10 +36,10 @@ const ListProduct = () => {
 						return (
 							<div
 								key={product._id}
-								className="bg-white cursor-pointer"
+								className="flex flex-col bg-white cursor-pointer"
 								onClick={() => navigate(`/shop/product-detail/${product._id}`)}
 							>
-								<div>
+								<div className="flex-shrink">
 									<img
 										alt={product.name}
 										className="w-full h-[280px] md:h-full object-contain"
@@ -47,8 +47,8 @@ const ListProduct = () => {
 									/>
 								</div>
 								<div className="pt-4">
-									<h4 className="font-medium truncate cursor-pointer">{product.name}</h4>
-									<p className="font-normal">${product.price}.00</p>
+									<h4 className="md:text-sm font-medium truncate cursor-pointer">{product.name}</h4>
+									<p className="md:text-sm font-normal">${product.price}.00</p>
 								</div>
 							</div>
 						);

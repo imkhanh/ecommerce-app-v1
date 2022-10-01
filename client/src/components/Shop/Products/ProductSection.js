@@ -3,6 +3,8 @@ import { ProductsContext } from './';
 import { getAllProducts } from './FetchApi';
 import ProductItem from './ProductItem';
 import ProductSidebar from './ProductSidebar';
+import { BsSliders } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 import Loading from '../Common/Loading';
 
 const ProductSection = () => {
@@ -14,28 +16,34 @@ const ProductSection = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	const fetchProducts = () => {
+	const fetchProducts = async () => {
 		dispatch({ type: 'loading', payload: true });
-
-		getAllProducts()
-			.then((res) => {
-				dispatch({ type: 'products', payload: res.data.products });
-				dispatch({ type: 'loading', payload: false });
-			})
-			.catch((err) => console.log(err));
+		try {
+			const res = await getAllProducts();
+			dispatch({ type: 'products', payload: res.data.products });
+			dispatch({ type: 'loading', payload: false });
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
 		<section>
-			<ProductSidebar />
 			<div>
-				<div className="py-4 px-8 lg:px-4 flex items-center justify-between">
-					<div>{products.length} products</div>
-					<div
-						onClick={() => dispatch({ type: 'sideBarToggle', payload: true })}
-						className="cursor-pointer select-none"
-					>
-						Filters
+				<ProductSidebar />
+				<button
+					onClick={() => dispatch({ type: 'sideBarToggle', payload: true })}
+					className="fixed top-1/2 right-8 transform -translate-y-1/2 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center text-base hover:scale-125 duration-500 ease-out z-20 "
+				>
+					<BsSliders />
+				</button>
+			</div>
+			<div>
+				<div className="py-4 px-8 lg:px-4 flex items-center">
+					<div className="text-sm md:text-xs flex items-center text-black/50 font-light space-x-2">
+						<Link to="/">Home</Link>
+						<div>/</div>
+						<Link to="/shop">Shop</Link>
 					</div>
 				</div>
 				<div className="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 border-t border-l border-black/10">

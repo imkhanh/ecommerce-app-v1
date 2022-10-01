@@ -22,3 +22,52 @@ export const updateQuantity = (type, quantity, setQuantity, totalQuatity, setAle
 		}
 	}
 };
+
+export const inCart = (id) => {
+	if (localStorage.getItem('cart')) {
+		const cartProduct = JSON.parse(localStorage.getItem('cart'));
+		for (const cart of cartProduct) {
+			if (cart.id === id) {
+				return true;
+			}
+		}
+	}
+};
+
+export const cartList = () => {
+	let list = [];
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null;
+
+	if (cart !== null) {
+		for (const c of cart) {
+			list.push(c);
+			localStorage.setItem('cart', JSON.stringify(list));
+		}
+		return list;
+	} else {
+		return list === null;
+	}
+};
+
+export const addToCart = (id, quantity, price, setQuantity, dispatch, fetchData) => {
+	let inCart = false;
+	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
+	if (cart) {
+		cart.forEach((item) => {
+			if (item.id === id) {
+				inCart = true;
+			}
+		});
+		if (!inCart) {
+			cart.push({ id, quantity, price });
+			localStorage.setItem('cart', JSON.stringify(cart));
+		}
+	} else {
+		cart.push({ id, quantity, price });
+		localStorage.setItem('cart', JSON.stringify(cart));
+	}
+	setQuantity(1);
+	dispatch({ type: 'inCart', payload: cartList() });
+	fetchData();
+};

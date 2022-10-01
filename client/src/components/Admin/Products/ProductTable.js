@@ -86,19 +86,21 @@ const ProductTable = () => {
 									<td className="py-2 text-black/70">{product.offer}</td>
 									<td className="py-2 text-black/70">{product.price}</td>
 									<td className="py-2">
-										<span
-											className={`py-[6px] px-4 rounded-full border border-black/10 text-xs font-medium cursor-pointer select-none ${
-												product.status === 'New'
-													? 'border-black/10 text-black bg-white'
-													: product.status === 'Pre Order'
-													? 'border-gray-50 text-gray-500 bg-gray-200'
-													: product.status === 'Sold Out'
-													? 'border-red-100 text-red-700 bg-red-100'
-													: product.status === 'Sale' && 'bg-amber-100 text-amber-800 border-amber-100'
-											}`}
-										>
-											{product.status}
-										</span>
+										{product.status && (
+											<span
+												className={`py-[6px] px-4 rounded-full border border-black/10 text-xs font-medium cursor-pointer select-none ${
+													product.status === 'New'
+														? 'border-black/10 text-black bg-white'
+														: product.status === 'Pre Order'
+														? 'border-gray-50 text-gray-500 bg-gray-200'
+														: product.status === 'Sold Out'
+														? 'border-red-100 text-red-700 bg-red-100'
+														: product.status === 'Sale' && 'bg-amber-100 text-amber-800 border-amber-100'
+												}`}
+											>
+												{product.status}
+											</span>
+										)}
 									</td>
 									<td className="py-2 text-black/70">{product.shipping}</td>
 									<td className="py-2 text-black/70">{dayjs(product.createdAt).format('DD/MM/YYYY')}</td>

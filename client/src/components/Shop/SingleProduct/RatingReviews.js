@@ -32,11 +32,11 @@ const RatingReviews = () => {
 						Reviews
 					</span>
 					<span className="absolute -top-3 -right-4 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center text-sm border-2 border-white">
-						0
+						{product.reviews && product.reviews.length}
 					</span>
 				</div>
 			</div>
-			<div className="p-8 lg:p-4 flex flex-col space-y-8">
+			<div className="px-8 py-8 lg:px-4 flex flex-col space-y-8">
 				{menu ? (
 					<div>
 						<p className="text-base text-justify">{product && product.description}</p>
@@ -55,21 +55,24 @@ const RatingReviews = () => {
 						</div>
 					</div>
 				) : (
-					<>
-						{isAuth() ? (
-							<div>
-								<p
-									onClick={() => dispatch({ type: 'authToggle', payload: true })}
-									className="cursor-pointer select-none underline underline-offset-4 font-medium"
-								>
-									Write a review
-								</p>
-							</div>
+					<div className="grid grid-cols-2 md:grid-cols-1 gap-14">
+						{!isAuth() ? (
+							<>
+								<div className="flex flex-col space-y-1">
+									<p>Have your say. Be the first to review the {product.name}</p>
+									<p
+										onClick={() => dispatch({ type: 'authToggle', payload: true })}
+										className="cursor-pointer select-none underline underline-offset-4 font-medium"
+									>
+										Write a review
+									</p>
+								</div>
+							</>
 						) : (
 							<ReviewForm />
 						)}
 						<ReviewDisplay />
-					</>
+					</div>
 				)}
 			</div>
 		</div>

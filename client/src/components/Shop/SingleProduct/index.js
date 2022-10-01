@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { BsChevronLeft, BsChevronRight, BsDash, BsHeart, BsHeartFill, BsPlus, BsX } from 'react-icons/bs';
 import Layout, { LayoutContext } from '../Layout';
 import { Link, useParams } from 'react-router-dom';
-import { getSingleProduct } from './FetchApi';
+import { getSingleProduct, postAddToCart } from './FetchApi';
 import { isWish, addToWishList, removeToWishList } from '../Products/Functions';
-import { changeSlide, updateQuantity } from './Functions';
+import { cartList, changeSlide, updateQuantity, addToCart } from './Functions';
 import RatingReviews from './RatingReviews';
 import ListProduct from './ListProduct';
 import Loading from '../Common/Loading';
@@ -13,6 +13,8 @@ const ProductSection = () => {
 	const { id } = useParams();
 	const { state, dispatch } = useContext(LayoutContext);
 	const product = state.singleProduct;
+
+	console.log(state.cartProduct);
 
 	const [readMore, setReadMore] = useState(false);
 	const [alert, setAlert] = useState(false);
@@ -29,8 +31,22 @@ const ProductSection = () => {
 		dispatch({ type: 'loading', payload: true });
 		try {
 			const res = await getSingleProduct(id);
-			dispatch({ type: 'singleProduct', payload: res.data.product });
-			dispatch({ type: 'loading', payload: false });
+			setTimeout(() => {
+				dispatch({ type: 'singleProduct', payload: res.data.product });
+				dispatch({ type: 'loading', payload: false });
+				dispatch({ type: 'inCart', payload: cartList() });
+			}, 1000);
+		} catch (error) {
+			console.log(error);
+		}
+
+		fetchCartProduct();
+	};
+
+	const fetchCartProduct = async () => {
+		try {
+			const res = await postAddToCart();
+			dispatch({ type: 'cartProduct', payload: res.data.products });
 		} catch (error) {
 			console.log(error);
 		}
@@ -45,54 +61,61 @@ const ProductSection = () => {
 	return (
 		<section>
 			<div className="py-4 px-8 lg:px-4 border-b border-black/10">
-				<div className="text-sm flex items-center text-black/50 space-x-1">
+				<div className="text-sm md:text-xs flex items-center text-black/50 space-x-2 font-light">
 					<Link to="/">Home</Link>
 					<div>/</div>
 					<Link to="/shop">Shop</Link>
 					<div>/</div>
-					<div className="text-black">{product && product.name}</div>
+					<div>{product && product.brand}</div>
+					<div>/</div>
+					<div>{product && product.category.name}</div>
+					<div>/</div>
+					<div className="text-black font-normal">{product && product.name}</div>
 				</div>
 			</div>
-			<div className="p-8 lg:p-4 flex md:flex-col space-x-24 xl:space-x-12 lg:space-x-4 md:space-x-0 md:space-y-12 select-none">
+			<div className="p-8 lg:p-4 flex md:flex-col space-x-24 xl:space-x-12 md:space-x-0 md:space-y-24 select-none">
 				{/* Product images */}
-				<div className="w-1/2 md:w-full flex lg:flex-col-reverse">
-					<div className="w-1/6 mt-0 lg:mt-8 md:mt-4 lg:w-full flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 overflow-x-scroll">
-						{product.images.length > 0 &&
-							product.images.map((img, index) => {
-								return (
-									<img
-										key={index}
-										alt={product.name}
-										onClick={() => setCurrentImage(index)}
-										className={`p-1 w-20 h-20 lg:w-16 lg:h-16 md:w-14 md:h-14 object-contain border ${
-											currentImage === index ? 'border-black opacity-100' : 'border-black/10 opacity-70'
-										} cursor-pointer duration-200 ease-in-out`}
-										src={`http://localhost:3000/uploads/products/${img}`}
-									/>
-								);
-							})}
+				<div className="w-1/2 md:w-full flex md:flex-col">
+					<div className="relative w-[5%] md:hidden">
+						<div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-20 bg-gray-200 px-2 py-5 flex flex-col rounded-full space-y-2">
+							{product.images.length > 0 &&
+								product.images.map((item, index) => {
+									return (
+										<span
+											key={index}
+											onClick={() => setCurrentImage(index)}
+											className={`${
+												currentImage === index ? 'h-6 bg-black' : 'bg-black/40  w-[6px] h-[6px]'
+											} rounded-full cursor-pointer select-none duration-200 ease-in`}
+										></span>
+									);
+								})}
+						</div>
 					</div>
+
 					<div
-						className="w-5/6 lg:w-full h-[620px] relative"
+						className="w-[95%] md:w-full h-[710px] md:h-[500px] relative"
 						style={{
 							backgroundImage: `url(http://localhost:3000/uploads/products/${product.images[currentImage]})`,
 							backgroundSize: 'cover',
 							backgroundPosition: 'center',
 							backgroundRepeat: 'no-repeat',
+							objectFit: 'contain',
 						}}
 					>
 						<span className="absolute bottom-0 right-4 md:right-2 transform -translate-y-1/2 text-sm font-semibold mix-blend-difference text-white">
 							{currentImage + 1} / {product.images.length}
 						</span>
+
 						<span
 							onClick={() => changeSlide('prevSlide', currentImage, setCurrentImage, product.images)}
-							className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
+							className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center  duration-200 ease-in-out cursor-pointer"
 						>
 							<BsChevronLeft />
 						</span>
 						<span
 							onClick={() => changeSlide('nextSlide', currentImage, setCurrentImage, product.images)}
-							className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10  rounded-full flex items-center justify-center border border-white duration-200 ease-in-out cursor-pointer"
+							className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10  rounded-full flex items-center justify-center duration-200 ease-in-out cursor-pointer"
 						>
 							<BsChevronRight />
 						</span>
@@ -102,10 +125,10 @@ const ProductSection = () => {
 				{/* Product detail */}
 				<div className="w-1/2 md:w-full space-y-10">
 					<div className="flex items-start justify-between">
-						<div className="flex flex-col space-y-2">
+						<div className="flex flex-col space-y-3">
 							<h1 className="font-bold text-3xl lg:text-2xl md:text-xl text-black">{product.name}</h1>
 							<p className="text-base font-medium text-gray-600">{product.category.name}</p>
-							<p className="text-lg font-semibold text-black">${product.price}.00</p>
+							<p className="text-xl font-semibold text-black">${product.price}.00</p>
 						</div>
 						{product.status && (
 							<span
@@ -123,8 +146,8 @@ const ProductSection = () => {
 							</span>
 						)}
 					</div>
-					<div className="space-y-2">
-						<span>Description</span>
+					<div>
+						<span className="mb-2 block">Description</span>
 						<p className="text-justify">
 							{product.description.length < 400
 								? product.description
@@ -139,8 +162,8 @@ const ProductSection = () => {
 							)}
 						</p>
 					</div>
-					<div className="space-y-2">
-						<span>Quantity: {product.quantity}</span>
+					<div>
+						<span className="mb-2 block">Quantity: {product.quantity}</span>
 						<div className="flex items-center">
 							<span
 								onClick={() => updateQuantity('decrease', quantity, setQuantity, product.quantity, setAlert)}
@@ -156,8 +179,9 @@ const ProductSection = () => {
 								<BsPlus />
 							</span>
 						</div>
+
 						{alert && (
-							<div className="py-6 px-4 flex items-center justify-between bg-gray-100">
+							<div className="mt-4 py-6 px-4 flex items-center justify-between bg-gray-100">
 								<span className="text-sm text-black/50">Stock limited</span>
 								<span
 									onClick={() => setAlert(false)}
@@ -169,9 +193,20 @@ const ProductSection = () => {
 						)}
 					</div>
 					<div className="grid grid-cols-3 gap-3">
-						<button className="col-span-2 w-full h-14 text-lg lg:text-base font-medium bg-black text-white border border-black">
-							Add to bag
-						</button>
+						{product.quantity !== 0 && state.inCart && state.inCart.includes(product._id) ? (
+							<button className="col-span-2 w-full h-14 text-lg lg:text-base font-medium bg-black text-white border border-black">
+								In Cart
+							</button>
+						) : (
+							<button
+								onClick={() =>
+									addToCart(product._id, quantity, product.price, setQuantity, dispatch, fetchSingleProduct)
+								}
+								className="col-span-2 w-full h-14 text-lg lg:text-base font-medium bg-black text-white border border-black"
+							>
+								Add to bag
+							</button>
+						)}
 
 						<button
 							onClick={() => addToWishList(product._id, setWishList)}

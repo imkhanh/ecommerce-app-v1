@@ -86,7 +86,7 @@ const Header = () => {
 									{isAdmin() ? <BsAppIndicator /> : <BsPersonCircle />}
 								</span>
 								{isVisible && (
-									<ul className="absolute top-12 right-0 origin-top-right bg-white w-48 h-auto shadow-lg rounded border border-gray-200 z-20">
+									<ul className="absolute top-12 right-0 origin-top-right bg-white w-52 h-auto shadow-lg rounded border border-gray-200 z-20">
 										{isAdmin() ? (
 											<li>
 												<Link
@@ -140,7 +140,7 @@ const Header = () => {
 										<li>
 											<div
 												onClick={() => logout()}
-												className="py-2 px-4 flex items-center hover:text-black hover:bg-gray-50"
+												className="py-2 px-4 flex items-center border-t border-black/10 hover:text-black hover:bg-gray-50"
 											>
 												<BsPower />
 												<span className="ml-4 text-sm">Logout</span>
@@ -157,9 +157,11 @@ const Header = () => {
 					</div>
 					<div onClick={() => dispatch({ type: 'cartToggle', payload: true })} className="relative cursor-pointer">
 						<BsHandbag />
-						<span className="absolute -top-4 -right-4 w-6 h-6 bg-black text-white text-sm font-medium rounded-full flex items-center justify-center border-2 border-white">
-							0
-						</span>
+						{state.cartProduct && (
+							<span className="absolute -top-4 -right-4 w-6 h-6 bg-black text-white text-sm font-medium rounded-full flex items-center justify-center border-2 border-white">
+								{state.cartProduct && state.cartProduct.length}
+							</span>
+						)}
 					</div>
 				</div>
 			</div>

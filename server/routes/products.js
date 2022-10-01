@@ -21,6 +21,9 @@ router.post('/add-product', upload.any(), productController.postAddProduct);
 router.post('/edit-product', upload.any(), productController.editProduct);
 router.delete('/delete-product/:id', productController.deletProduct);
 
+router.post('/add-cart', productController.postAddToCart);
+router.post('/add-wish', productController.postAddToWish);
+
 router.post('/add-review', productController.postAddReview);
 router.post('/delete-review', productController.postDeleteReview);
 

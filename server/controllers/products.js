@@ -170,6 +170,34 @@ const productController = {
 			console.log(error);
 		}
 	},
+	postAddToCart: async (req, res) => {
+		try {
+			const { cartProduct } = req.body;
+
+			const products = await Products.find({
+				_id: { $in: cartProduct },
+			});
+			if (products) {
+				return res.json({ products });
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	postAddToWish: async (req, res) => {
+		try {
+			const { wProduct } = req.body;
+
+			const products = await Products.find({
+				_id: { $in: wProduct },
+			});
+			if (products) {
+				return res.json({ products });
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	},
 };
 
 module.exports = productController;
