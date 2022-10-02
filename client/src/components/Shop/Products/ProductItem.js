@@ -15,8 +15,6 @@ const ProductItem = ({ product }) => {
 						className={`py-[6px] px-4 rounded-full border border-black/10 text-xs uppercase font-semibold cursor-pointer ${
 							product.status === 'New'
 								? 'border-black/10 text-black bg-white'
-								: product.status === 'Pre Order'
-								? 'border-gray-50 text-gray-500 bg-gray-200'
 								: product.status === 'Sold Out'
 								? 'border-red-100 text-red-700 bg-red-100'
 								: product.status === 'Sale' && 'bg-amber-100 text-amber-800 border-amber-100'

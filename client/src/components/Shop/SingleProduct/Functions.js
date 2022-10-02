@@ -32,6 +32,7 @@ export const inCart = (id) => {
 			}
 		}
 	}
+	return false;
 };
 
 export const cartList = () => {
@@ -40,8 +41,7 @@ export const cartList = () => {
 
 	if (cart !== null) {
 		for (const c of cart) {
-			list.push(c);
-			localStorage.setItem('cart', JSON.stringify(list));
+			list.push(c.id);
 		}
 		return list;
 	} else {
@@ -53,7 +53,7 @@ export const addToCart = (id, quantity, price, setQuantity, dispatch, fetchData)
 	let inCart = false;
 	const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
 
-	if (cart) {
+	if (cart.length > 0) {
 		cart.forEach((item) => {
 			if (item.id === id) {
 				inCart = true;

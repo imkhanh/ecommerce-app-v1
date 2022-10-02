@@ -20,7 +20,34 @@ const deleteImages = (type, images) => {
 
 const productController = {
 	//search filter
-	getProductsByFilters: async (req, res) => {},
+	getProductsByFilters: async (req, res) => {
+		try {
+			const { query, category, brand, shipping, status } = req.body;
+
+			if (query) {
+				const products = await Products.find({ name: { $regex: query, $options: 'i' } });
+				if (products) return res.json({ products });
+			}
+			if (category) {
+				const products = await Products.find({ category });
+				if (products) return res.json({ products });
+			}
+			if (brand) {
+				const products = await Products.find({ brand });
+				if (products) return res.json({ products });
+			}
+			if (shipping) {
+				const products = await Products.find({ shipping });
+				if (products) return res.json({ products });
+			}
+			if (status) {
+				const products = await Products.find({ status });
+				if (products) return res.json({ products });
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	},
 	getAllProducts: async (req, res) => {
 		try {
 			const products = await Products.find({}).populate('category', '_id name').sort('-createdAt');
@@ -173,10 +200,9 @@ const productController = {
 	postAddToCart: async (req, res) => {
 		try {
 			const { cartProduct } = req.body;
-
 			const products = await Products.find({
 				_id: { $in: cartProduct },
-			});
+			}).populate('category', '_id name');
 			if (products) {
 				return res.json({ products });
 			}
@@ -186,11 +212,10 @@ const productController = {
 	},
 	postAddToWish: async (req, res) => {
 		try {
-			const { wProduct } = req.body;
-
+			const { wishProduct } = req.body;
 			const products = await Products.find({
-				_id: { $in: wProduct },
-			});
+				_id: { $in: wishProduct },
+			}).populate('category', '_id name');
 			if (products) {
 				return res.json({ products });
 			}

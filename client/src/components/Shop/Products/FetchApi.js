@@ -17,3 +17,12 @@ export const getAllCategories = async () => {
 		console.log(error);
 	}
 };
+
+export const getAllProductsByFilters = async (arg) => {
+	try {
+		const res = await axios.post('/api/product/search/filters', arg);
+		return res;
+	} catch (error) {
+		console.log(error);
+	}
+};

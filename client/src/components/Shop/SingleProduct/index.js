@@ -14,8 +14,6 @@ const ProductSection = () => {
 	const { state, dispatch } = useContext(LayoutContext);
 	const product = state.singleProduct;
 
-	console.log(state.cartProduct);
-
 	const [readMore, setReadMore] = useState(false);
 	const [alert, setAlert] = useState(false);
 	const [quantity, setQuantity] = useState(1);
@@ -73,7 +71,7 @@ const ProductSection = () => {
 					<div className="text-black font-normal">{product && product.name}</div>
 				</div>
 			</div>
-			<div className="p-8 lg:p-4 flex md:flex-col space-x-24 xl:space-x-12 md:space-x-0 md:space-y-24 select-none">
+			<div className="p-8 lg:p-4 flex md:flex-col space-x-24 xl:space-x-12 md:space-x-0 md:space-y-12 select-none">
 				{/* Product images */}
 				<div className="w-1/2 md:w-full flex md:flex-col">
 					<div className="relative w-[5%] md:hidden">
@@ -103,7 +101,7 @@ const ProductSection = () => {
 							objectFit: 'contain',
 						}}
 					>
-						<span className="absolute bottom-0 right-4 md:right-2 transform -translate-y-1/2 text-sm font-semibold mix-blend-difference text-white">
+						<span className="hidden md:block absolute bottom-0 left-4 md:right-2 transform -translate-y-1/2 text-sm font-semibold mix-blend-difference text-white">
 							{currentImage + 1} / {product.images.length}
 						</span>
 
@@ -135,8 +133,6 @@ const ProductSection = () => {
 								className={`py-[6px] px-4 rounded-full border border-black/10 text-xs uppercase font-semibold cursor-pointer ${
 									product.status === 'New'
 										? 'border-black/10 text-black bg-white'
-										: product.status === 'Pre Order'
-										? 'border-gray-50 text-gray-500 bg-gray-200'
 										: product.status === 'Sold Out'
 										? 'border-red-100 text-red-700 bg-red-100'
 										: product.status === 'Sale' && 'bg-amber-100 text-amber-800 border-amber-100'
@@ -162,23 +158,26 @@ const ProductSection = () => {
 							)}
 						</p>
 					</div>
+
 					<div>
 						<span className="mb-2 block">Quantity: {product.quantity}</span>
-						<div className="flex items-center">
-							<span
-								onClick={() => updateQuantity('decrease', quantity, setQuantity, product.quantity, setAlert)}
-								className="w-8 h-8 rounded-full bg-white text-black border border-black/20 flex items-center justify-center cursor-pointer hover:border-black transition-colors"
-							>
-								<BsDash />
-							</span>
-							<span className="w-10 text-center">{quantity}</span>
-							<span
-								onClick={() => updateQuantity('increase', quantity, setQuantity, product.quantity, setAlert)}
-								className="w-8 h-8 rounded-full bg-white text-black border border-black/20 flex items-center justify-center cursor-pointer hover:border-black transition-colors"
-							>
-								<BsPlus />
-							</span>
-						</div>
+						{product.quantity !== 0 && (
+							<div className="flex items-center">
+								<span
+									onClick={() => updateQuantity('decrease', quantity, setQuantity, product.quantity, setAlert)}
+									className="w-8 h-8 rounded-full bg-white text-black border border-black/20 flex items-center justify-center cursor-pointer hover:border-black transition-colors"
+								>
+									<BsDash />
+								</span>
+								<span className="w-10 text-center">{quantity}</span>
+								<span
+									onClick={() => updateQuantity('increase', quantity, setQuantity, product.quantity, setAlert)}
+									className="w-8 h-8 rounded-full bg-white text-black border border-black/20 flex items-center justify-center cursor-pointer hover:border-black transition-colors"
+								>
+									<BsPlus />
+								</span>
+							</div>
+						)}
 
 						{alert && (
 							<div className="mt-4 py-6 px-4 flex items-center justify-between bg-gray-100">
@@ -192,19 +191,26 @@ const ProductSection = () => {
 							</div>
 						)}
 					</div>
-					<div className="grid grid-cols-3 gap-3">
-						{product.quantity !== 0 && state.inCart && state.inCart.includes(product._id) ? (
-							<button className="col-span-2 w-full h-14 text-lg lg:text-base font-medium bg-black text-white border border-black">
-								In Cart
-							</button>
+
+					<div className="grid grid-cols-2 gap-2">
+						{product.quantity !== 0 ? (
+							state.inCart && state.inCart.includes(product._id) ? (
+								<button className="w-full h-14 text-lg lg:text-base font-medium bg-black text-white border border-black">
+									In Cart
+								</button>
+							) : (
+								<button
+									onClick={() =>
+										addToCart(product._id, quantity, product.price, setQuantity, dispatch, fetchSingleProduct)
+									}
+									className="w-full h-14 text-lg lg:text-base font-medium bg-black text-white border border-black"
+								>
+									Add to bag
+								</button>
+							)
 						) : (
-							<button
-								onClick={() =>
-									addToCart(product._id, quantity, product.price, setQuantity, dispatch, fetchSingleProduct)
-								}
-								className="col-span-2 w-full h-14 text-lg lg:text-base font-medium bg-black text-white border border-black"
-							>
-								Add to bag
+							<button className="w-full h-14 text-lg lg:text-base font-medium bg-black/80 text-white border border-black">
+								Out of Stock
 							</button>
 						)}
 
@@ -212,7 +218,7 @@ const ProductSection = () => {
 							onClick={() => addToWishList(product._id, setWishList)}
 							className={`${
 								isWish(product._id, wishList) ? 'hidden' : ''
-							} col-span-1 w-full h-14 flex items-center justify-center text-lg lg:text-base font-medium bg-white text-black/50 border border-black/20`}
+							} w-full h-14 flex items-center justify-center text-lg lg:text-base font-medium bg-white text-black/50 border border-black/20`}
 						>
 							<span className="mr-2">Favourite</span>
 							<BsHeart />
@@ -221,7 +227,7 @@ const ProductSection = () => {
 							onClick={() => removeToWishList(product._id, setWishList)}
 							className={`${
 								!isWish(product._id, wishList) ? 'hidden' : ''
-							} col-span-1 w-full h-14 flex items-center justify-center text-lg lg:text-base font-medium bg-white text-blue-500 border border-blue-500`}
+							} w-full h-14 flex items-center justify-center text-lg lg:text-base font-medium bg-white text-blue-500 border border-blue-500`}
 						>
 							<span className="mr-2">Favourite</span>
 							<BsHeartFill />

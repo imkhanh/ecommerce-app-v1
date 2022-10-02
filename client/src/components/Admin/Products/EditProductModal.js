@@ -240,7 +240,6 @@ const EditProductModal = () => {
 
 								<option value="New">New</option>
 								<option value="Sale">Sale</option>
-								<option value="Pre Order">Pre Order</option>
 								<option value="Sold Out">Sold Out</option>
 							</select>
 						</div>

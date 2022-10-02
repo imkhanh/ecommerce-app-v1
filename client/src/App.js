@@ -4,7 +4,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RequireAuth from './components/Shop/AuthModal/RequireAuth';
 import RequireAdmin from './components/Shop/AuthModal/RequireAdmin';
 //shop routes
-import { LayoutContext, layoutReducer, layoutState, Home, Product, Products } from './components/Shop';
+import {
+	LayoutContext,
+	layoutReducer,
+	layoutState,
+	Home,
+	Product,
+	Products,
+	Checkout,
+	UserProfile,
+} from './components/Shop';
 
 //manager routes
 import { Dashboard, AdminProducts, AdminCategories, AdminUsers } from './components/Admin';
@@ -21,7 +30,8 @@ const App = () => {
 					<Route path="/shop/product-detail/:id" element={<Product />} />
 
 					<Route element={<RequireAuth />}>
-						<Route path="/user/profile" element={<div>Profile</div>} />
+						<Route path="/user/profile" element={<UserProfile />} />
+						<Route path="/checkout" element={<Checkout />} />
 					</Route>
 
 					<Route element={<RequireAdmin />}>

@@ -5,7 +5,7 @@ import { isAuth, isAdmin } from './Authenticated';
 const RequireAuth = () => {
 	const location = useLocation();
 
-	if (!isAuth() && isAdmin()) {
+	if (!isAuth() && !isAdmin()) {
 		return <Navigate to="/" state={{ from: location }} />;
 	}
 	return <Outlet />;

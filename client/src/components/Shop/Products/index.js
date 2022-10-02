@@ -6,7 +6,6 @@ export const ProductsContext = createContext();
 
 const initalState = {
 	products: [],
-	categories: [],
 	sideBarToggle: false,
 	loading: false,
 };
@@ -15,8 +14,6 @@ const productsReducer = (state = initalState, action) => {
 	switch (action.type) {
 		case 'products':
 			return { ...state, products: action.payload };
-		case 'categories':
-			return { ...state, categories: action.payload };
 		case 'sideBarToggle':
 			return { ...state, sideBarToggle: action.payload };
 		case 'loading':
