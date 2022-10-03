@@ -6,6 +6,7 @@ export const layoutState = {
 	cartProduct: null,
 	inCart: null,
 	loading: false,
+	orderSuccess: false,
 };
 
 export const layoutReducer = (state = layoutState, action) => {
@@ -22,7 +23,8 @@ export const layoutReducer = (state = layoutState, action) => {
 			return { ...state, cartProduct: action.payload };
 		case 'inCart':
 			return { ...state, inCart: action.payload };
-
+		case 'orderSuccess':
+			return { ...state, orderSuccess: action.payload };
 		case 'loading':
 			return { ...state, loading: action.payload };
 		default:

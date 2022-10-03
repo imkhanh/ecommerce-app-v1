@@ -55,18 +55,23 @@ const productController = {
 			console.log(error);
 		}
 	},
-	getAllProducts: async (req, res) => {
-		const { sort, order, page } = req.body;
-		const currenPage = page || 1;
-		const perPage = 4;
-
+	getAllAdmin: async (req, res) => {
 		try {
-			const products = await Products.find({})
-				.populate('category', '_id name')
-				.skip((currenPage - 1) * perPage)
-				.sort([[sort, order]])
-				.limit(perPage);
-			if (products) return res.json({ products });
+			const products = await Products.find({}).populate('category', '_id name');
+			return res.json({ products });
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	getAllProducts: async (req, res) => {
+		try {
+			const page = req.query.page * 1 || 1;
+			const limit = req.query.limit * 1 || 8;
+			const skip = (page - 1) * limit;
+
+			const products = await Products.find({}).populate('category', '_id name').skip(skip).limit(limit);
+
+			return res.json({ result: products.length, products: products });
 		} catch (error) {
 			console.log(error);
 		}

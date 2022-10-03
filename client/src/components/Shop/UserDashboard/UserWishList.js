@@ -45,8 +45,9 @@ const UserWishListSection = () => {
 
 	return (
 		<div className="px-8 pb-8 border-t-2 border-black shadow">
-			<div className="mb-4 h-16 flex items-center border-b border-black/10">
-				<h4 className="text-sm font-semibold">My Wish List</h4>
+			<div className="mb-4 h-20 flex flex-col items-start justify-center border-b border-black/10">
+				<h4 className="text-base font-semibold">My Wish List</h4>
+				<p className="text-sm text-black/70">{lists && lists.length} products</p>
 			</div>
 			<div className="mt-4 bg-white overflow-x-auto rounded-sm">
 				<table className="min-w-full text-sm divide-y divide-gray-200">

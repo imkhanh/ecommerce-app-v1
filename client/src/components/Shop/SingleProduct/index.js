@@ -75,20 +75,22 @@ const ProductSection = () => {
 				{/* Product images */}
 				<div className="w-1/2 md:w-full flex md:flex-col">
 					<div className="relative w-[5%] md:hidden">
-						<div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-20 bg-gray-200 px-2 py-5 flex flex-col rounded-full space-y-2">
-							{product.images.length > 0 &&
-								product.images.map((item, index) => {
-									return (
-										<span
-											key={index}
-											onClick={() => setCurrentImage(index)}
-											className={`${
-												currentImage === index ? 'h-6 bg-black' : 'bg-black/40  w-[6px] h-[6px]'
-											} rounded-full cursor-pointer select-none duration-200 ease-in`}
-										></span>
-									);
-								})}
-						</div>
+						{product.images && product.images.length > 1 && (
+							<div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-20 bg-gray-200 px-2 py-5 flex flex-col rounded-full space-y-2">
+								{product.images.length > 0 &&
+									product.images.map((item, index) => {
+										return (
+											<span
+												key={index}
+												onClick={() => setCurrentImage(index)}
+												className={`${
+													currentImage === index ? 'h-6 bg-black' : 'bg-black/40  w-[6px] h-[6px]'
+												} rounded-full cursor-pointer select-none duration-200 ease-in`}
+											></span>
+										);
+									})}
+							</div>
+						)}
 					</div>
 
 					<div
@@ -104,19 +106,22 @@ const ProductSection = () => {
 						<span className="hidden md:block absolute bottom-0 left-4 md:right-2 transform -translate-y-1/2 text-sm font-semibold mix-blend-difference text-white">
 							{currentImage + 1} / {product.images.length}
 						</span>
-
-						<span
-							onClick={() => changeSlide('prevSlide', currentImage, setCurrentImage, product.images)}
-							className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center  duration-200 ease-in-out cursor-pointer"
-						>
-							<BsChevronLeft />
-						</span>
-						<span
-							onClick={() => changeSlide('nextSlide', currentImage, setCurrentImage, product.images)}
-							className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10  rounded-full flex items-center justify-center duration-200 ease-in-out cursor-pointer"
-						>
-							<BsChevronRight />
-						</span>
+						{product.images && product.images.length > 1 && (
+							<>
+								<span
+									onClick={() => changeSlide('prevSlide', currentImage, setCurrentImage, product.images)}
+									className="absolute top-1/2 left-4 md:left-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center  duration-200 ease-in-out cursor-pointer"
+								>
+									<BsChevronLeft />
+								</span>
+								<span
+									onClick={() => changeSlide('nextSlide', currentImage, setCurrentImage, product.images)}
+									className="absolute top-1/2 right-4 md:right-0 transform -translate-y-1/2 hover:bg-gray-100 w-12 h-12 md:w-10 md:h-10  rounded-full flex items-center justify-center duration-200 ease-in-out cursor-pointer"
+								>
+									<BsChevronRight />
+								</span>
+							</>
+						)}
 					</div>
 				</div>
 

@@ -9,6 +9,15 @@ export const getSingleUser = async (id) => {
 	}
 };
 
+export const getOrderByUser = async (id) => {
+	try {
+		const res = await axios.get(`/api/order/order-by-user/${id}`);
+		return res;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 export const patchEditUser = async (formData) => {
 	try {
 		const res = await axios.patch(`/api/user/edit-user/${formData.id}`, formData);

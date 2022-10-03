@@ -49,9 +49,9 @@ const CartModal = () => {
 		<div className="relative">
 			<Overlay state={state.cartToggle} dispatch={() => dispatch({ type: 'cartToggle', payload: false })} />
 			<div
-				className={`fixed top-0 right-0 ${
-					state.cartToggle ? 'w-[448px] opacity-100' : 'w-0 opacity-0'
-				}  h-screen shadow-lg bg-white duration-300 ease-in-out z-[70]`}
+				className={`fixed top-0 right-0  ${
+					state.cartToggle ? 'opacity-100 translate-x-0' : 'translate-x-full opacity-0'
+				} max-w-md w-full h-screen shadow-lg bg-white transform duration-300 ease-in-out z-[70]`}
 			>
 				<div className="flex flex-col w-full h-full">
 					<div className="h-14 px-4 flex items-center justify-between border-b border-black/10">

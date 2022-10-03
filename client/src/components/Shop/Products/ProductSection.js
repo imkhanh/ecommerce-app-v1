@@ -6,11 +6,13 @@ import ProductSidebar from './ProductSidebar';
 import { BsSliders } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Loading from '../Common/Loading';
+import LoadMore from './LoadMore';
 
 const ProductSection = () => {
 	const { state, dispatch } = useContext(ProductsContext);
 	const { products, loading } = state;
 	const [page, setPage] = useState(1);
+	const [result, setResult] = useState(1);
 
 	useEffect(() => {
 		fetchProducts();
@@ -20,8 +22,9 @@ const ProductSection = () => {
 	const fetchProducts = async () => {
 		dispatch({ type: 'loading', payload: true });
 		try {
-			const res = await getAllProducts('createdAt', 'desc', 3);
+			const res = await getAllProducts(page);
 			dispatch({ type: 'products', payload: res.data.products });
+			setResult(res.data.result);
 			dispatch({ type: 'loading', payload: false });
 		} catch (error) {
 			console.log(error);
@@ -59,8 +62,8 @@ const ProductSection = () => {
 					)}
 				</div>
 			</div>
-			<div className="py-24">
-				<button onClick={() => setPage(page + 1)}>Load more</button>
+			<div className="py-24 flex items-center justify-center">
+				<LoadMore page={page} setPage={setPage} result={result} />
 			</div>
 		</section>
 	);
