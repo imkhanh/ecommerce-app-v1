@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ProductsContext } from './';
 import { getAllProducts } from './FetchApi';
 import ProductItem from './ProductItem';
@@ -10,6 +10,7 @@ import Loading from '../Common/Loading';
 const ProductSection = () => {
 	const { state, dispatch } = useContext(ProductsContext);
 	const { products, loading } = state;
+	const [page, setPage] = useState(1);
 
 	useEffect(() => {
 		fetchProducts();
@@ -19,7 +20,7 @@ const ProductSection = () => {
 	const fetchProducts = async () => {
 		dispatch({ type: 'loading', payload: true });
 		try {
-			const res = await getAllProducts();
+			const res = await getAllProducts('createdAt', 'desc', 3);
 			dispatch({ type: 'products', payload: res.data.products });
 			dispatch({ type: 'loading', payload: false });
 		} catch (error) {
@@ -54,9 +55,12 @@ const ProductSection = () => {
 							return <ProductItem key={product._id} product={product} />;
 						})
 					) : (
-						<div>No product found</div>
+						<div className="p-8 lg:p-4 text-black/50">No product found</div>
 					)}
 				</div>
+			</div>
+			<div className="py-24">
+				<button onClick={() => setPage(page + 1)}>Load more</button>
 			</div>
 		</section>
 	);

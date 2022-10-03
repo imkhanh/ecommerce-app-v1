@@ -7,4 +7,20 @@ import Products from './Products';
 import Checkout from './Checkout';
 
 import UserProfile from './UserDashboard/UserProfile';
-export { LayoutContext, layoutReducer, layoutState, Home, Product, Products, Checkout, UserProfile };
+import UserWishList from './UserDashboard/UserWishList';
+import UserOrder from './UserDashboard/UserOrder';
+import ChangePassword from './UserDashboard/ChangePassword';
+
+export {
+	LayoutContext,
+	layoutReducer,
+	layoutState,
+	Home,
+	Product,
+	Products,
+	Checkout,
+	UserProfile,
+	UserWishList,
+	UserOrder,
+	ChangePassword,
+};

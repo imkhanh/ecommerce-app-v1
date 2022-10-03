@@ -1,4 +1,5 @@
 const Users = require('../models/users');
+const bcypt = require('bcrypt');
 
 const userController = {
 	getAllUsers: async (req, res) => {
@@ -17,6 +18,21 @@ const userController = {
 			console.log(error);
 		}
 	},
+	editUser: async (req, res) => {
+		try {
+			const { fullName, userName, phoneNumber, email } = req.body;
+
+			const editUser = await Users.findByIdAndUpdate(
+				{ _id: req.params.id },
+				{ fullName, userName, phoneNumber, email, updatedAt: Date.now() },
+				{ new: true }
+			);
+
+			if (editUser) return res.json({ success: 'User edited successfully' });
+		} catch (error) {
+			console.log(error);
+		}
+	},
 	deleteUser: async (req, res) => {
 		try {
 			await Users.findByIdAndDelete(req.params.id);
@@ -27,28 +43,19 @@ const userController = {
 	},
 	changePasswordUser: async (req, res) => {
 		try {
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	addToCart: async (req, res) => {
-		try {
-			const user = await Users.findById(req.params.id);
-			if (!user) return res.json({ error: 'User does not exists' });
+			const { uId, oldPassword, newPassword } = req.body;
+			if (!uId || !oldPassword || !newPassword) return res.json({ error: 'All fileds must be required' });
 
-			await Users.findByIdAndUpdate(
-				{ _id: req.user.id },
-				{
-					cart: req.body.cart,
-				}
-			);
-			return res.json({ success: 'Product added successfully' });
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	addToWish: async (req, res) => {
-		try {
+			const data = await Users.findOne({ _id: uId });
+			if (!data) {
+				return res.json({ error: 'Invalid User' });
+			}
+			const oldPasswordCheck = await bcypt.compare(oldPassword, data.password);
+			if (oldPasswordCheck) {
+				const newPasswordHash = await bcypt.hash(newPassword, 10);
+				const changePassword = await Users.findByIdAndUpdate(uId, { password: newPasswordHash }, { new: true });
+				if (changePassword) return res.json({ success: 'Password updated successfully' });
+			}
 		} catch (error) {
 			console.log(error);
 		}

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (sort, order, page) => {
 	try {
-		const res = await axios.get('/api/product/get-all');
+		const res = await axios.get('/api/product/get-all', { sort, order, page });
 		return res;
 	} catch (error) {
 		console.log(error);

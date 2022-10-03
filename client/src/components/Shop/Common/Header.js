@@ -75,9 +75,9 @@ const Header = () => {
 				</ul>
 				<div className="w-1/3 flex items-center justify-end space-x-6 lg:space-x-4 duration-200 ease-in-out select-none">
 					<div>
-						<span>
+						<Link to="/user/wish-list">
 							<BsHeart />
-						</span>
+						</Link>
 					</div>
 					<div ref={dropRef} className="relative cursor-pointer">
 						{isAuth() ? (

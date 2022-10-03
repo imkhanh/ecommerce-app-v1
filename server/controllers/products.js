@@ -22,26 +22,33 @@ const productController = {
 	//search filter
 	getProductsByFilters: async (req, res) => {
 		try {
-			const { query, category, brand, shipping, status } = req.body;
+			const { query, category, brand, shipping, status, price } = req.body;
 
 			if (query) {
-				const products = await Products.find({ name: { $regex: query, $options: 'i' } });
+				const products = await Products.find({ name: { $regex: query, $options: 'i' } }).populate(
+					'category',
+					'_id name'
+				);
 				if (products) return res.json({ products });
 			}
 			if (category) {
-				const products = await Products.find({ category });
+				const products = await Products.find({ category }).populate('category', '_id name');
 				if (products) return res.json({ products });
 			}
 			if (brand) {
-				const products = await Products.find({ brand });
+				const products = await Products.find({ brand }).populate('category', '_id name');
 				if (products) return res.json({ products });
 			}
 			if (shipping) {
-				const products = await Products.find({ shipping });
+				const products = await Products.find({ shipping }).populate('category', '_id name');
 				if (products) return res.json({ products });
 			}
 			if (status) {
-				const products = await Products.find({ status });
+				const products = await Products.find({ status }).populate('category', '_id name');
+				if (products) return res.json({ products });
+			}
+			if (price) {
+				const products = await Products.find({ price: { $gte: price } }).populate('category', '_id name');
 				if (products) return res.json({ products });
 			}
 		} catch (error) {
@@ -49,8 +56,16 @@ const productController = {
 		}
 	},
 	getAllProducts: async (req, res) => {
+		const { sort, order, page } = req.body;
+		const currenPage = page || 1;
+		const perPage = 4;
+
 		try {
-			const products = await Products.find({}).populate('category', '_id name').sort('-createdAt');
+			const products = await Products.find({})
+				.populate('category', '_id name')
+				.skip((currenPage - 1) * perPage)
+				.sort([[sort, order]])
+				.limit(perPage);
 			if (products) return res.json({ products });
 		} catch (error) {
 			console.log(error);

@@ -6,30 +6,19 @@ import { getAllCategories, getAllProducts, getAllProductsByFilters } from './Fet
 
 const ProductSidebar = () => {
 	const { state, dispatch } = useContext(ProductsContext);
-	const { products, loading } = state;
+	const { products } = state;
 
 	const [search, setSearch] = useState('');
 	const [categories, setCategories] = useState([]);
 	const [category, setCategory] = useState('');
-	const [status, setStatus] = useState(['New', 'Sale', 'Sold Out']);
-	const [shipping, setShipping] = useState(['Yes', 'No']);
+	const [shipping, setShipping] = useState('');
+	const [status, setStatus] = useState('');
+	const [price, setPrice] = useState(0);
 
 	useEffect(() => {
 		fetchAllCategories();
 		// eslint-disable-next-line
 	}, []);
-
-	useEffect(() => {
-		const delayed = setTimeout(() => {
-			fetchAllProductsByFilters({ query: search });
-			if (!search) {
-				fetchAllProducts();
-			}
-		}, 300);
-
-		return () => clearTimeout(delayed);
-		// eslint-disable-next-line
-	}, [search]);
 
 	const fetchAllCategories = async () => {
 		try {
@@ -53,26 +42,53 @@ const ProductSidebar = () => {
 	};
 
 	const fetchAllProductsByFilters = async (arg) => {
+		dispatch({ type: 'loading', payload: true });
+
 		try {
 			const res = await getAllProductsByFilters(arg);
 			dispatch({ type: 'products', payload: res.data.products });
+			dispatch({ type: 'loading', payload: false });
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	const handleSearch = (e) => {
-		setSearch(e.target.value);
-		fetchAllProductsByFilters({ name: e.target.value });
-	};
+	useEffect(() => {
+		if (search.trim() === '') {
+			fetchAllProducts();
+		} else {
+			fetchAllProductsByFilters({ query: search });
+		}
+
+		// eslint-disable-next-line
+	}, [search]);
 
 	const handleChangeCategory = (e) => {
 		setCategory(e.target.value);
 		fetchAllProductsByFilters({ category: e.target.value });
 	};
 
+	const handleChangeShipping = (e) => {
+		setShipping(e.target.value);
+		fetchAllProductsByFilters({ shipping: e.target.value });
+	};
+
+	const handleChangeStatus = (e) => {
+		setStatus(e.target.value);
+		fetchAllProductsByFilters({ status: e.target.value });
+	};
+
+	const handleChangePrice = (e) => {
+		setPrice(e.target.value);
+		fetchAllProductsByFilters({ price: e.target.value });
+	};
+
 	const resetAll = () => {
 		setCategory('');
+		setSearch('');
+		setShipping('');
+		setStatus('');
+		setPrice(0);
 		fetchAllProducts();
 	};
 
@@ -113,7 +129,7 @@ const ProductSidebar = () => {
 							type="text"
 							name="search"
 							value={search}
-							onChange={handleSearch}
+							onChange={(e) => setSearch(e.target.value)}
 							placeholder="Search..."
 							className="pl-7 text-sm w-full h-10 border-b border-gray-300 outline-none focus:border-black"
 						/>
@@ -126,7 +142,7 @@ const ProductSidebar = () => {
 								return (
 									<div key={index} className="flex items-center">
 										<input
-											type="radio"
+											type="checkbox"
 											name="category"
 											value={item._id}
 											onChange={handleChangeCategory}
@@ -143,28 +159,79 @@ const ProductSidebar = () => {
 					<div>
 						<span className="block w-full px-5 py-3 text-xs font-medium border-b">Status</span>
 						<div className="px-5 py-3 space-y-2">
-							{status.map((item, index) => {
-								return (
-									<div key={index} className="flex items-center">
-										<input type="checkbox" className="h-5 w-5 rounded border-gray-200" />
-										<span className="ml-3 text-sm font-medium">{item}</span>
-									</div>
-								);
-							})}
+							<div className="flex items-center">
+								<input
+									type="checkbox"
+									value="New"
+									defaultChecked={status === 'New'}
+									onChange={handleChangeStatus}
+									className="h-5 w-5 rounded border-gray-200"
+								/>
+								<span className="ml-3 text-sm font-medium">New</span>
+							</div>
+							<div className="flex items-center">
+								<input
+									type="checkbox"
+									value="Sale"
+									defaultChecked={shipping === 'Sale'}
+									onChange={handleChangeStatus}
+									className="h-5 w-5 rounded border-gray-200"
+								/>
+								<span className="ml-3 text-sm font-medium">Sale</span>
+							</div>
+							<div className="flex items-center">
+								<input
+									type="checkbox"
+									value="Sold Out"
+									defaultChecked={shipping === 'Sold Out'}
+									onChange={handleChangeStatus}
+									className="h-5 w-5 rounded border-gray-200"
+								/>
+								<span className="ml-3 text-sm font-medium">Sold Out</span>
+							</div>
 						</div>
 					</div>
 
 					<div>
 						<span className="block w-full px-5 py-3 text-xs font-medium border-b">Shipping</span>
 						<div className="px-5 py-3 space-y-2">
-							{shipping.map((item, index) => {
-								return (
-									<div key={index} className="flex items-center">
-										<input type="checkbox" className="h-5 w-5 rounded border-gray-200" />
-										<span className="ml-3 text-sm font-medium">{item}</span>
-									</div>
-								);
-							})}
+							<div className="flex items-center">
+								<input
+									type="checkbox"
+									value="Yes"
+									defaultChecked={shipping === 'Yes'}
+									onChange={handleChangeShipping}
+									className="h-5 w-5 rounded border-gray-200"
+								/>
+								<span className="ml-3 text-sm font-medium">Yes</span>
+							</div>
+							<div className="flex items-center">
+								<input
+									type="checkbox"
+									value="No"
+									defaultChecked={shipping === 'No'}
+									onChange={handleChangeShipping}
+									className="h-5 w-5 rounded border-gray-200"
+								/>
+								<span className="ml-3 text-sm font-medium">No</span>
+							</div>
+						</div>
+					</div>
+					<div>
+						<span className="block w-full px-5 py-3 text-xs font-medium border-b">Price</span>
+						<div className="px-5 py-3 space-y-2">
+							<div className="flex flex-col">
+								<span className="mb-4 text-sm font-light text-black/50">Price ${price} between $5000</span>
+
+								<input
+									type="range"
+									value={price}
+									min="0"
+									max="5000"
+									onChange={handleChangePrice}
+									className="w-full"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -13,6 +13,9 @@ import {
 	Products,
 	Checkout,
 	UserProfile,
+	UserOrder,
+	UserWishList,
+	ChangePassword,
 } from './components/Shop';
 
 //manager routes
@@ -30,8 +33,11 @@ const App = () => {
 					<Route path="/shop/product-detail/:id" element={<Product />} />
 
 					<Route element={<RequireAuth />}>
-						<Route path="/user/profile" element={<UserProfile />} />
 						<Route path="/checkout" element={<Checkout />} />
+						<Route path="/user/profile" element={<UserProfile />} />
+						<Route path="/user/order-list" element={<UserOrder />} />
+						<Route path="/user/wish-list" element={<UserWishList />} />
+						<Route path="/user/change-password" element={<ChangePassword />} />
 					</Route>
 
 					<Route element={<RequireAdmin />}>
