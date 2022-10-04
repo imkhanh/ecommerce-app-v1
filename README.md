@@ -1,8 +1,8 @@
 # MERN Stack - Ecommerce
 
-> Ecommerce website built with the MERN stack with React Context API for state management, taildwindcss
+> Ecommerce website built with the MERN stack with React Context API for state management, Taildwindcss for UI
 
-## Demo: https://blancos-ecommerce.herokuapp.com/
+#### Demo: https://blancos-ecommerce.herokuapp.com/
 
 #### Install dependencies for server
 
