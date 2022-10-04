@@ -1,39 +1,39 @@
-# Ecommerce App
-
 # MERN Stack - Ecommerce
+
+
 
 > Ecommerce website built with the MERN stack with React Context API for state management, taildwindcss
 
-## Demo:
 
-## Install dependencies for server
 
-### `npm install`
+## Demo: https://blancos-ecommerce.herokuapp.com/
 
-## Install dependencies for client
+### Install dependencies for server
 
-### cd client ---> `npm install`
+#### `npm install`
 
-## Connect to your mongodb and add info in .env
+### Install dependencies for client
 
-## Run the client & server with concurrently
+#### cd client ----> `npm install`
 
-### `npm run dev`
+### Run the client & server with concurrently
 
-## Run the Express server only
+#### `npm run dev`
 
-### `npm run server`
+### Run the Express server only
+
+#### `npm run server`
 
 ## Run the React client only
 
-### `npm run client`
+#### `npm run client`
 
 ### Server runs on http://localhost:5000 and client on http://localhost:3000
 
-### User interface
+#### User interface
 
 ![alt]
 
-### Admin interface
+#### Admin interface
 
-![alt]
+![alt] https://res.cloudinary.com/imkhanh/image/upload/v1664897361/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.27.05_yeiazj.png
