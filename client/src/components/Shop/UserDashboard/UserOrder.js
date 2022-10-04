@@ -38,14 +38,14 @@ const UserOrderSection = () => {
 				<table className="min-w-full text-sm divide-y divide-gray-200">
 					<thead>
 						<tr>
-							<th className="py-2 text-left font-medium text-black">Products</th>
-							<th className="py-2 text-left font-medium text-black">Status</th>
-							<th className="py-2 text-left font-medium text-black">Total</th>
-							<th className="py-2 text-left font-medium text-black">Phone</th>
-							<th className="py-2 text-left font-medium text-black">Address</th>
-							<th className="py-2 text-left font-medium text-black">Transaction Id</th>
-							<th className="py-2 text-left font-medium text-black">Checkout At</th>
-							<th className="py-2 text-left font-medium text-black">Processing</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Products</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Status</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Total</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Phone</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Address</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Transaction Id</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Checkout At</th>
+							<th className="py-2 text-left text-xs font-medium text-black">Processing</th>
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200">
@@ -87,12 +87,12 @@ const UserOrderSection = () => {
 												{order.status}
 											</span>
 										</td>
-										<td className="py-2">${order.amount}.00</td>
-										<td className="py-2">{order.phoneNumber}</td>
-										<td className="py-2">{order.address}</td>
-										<td className="py-2">{order.transactionId}</td>
-										<td className="py-2">{dayjs(order.createdAt).format('DD/MM/YYYY')}</td>
-										<td className="py-2 ">{dayjs(order.updatedAt).format('DD/MM/YYYY')}</td>
+										<td className="py-2 text-black/60">${order.amount}.00</td>
+										<td className="py-2 text-black/60">{order.phoneNumber}</td>
+										<td className="py-2 text-black/60">{order.address}</td>
+										<td className="py-2 text-black/60">{order.transactionId}</td>
+										<td className="py-2 text-black/60">{dayjs(order.createdAt).format('DD/MM/YYYY')}</td>
+										<td className="py-2 text-black/60 ">{dayjs(order.updatedAt).format('DD/MM/YYYY')}</td>
 									</tr>
 								);
 							})

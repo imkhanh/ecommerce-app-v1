@@ -16,10 +16,11 @@ import {
 	UserOrder,
 	UserWishList,
 	ChangePassword,
+	PageNotFound,
 } from './components/Shop';
 
 //manager routes
-import { Dashboard, AdminProducts, AdminCategories, AdminUsers } from './components/Admin';
+import { Dashboard, AdminProducts, AdminCategories, AdminUsers, AdminOrder } from './components/Admin';
 
 const App = () => {
 	const [state, dispatch] = useReducer(layoutReducer, layoutState);
@@ -45,11 +46,11 @@ const App = () => {
 						<Route path="/admin/products" element={<AdminProducts />} />
 						<Route path="/admin/categories" element={<AdminCategories />} />
 						<Route path="/admin/users" element={<AdminUsers />} />
-						<Route path="/admin/orders" element={<AdminProducts />} />
+						<Route path="/admin/orders" element={<AdminOrder />} />
 					</Route>
 
-					<Route path="*" element={<div>Page not found</div>} />
-					<Route path="/404" element={<div>Page not found</div>} />
+					<Route path="*" element={<PageNotFound />} />
+					<Route path="/404" element={<PageNotFound />} />
 				</Routes>
 			</BrowserRouter>
 		</LayoutContext.Provider>

@@ -4,14 +4,17 @@ import Layout, { LayoutContext } from '../Layout';
 import DropIn from 'braintree-web-drop-in-react';
 import { postAddToCart } from '../SingleProduct/FetchApi';
 import { createOrder, getBraintreeToken, getPaymentProcess } from './FetchApi';
-import { subTotalPrice, totalPrice, totalQuantity } from '../CartModal/Functions';
+import { totalPrice } from '../CartModal/Functions';
 import { BsArrowRepeat } from 'react-icons/bs';
+import CheckOutProduct from './CheckOutProduct';
+import Loading from '../Common/Loading';
 
 const CheckoutSection = () => {
 	const navigate = useNavigate();
 	const { state, dispatch } = useContext(LayoutContext);
 	const { cartProduct: products } = state;
 
+	const [loading, setLoading] = useState(false);
 	const [formData, setFormData] = useState({
 		address: '',
 		phoneNumber: '',
@@ -33,12 +36,12 @@ const CheckoutSection = () => {
 	}, []);
 
 	const fetchCartProduct = async () => {
-		dispatch({ type: 'loading', payload: true });
+		setLoading(true);
 		try {
 			const res = await postAddToCart();
 			if (res && res.data.products) {
 				dispatch({ type: 'cartProduct', payload: res.data.products });
-				dispatch({ type: 'loading', payload: false });
+				setLoading(false);
 			}
 		} catch (error) {
 			console.log(error);
@@ -108,7 +111,7 @@ const CheckoutSection = () => {
 	if (state.loading) {
 		return (
 			<div className="flex flex-col items-center justify-center h-screen space-y-2">
-				<div className="animation-">
+				<div className="animate-spin">
 					<BsArrowRepeat />
 				</div>
 				<div>Please wait untill finish</div>
@@ -116,64 +119,12 @@ const CheckoutSection = () => {
 		);
 	}
 
+	if (loading) return <Loading />;
+
 	return (
-		<section className="px-8 lg:px-4 md:pb-12">
-			<div className="py-4 flex products-center">
-				<div className="text-sm md:text-xs flex products-center text-black/50 font-light space-x-2">
-					<div navigate="/">Home</div>
-					<div>/</div>
-					<div navigate="/shop">Shop</div>
-					<div>/</div>
-					<div className="text-black">Order</div>
-				</div>
-			</div>
+		<section className="p-8 lg:px-4 md:py-10">
 			<div className="grid grid-cols-2 md:grid-cols-1 gap-20 md:gap-10">
-				<div className="mt-4 bg-white overflow-x-auto rounded-sm">
-					<table className="w-full text-sm divide-y divide-gray-200">
-						<thead>
-							<tr>
-								<th className="py-2 font-medium md:text-xs text-left text-black"></th>
-								<th className="py-2 font-medium md:text-xs text-left text-black">Image</th>
-								<th className="py-2 font-medium md:text-xs text-left text-black">Name</th>
-								<th className="py-2 font-medium md:text-xs text-left text-black">Category</th>
-								<th className="py-2 font-medium md:text-xs text-left text-black">Price ($)</th>
-								<th className="py-2 font-medium md:text-xs text-left text-black">Quantity</th>
-								<th className="py-2 font-medium md:text-xs text-left text-black">Sub Total</th>
-							</tr>
-						</thead>
-						<tbody className="divide-y divide-gray-200">
-							{products && products.length > 0 ? (
-								products.map((product, index) => {
-									return (
-										<tr key={product._id}>
-											<td className="p-4 w-[5%] text-black/70">{index + 1}</td>
-											<td className="py-4 text-black/70">
-												<img
-													alt={product.name}
-													src={`http://localhost:3000/uploads/products/${product.images[0]}`}
-													className="w-14 h-14 object-cover"
-												/>
-											</td>
-											<td className="py-4 md:text-xs text-black/70">{product.name}</td>
-											<td className="py-4 md:text-xs text-black/70">{product.category.name}</td>
-											<td className="py-4 text-black/70">{product.price}</td>
-											<td className="py-4 text-black/70">{totalQuantity(product._id)}</td>
-											<td className="py-4 text-black/70">{subTotalPrice(product._id, product.price)}</td>
-										</tr>
-									);
-								})
-							) : (
-								<tr>
-									<td>No product found for checkout</td>
-								</tr>
-							)}
-						</tbody>
-					</table>
-					<div className="py-4 flex items-center justify-end">
-						<span className="text-base font-semibold">Total Price:</span>
-						<span className="ml-4 font-semibold">${totalPrice()}</span>
-					</div>
-				</div>
+				<CheckOutProduct products={products} />
 				<div>
 					{formData.clientToken !== null ? (
 						<>

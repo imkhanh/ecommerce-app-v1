@@ -5,6 +5,7 @@ import Home from './Home';
 import Product from './SingleProduct';
 import Products from './Products';
 import Checkout from './Checkout';
+import PageNotFound from './Common/PageNotFound';
 
 import UserProfile from './UserDashboard/UserProfile';
 import UserWishList from './UserDashboard/UserWishList';
@@ -19,6 +20,7 @@ export {
 	Product,
 	Products,
 	Checkout,
+	PageNotFound,
 	UserProfile,
 	UserWishList,
 	UserOrder,

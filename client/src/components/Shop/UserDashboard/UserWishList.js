@@ -53,12 +53,12 @@ const UserWishListSection = () => {
 				<table className="min-w-full text-sm divide-y divide-gray-200">
 					<thead>
 						<tr>
-							<th className="py-2 font-medium text-left text-black">Index</th>
-							<th className="py-2 font-medium text-left text-black">Image</th>
-							<th className="py-2 font-medium text-left text-black">Name</th>
-							<th className="py-2 font-medium text-left text-black">Category</th>
-							<th className="py-2 font-medium text-left text-black">Status</th>
-							<th className="py-2 font-medium text-left text-black">Action</th>
+							<th className="py-2 font-medium text-xs text-left text-black">Index</th>
+							<th className="py-2 font-medium text-xs text-left text-black">Image</th>
+							<th className="py-2 font-medium text-xs text-left text-black">Name</th>
+							<th className="py-2 font-medium text-xs text-left text-black">Category</th>
+							<th className="py-2 font-medium text-xs text-left text-black">Status</th>
+							<th className="py-2 font-medium text-xs text-left text-black">Action</th>
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-200">

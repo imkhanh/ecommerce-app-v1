@@ -41,6 +41,7 @@ const Header = () => {
 		return (
 			<li key={link.id}>
 				<Link
+					onClick={() => dispatch({ type: 'mobileToggle', payload: false })}
 					to={link.to}
 					className="block mx-6 lg:mx-4 md:mx-0 md:my-4 text-xs md:text-lg font-normal md:font-medium  hover:text-black uppercase "
 				>

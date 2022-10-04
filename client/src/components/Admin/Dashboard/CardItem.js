@@ -38,9 +38,9 @@ const CardItem = () => {
 						<span>{state.getAllDocuments ? state.getAllDocuments.categories : 0}</span>
 					</div>
 				</div>
-				<div className="w-full h-[160px] border-t-4 border-rose-500 rounded-bl-md rounded-br-md shadow-lg bg-white">
+				<div className="w-full h-[160px] border-t-4 border-gray-500 rounded-bl-md rounded-br-md shadow-lg bg-white">
 					<div className="h-full flex flex-col items-center justify-center space-y-2">
-						<span className="w-10 h-10 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center">
+						<span className="w-10 h-10 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center">
 							<BsPeopleFill />
 						</span>
 						<span>{state.getAllDocuments ? state.getAllDocuments.users : 0}</span>
@@ -51,7 +51,7 @@ const CardItem = () => {
 						<span className="w-10 h-10 rounded-full bg-amber-100 text-amber-500 flex items-center justify-center">
 							<BsReceipt />
 						</span>
-						<span>2</span>
+						<span>{state.getAllDocuments ? state.getAllDocuments.orders : 0}</span>
 					</div>
 				</div>
 			</div>

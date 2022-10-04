@@ -77,7 +77,7 @@ const SlideUpload = () => {
 				</div>
 			</div>
 
-			<div className="h-[360px] flex space-x-4 overflow-x-auto">
+			<div className="pb-6 flex space-x-4 overflow-x-auto">
 				{images.length > 0 &&
 					images.map((img) => {
 						return (
@@ -85,11 +85,12 @@ const SlideUpload = () => {
 								<img
 									alt="name"
 									src={`http://localhost:3000/uploads/customizes/${img.slideImage}`}
-									className="w-full h-full object-cover"
+									className="w-full h-[400px] object-cover"
 								/>
+								<div className="absolute inset-0 bg-black opacity-30 z-10" />
 								<span
 									onClick={() => handleDeleteImage(img._id)}
-									className="absolute top-4 right-4 bg-white text-black w-10 h-10 rounded-full flex items-center justify-center cursor-pointer select-none text-2xl"
+									className="absolute top-4 right-4 bg-white text-black w-8 h-8 rounded-full flex items-center justify-center cursor-pointer select-none text-2xl z-20"
 								>
 									<BsX />
 								</span>
