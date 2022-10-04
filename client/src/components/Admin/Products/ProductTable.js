@@ -4,6 +4,7 @@ import { BsPencilFill, BsTrashFill } from 'react-icons/bs';
 import { ProductsContext } from '.';
 import Loading from '../Layout/Loading';
 import dayjs from 'dayjs';
+import { BASE_URL } from '../../../url';
 
 const ProductTable = () => {
 	const { state, dispatch } = useContext(ProductsContext);
@@ -71,7 +72,7 @@ const ProductTable = () => {
 										<img
 											alt={product.name}
 											className="w-16 h-16 object-cover"
-											src={`http://localhost:3000/uploads/products/${product.images[0]}`}
+											src={`${BASE_URL}/uploads/products/${product.images[0]}`}
 										/>
 									</td>
 									<td className="py-2 text-black/70">{product.name}</td>

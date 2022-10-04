@@ -5,6 +5,7 @@ import DashboardLayout, { DashboardContext } from '.';
 import { postAddToWish } from './FetchApi';
 import { LayoutContext } from '../Layout';
 import Loading from '../Common/Loading';
+import { BASE_URL } from '../../../url';
 
 const UserWishListSection = () => {
 	const navigate = useNavigate();
@@ -70,7 +71,7 @@ const UserWishListSection = () => {
 										<td className="py-4 text-black/70">
 											<img
 												alt={item.name}
-												src={`http://localhost:3000/uploads/products/${item.images[0]}`}
+												src={`${BASE_URL}/uploads/products/${item.images[0]}`}
 												className="w-14 h-14 object-cover"
 											/>
 										</td>

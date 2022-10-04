@@ -3,6 +3,7 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import Loading from '../Common/Loading';
 import { HomeContext } from './';
 import { getAllImages } from './FetchApi';
+import { BASE_URL } from '../../../url';
 
 const Sliders = () => {
 	const { state, dispatch } = useContext(HomeContext);
@@ -47,7 +48,7 @@ const Sliders = () => {
 			{slides.length > 0 ? (
 				<img
 					alt="slideImage"
-					src={`http://localhost:3000/uploads/customizes/${slides[currentImage]?.slideImage}`}
+					src={`${BASE_URL}/uploads/customizes/${slides[currentImage]?.slideImage}`}
 					className="w-full h-full object-cover"
 				/>
 			) : (

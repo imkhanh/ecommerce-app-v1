@@ -7,6 +7,7 @@ import { totalPrice, totalQuantity, subTotalPrice, updateQuantity } from './Func
 import { Link } from 'react-router-dom';
 import Overlay from '../Common/Overlay';
 import { isAuth } from '../AuthModal/Authenticated';
+import { BASE_URL } from '../../../url';
 
 const CartModal = () => {
 	const { state, dispatch } = useContext(LayoutContext);
@@ -81,7 +82,7 @@ const CartModal = () => {
 										<div className="col-span-1">
 											<img
 												alt={item.name}
-												src={`http://localhost:3000/uploads/products/${item.images[0]}`}
+												src={`${BASE_URL}/uploads/products/${item.images[0]}`}
 												className="w-24 h-24 object-cover"
 											/>
 										</div>

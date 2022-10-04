@@ -3,6 +3,7 @@ import DashboardLayout, { DashboardContext } from '.';
 import { getOrderByUser } from './FetchApi';
 import Loading from '../Common/Loading';
 import dayjs from 'dayjs';
+import { BASE_URL } from '../../../url';
 
 const UserOrderSection = () => {
 	const uId = JSON.parse(localStorage.getItem('auth')).user.id;
@@ -59,7 +60,7 @@ const UserOrderSection = () => {
 													<span key={product._id} className="flex items-center">
 														<img
 															className="w-12 h-12 object-cover"
-															src={`http://localhost:3000/uploads/products/${product.id.images[0]}`}
+															src={`${BASE_URL}/uploads/products/${product.id.images[0]}`}
 															alt="productImage"
 														/>
 														<span className="pl-4 flex flex-col">

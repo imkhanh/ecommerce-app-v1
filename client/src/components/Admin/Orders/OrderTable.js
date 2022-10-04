@@ -4,6 +4,7 @@ import { BsPencilFill, BsTrashFill } from 'react-icons/bs';
 import { OrderContext } from '.';
 import Loading from '../Layout/Loading';
 import dayjs from 'dayjs';
+import { BASE_URL } from '../../../url';
 
 const OrderTable = () => {
 	const { state, dispatch } = useContext(OrderContext);
@@ -70,7 +71,7 @@ const OrderTable = () => {
 												<span key={product._id} className="flex items-center">
 													<img
 														className="w-12 h-12 object-cover"
-														src={`http://localhost:3000/uploads/products/${product.id.images[0]}`}
+														src={`${BASE_URL}/uploads/products/${product.id.images[0]}`}
 														alt="productImage"
 													/>
 													<span className="pl-4 flex flex-col">

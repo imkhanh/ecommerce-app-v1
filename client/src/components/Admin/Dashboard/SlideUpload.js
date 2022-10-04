@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { BsCloudUpload, BsX } from 'react-icons/bs';
+import { BASE_URL } from '../../../url';
 import Loading from '../Layout/Loading';
 import { DashboardContext } from './';
 import { deleteSlideImage, getAllSlideImages, uploadSlideImage } from './FetchApi';
@@ -84,7 +85,7 @@ const SlideUpload = () => {
 							<div key={img._id} className="relative flex-shrink-0">
 								<img
 									alt="name"
-									src={`http://localhost:3000/uploads/customizes/${img.slideImage}`}
+									src={`${BASE_URL}/uploads/customizes/${img.slideImage}`}
 									className="w-full h-[400px] object-cover"
 								/>
 								<div className="absolute inset-0 bg-black opacity-30 z-10" />

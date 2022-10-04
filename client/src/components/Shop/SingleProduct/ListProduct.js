@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { BASE_URL } from '../../../url';
 import { getListProduct } from './FetchApi';
 
 const ListProduct = () => {
@@ -43,7 +44,7 @@ const ListProduct = () => {
 									<img
 										alt={product.name}
 										className="w-full h-[280px] md:h-full object-contain"
-										src={`http://localhost:3000/uploads/products/${product.images[0]}`}
+										src={`${BASE_URL}/uploads/products/${product.images[0]}`}
 									/>
 								</div>
 								<div className="pt-4">

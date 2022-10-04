@@ -8,6 +8,7 @@ import { cartList, changeSlide, updateQuantity, addToCart } from './Functions';
 import RatingReviews from './RatingReviews';
 import ListProduct from './ListProduct';
 import Loading from '../Common/Loading';
+import { BASE_URL } from '../../../url';
 
 const ProductSection = () => {
 	const { id } = useParams();
@@ -96,7 +97,7 @@ const ProductSection = () => {
 					<div
 						className="w-[95%] md:w-full h-[710px] md:h-[500px] relative"
 						style={{
-							backgroundImage: `url(http://localhost:3000/uploads/products/${product.images[currentImage]})`,
+							backgroundImage: `url(${BASE_URL}/uploads/products/${product.images[currentImage]})`,
 							backgroundSize: 'cover',
 							backgroundPosition: 'center',
 							backgroundRepeat: 'no-repeat',

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { isWish, addToWishList, removeToWishList } from './Functions';
+import { BASE_URL } from '../../../url';
 
 const ProductItem = ({ product }) => {
 	const navigate = useNavigate();
@@ -42,7 +43,7 @@ const ProductItem = ({ product }) => {
 				<img
 					alt={product.name}
 					onClick={() => navigate(`/shop/product-detail/${product._id}`)}
-					src={`http://localhost:3000/uploads/products/${product.images[0]}`}
+					src={`${BASE_URL}/uploads/products/${product.images[0]}`}
 					className="w-full h-[280px] md:h-full object-contain cursor-pointer"
 				/>
 			</div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BASE_URL } from '../../../url';
 import { totalPrice, totalQuantity } from '../CartModal/Functions';
 
 const CheckOutProduct = ({ products }) => {
@@ -17,7 +18,7 @@ const CheckOutProduct = ({ products }) => {
 								<div className="py-4 flex  items-center">
 									<img
 										alt={product.name}
-										src={`http://localhost:3000/uploads/products/${product.images[0]}`}
+										src={`${BASE_URL}/uploads/products/${product.images[0]}`}
 										className="w-24 h-24 object-cover"
 									/>
 									<div>
