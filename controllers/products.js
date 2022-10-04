@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const deleteImages = (type, images) => {
-	const basePath = path.join(__dirname, '../client/public/uploads/products/');
+	const basePath = path.join(__dirname, '../client/build/uploads/products/');
 
 	for (let i = 0; i < images.length; i++) {
 		let filePath = '';
@@ -57,7 +57,7 @@ const productController = {
 	},
 	getAllAdmin: async (req, res) => {
 		try {
-			const products = await Products.find({}).populate('category', '_id name');
+			const products = await Products.find({}).populate('category', '_id name').sort('-createdAt');
 			return res.json({ products });
 		} catch (error) {
 			console.log(error);
