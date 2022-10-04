@@ -44,7 +44,7 @@ npm run client
 
 #### Admin interface
 
-![alt] https://res.cloudinary.com/imkhanh/image/upload/v1664897361/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.27.05_yeiazj.png
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664897361/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.27.05_yeiazj.png)
 
 ```
 
