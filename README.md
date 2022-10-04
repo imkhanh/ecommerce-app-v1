@@ -1,7 +1,10 @@
 ## MERN Stack - Ecommerce
 
 ```
-Ecommerce website built with the MERN stack with React Context API for state management, Taildwindcss for UI
+Ecommerce website built with the MERN stack 
+
+Blancos website is an ultimate shopping destination for all the fashion's. It is build completely on MERN Stack technology. ReactJs is used to implement fully functional frontend with React Context API for state management, Taildwindcss for UI. NodeJs & ExpressJs for a scalable backend in a modular way. MongoDb as a cloudbase database Braintree to implement payment methods by Credit/ Debit card. Cash on delivery feature.
+
 ```
 
 #### Demo: https://blancos-ecommerce.herokuapp.com/
