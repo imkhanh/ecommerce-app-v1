@@ -1,20 +1,22 @@
 # MERN Stack - Ecommerce
 
-
-
 > Ecommerce website built with the MERN stack with React Context API for state management, taildwindcss
 
-
+-  [![React][react.js]][react-url]
+-  [![Tailwindcss][tailwindcss.com]][tailwindcss-url]
 
 ## Demo: https://blancos-ecommerce.herokuapp.com/
 
 ### Install dependencies for server
 
-#### `npm install`
+-  npm
+   ```sh
+   npm install
+   ```
 
 ### Install dependencies for client
 
-#### cd client ----> `npm install`
+cd client ----> `npm install`
 
 ### Run the client & server with concurrently
 
