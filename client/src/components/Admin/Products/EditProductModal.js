@@ -2,6 +2,8 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { editProduct, getAllCategories } from './FetchApi';
 import Overlay from '../Layout/Overlay';
 import { ProductsContext } from '.';
+import { BASE_URL } from '../../../url';
+
 
 const EditProductModal = () => {
 	const { state, dispatch } = useContext(ProductsContext);
@@ -254,7 +256,7 @@ const EditProductModal = () => {
 										<img
 											alt={index}
 											key={index}
-											src={`http://localhost:3000/uploads/products/${img}`}
+											src={`${BASE_URL}/uploads/products/${img}`}
 											className="p-1 w-10 h-10 object-cover border border-black/10"
 										/>
 									);
