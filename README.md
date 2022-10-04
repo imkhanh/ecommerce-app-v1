@@ -4,7 +4,7 @@ Blancos website is an ultimate shopping destination for all the fashion's. It is
 
 Features of Blancos Ecommerce :
 
-[x] Product list
+[:white_check_mark:] (Product list)
 [x] Product details
 [x] Product filter category ,brand, price ,status, shipping in sidebar
 [x] Product reviews
