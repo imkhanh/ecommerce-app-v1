@@ -11,13 +11,14 @@ import LoadMore from './LoadMore';
 const ProductSection = () => {
 	const { state, dispatch } = useContext(ProductsContext);
 	const { products, loading } = state;
+
 	const [page, setPage] = useState(1);
 	const [result, setResult] = useState(1);
 
 	useEffect(() => {
 		fetchProducts();
 		// eslint-disable-next-line
-	}, []);
+	}, [page]);
 
 	const fetchProducts = async () => {
 		dispatch({ type: 'loading', payload: true });
@@ -63,7 +64,7 @@ const ProductSection = () => {
 				</div>
 			</div>
 			<div className="py-24 flex items-center justify-center">
-				<LoadMore page={page} setPage={setPage} result={result} />
+				<LoadMore result={result} page={page} setPage={setPage} />
 			</div>
 		</section>
 	);

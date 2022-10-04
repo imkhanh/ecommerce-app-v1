@@ -67,11 +67,14 @@ const productController = {
 		try {
 			const page = req.query.page * 1 || 1;
 			const limit = req.query.limit * 1 || 8;
-			const skip = (page - 1) * limit;
 
-			const products = await Products.find({}).populate('category', '_id name').skip(skip).limit(limit);
+			const products = await Products.find({})
+				.skip((page - 1) * limit)
+				.limit(limit)
+				.populate('category', '_id name')
+				.sort('-createdAt');
 
-			return res.json({ result: products.length, products: products });
+			return res.json({ success: true, result: products.length, products });
 		} catch (error) {
 			console.log(error);
 		}

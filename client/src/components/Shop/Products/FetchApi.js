@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getAllProducts = async (page) => {
 	try {
-		const res = await axios.get(`/api/product/get-all?page=${page}`);
+		const res = await axios.get(`/api/product/get-all?limit=${page * 8}`);
 		return res;
 	} catch (error) {
 		console.log(error);
