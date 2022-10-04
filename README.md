@@ -17,7 +17,7 @@ Features of Blancos Ecommerce :
 
 We are using multer for multiple images uploads, and many more features.
 
-There are main 2 modules.
+There are main 2 modules (Admin & User)
 
 Admin can create new products, update existing, change/update order status and have access to everything.
 
