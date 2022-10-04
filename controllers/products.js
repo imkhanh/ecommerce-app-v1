@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const deleteImages = (type, images) => {
-	const basePath = path.join(__dirname, '../../client/public/uploads/products/');
+	const basePath = path.join(__dirname, '../client/public/uploads/products/');
 
 	for (let i = 0; i < images.length; i++) {
 		let filePath = '';

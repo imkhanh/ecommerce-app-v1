@@ -43,7 +43,7 @@ const customizeController = {
 	deleteImage: async (req, res) => {
 		try {
 			const image = await Customizes.findById(req.params.id);
-			const filePath = path.join(__dirname, `../../client/public/uploads/customizes/${image.slideImage}`);
+			const filePath = path.join(__dirname, `../client/public/uploads/customizes/${image.slideImage}`);
 
 			const deleteImage = await Customizes.findByIdAndDelete(req.params.id);
 			if (deleteImage) {

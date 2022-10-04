@@ -35,6 +35,13 @@ app.use('/api/customize', require('./routes/customizes'));
 app.use('/api/order', require('./routes/orders'));
 app.use('/api/braintree', require('./routes/braintree'));
 
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+	app.get('*', (req, res) => {
+		res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+	});
+}
+
 // Run server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

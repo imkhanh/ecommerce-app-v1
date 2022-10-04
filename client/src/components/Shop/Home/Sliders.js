@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import Loading from '../Common/Loading';
 import { HomeContext } from './';
 import { getAllImages } from './FetchApi';
 
@@ -34,7 +35,12 @@ const Sliders = () => {
 		}
 	};
 
-	if (loading) return <div className="bg-gray-100 w-full h-[800px]"></div>;
+	if (loading)
+		return (
+			<div className="relative bg-gray-100 w-full h-[800px]">
+				<Loading />
+			</div>
+		);
 
 	return (
 		<div className="p-8 lg:p-4 relative">
