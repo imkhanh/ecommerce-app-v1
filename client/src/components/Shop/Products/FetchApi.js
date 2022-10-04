@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getAllProducts = async (page) => {
 	try {
-		const res = await axios.get(`/product/get-all?page=${page}`);
+		const res = await axios.get(`/api/product/get-all?page=${page}`);
 		return res;
 	} catch (error) {
 		console.log(error);
@@ -11,7 +11,7 @@ export const getAllProducts = async (page) => {
 
 export const getAllCategories = async () => {
 	try {
-		const res = await axios.get('/category/get-all');
+		const res = await axios.get('/api/category/get-all');
 		return res;
 	} catch (error) {
 		console.log(error);
