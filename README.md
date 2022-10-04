@@ -4,16 +4,16 @@ Blancos website is an ultimate shopping destination for all the fashion's. It is
 
 Features of Blancos Ecommerce :
 
--[x] Product list
--[x] Product details
--[x] Product filter category ,brand, price ,status, shipping in sidebar
--[x] Product reviews
--[x] Searching product
--[x] Shopping cart
--[x] User profile
--[x] User wish list
--[x] User change password
--[x] Order History
+- [x] Product list
+- [x] Product details
+- [x] Product filter category ,brand, price ,status, shipping in sidebar
+- [x] Product reviews
+- [x] Searching product
+- [x] Shopping cart
+- [x] User profile
+- [x] User wish list
+- [x] User change password
+- [x] Order History
 
 We are using multer for multiple images uploads, and many more features.
 
