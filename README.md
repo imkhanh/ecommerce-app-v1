@@ -1,19 +1,19 @@
-## Ecommerce website built with the MERN stack 
+## Ecommerce website built with the MERN stack
 
 Blancos website is an ultimate shopping destination for all the fashion's. It is build completely on MERN Stack technology. ReactJs is used to implement fully functional frontend with React Context API for state management, Taildwindcss for UI. NodeJs & ExpressJs for a scalable backend in a modular way. MongoDb as a cloudbase database Braintree to implement payment methods by Credit/ Debit card. Cash on delivery feature.
 
 Features of Blancos Ecommerce :
 
-- [x] Product list
-- [x] Product details
-- [x] Product filter category ,brand, price ,status, shipping in sidebar
-- [x] Product reviews
-- [x] Searching product
-- [x] Shopping cart
-- [x] User profile
-- [x] User wish list
-- [x] User change password
-- [x] Order History
+-  [x] Product list
+-  [x] Product details
+-  [x] Product filter category ,brand, price ,status, shipping in sidebar
+-  [x] Product reviews
+-  [x] Searching product
+-  [x] Shopping cart
+-  [x] User profile
+-  [x] User wish list
+-  [x] User change password
+-  [x] Order History
 
 We are using multer for multiple images uploads, and many more features.
 
@@ -69,19 +69,18 @@ npm run client
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664897594/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.31.13_ysdek7.png)
 
-![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664897594/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.31.38_oqplid.png)
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.21_yous6d.png)
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.40_o0ujmn.png)
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.08_btwgdd.png)
 
-![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.02_zm3lrj.png)
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664897594/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.31.38_oqplid.png)
 
-![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.21_yous6d.png)
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.02_zm3lrj.png)
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898214/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.30_lf1eyi.png)
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898214/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.19_jypqx4.png)
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898214/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.32_bmqohl.png)
-
