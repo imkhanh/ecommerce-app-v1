@@ -92,14 +92,38 @@ Edit Product
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.21_yous6d.png)
 
-![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.08_btwgdd.png)
-
-![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.02_zm3lrj.png)
-
-![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898214/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.30_lf1eyi.png)
+```
+Categories
+```
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898214/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.32_bmqohl.png)
 
+```
+Add Category
+```
+
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.40_o0ujmn.png)
 
+```
+Users
+```
+
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.02_zm3lrj.png)
+
+```
+Add User
+```
+
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.08_btwgdd.png)
+
+```
+Orders
+```
+
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898214/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.19_jypqx4.png)
+
+```
+Edit Order
+```
+
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898214/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.42.30_lf1eyi.png)
