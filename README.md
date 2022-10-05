@@ -63,7 +63,7 @@ npm run client
 
 #### User interface
 
-![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664978972/blancos-ecommerce/screencapture-blancos-ecommerce-herokuapp-2022-10-05-21_03_36_sgmwsy.png)
+![Image](https://res.cloudinary.com/imkhanh/image/upload/v1664978972/blancos-ecommerce/screencapture-blancos-ecommerce-herokuapp-2022-10-05-21_03_36_sgmwsy.png)
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664978964/blancos-ecommerce/screencapture-blancos-ecommerce-herokuapp-shop-2022-10-05-21_03_08_xbqqgu.png)
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664978964/blancos-ecommerce/screencapture-blancos-ecommerce-herokuapp-shop-product-detail-63370a628b601e2a5be353d6-2022-10-05-21_05_20_ypunrd.png)
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664978989/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-05_lu%CC%81c_21.06.32_wp1lag.png)
