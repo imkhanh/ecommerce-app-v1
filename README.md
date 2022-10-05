@@ -9,16 +9,17 @@ There are main 2 modules (Admin & User)
 Admin can create new products, update existing, change/update order status and have access to everything.
 
 Features of Blancos Ecommerce :
-[x] Product list
-[x] Product details
-[x] Product filter category ,brand, price ,status, shipping in sidebar
-[x] Product reviews
-[x] Searching product
-[x] Shopping cart
-[x] User profile
-[x] User wish list
-[x] User change password
-[x] Order History
+
+-  Product list
+-  Product details
+-  Product filter category ,brand, price ,status, shipping in sidebar
+-  Product reviews
+-  Searching product
+-  Shopping cart
+-  User profile
+-  User wish list
+-  User change password
+-  Order History
 
 #### Demo: https://blancos-ecommerce.herokuapp.com/
 
@@ -62,7 +63,11 @@ npm run client
 
 #### User interface
 
-![alt]
+```
+Home
+```
+
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664975221/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-05_lu%CC%81c_20.06.39_pqx5zq.png)
 
 <hr/>
 
@@ -103,6 +108,12 @@ Add Category
 ```
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.40_o0ujmn.png)
+
+```
+Edit Category
+```
+
+![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664898213/blancos-ecommerce/A%CC%89nh_chu%CC%A3p_Ma%CC%80n_hi%CC%80nh_2022-10-04_lu%CC%81c_22.41.48_mmu1qh.png)
 
 ```
 Users
