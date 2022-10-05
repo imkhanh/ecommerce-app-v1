@@ -60,6 +60,7 @@ npm run client
 #### Server runs on http://localhost:5000 and client on http://localhost:3000
 
 <hr/>
+
 #### User interface
 
 ![alt](https://res.cloudinary.com/imkhanh/image/upload/v1664978972/blancos-ecommerce/screencapture-blancos-ecommerce-herokuapp-2022-10-05-21_03_36_sgmwsy.png)
