@@ -59,12 +59,13 @@ npm run client
 
 #### User interface
 ![screencapture-blancos-ecommerce-herokuapp-2022-10-05-21_03_36](https://user-images.githubusercontent.com/78254137/194230032-af268680-bd3a-49c3-a011-5b4269a04c36.png)
-![screencapture-blancos-ecommerce-herokuapp-user-order-list-2022-10-05-21_07_57](https://user-images.githubusercontent.com/78254137/194230113-b2921425-729c-4550-a84d-c9d5a4046642.png)
-![screencapture-blancos-ecommerce-herokuapp-user-profile-2022-10-05-21_07_21](https://user-images.githubusercontent.com/78254137/194230118-cb02e7d3-13ea-4f0d-aa45-03a76a33dc81.png)
-![screencapture-blancos-ecommerce-herokuapp-user-wish-list-2022-10-05-21_07_40](https://user-images.githubusercontent.com/78254137/194230123-8f37e16b-1ea8-40d0-ac7c-1c0ee69154c9.png)
-![screencapture-blancos-ecommerce-herokuapp-checkout-2022-10-05-21_07_02](https://user-images.githubusercontent.com/78254137/194230094-4aa84891-e141-4bbf-ae9a-12cfc3ef4e11.png)
 ![screencapture-blancos-ecommerce-herokuapp-shop-2022-10-05-21_03_08](https://user-images.githubusercontent.com/78254137/194230099-4ad54c3b-34a1-42c6-967e-54e307df950c.png)
 ![screencapture-blancos-ecommerce-herokuapp-shop-product-detail-63370a628b601e2a5be353d6-2022-10-05-21_05_20](https://user-images.githubusercontent.com/78254137/194230105-6073c501-8a90-4f22-b6fd-183466df70d3.png)
+![screencapture-blancos-ecommerce-herokuapp-checkout-2022-10-05-21_07_02](https://user-images.githubusercontent.com/78254137/194230094-4aa84891-e141-4bbf-ae9a-12cfc3ef4e11.png)
+<img width="1680" alt="Ảnh chụp Màn hình 2022-10-05 lúc 21 06 32" src="https://user-images.githubusercontent.com/78254137/194230859-aa161a48-c9bc-4b19-8993-d12ebf0027b3.png">
+![screencapture-blancos-ecommerce-herokuapp-user-order-list-2022-10-05-21_07_57](https://user-images.githubusercontent.com/78254137/194230113-b2921425-729c-4550-a84d-c9d5a4046642.png)
+![screencapture-blancos-ecommerce-herokuapp-user-wish-list-2022-10-05-21_07_40](https://user-images.githubusercontent.com/78254137/194230123-8f37e16b-1ea8-40d0-ac7c-1c0ee69154c9.png)
+![screencapture-blancos-ecommerce-herokuapp-user-profile-2022-10-05-21_07_21](https://user-images.githubusercontent.com/78254137/194230118-cb02e7d3-13ea-4f0d-aa45-03a76a33dc81.png)
 ![screencapture-blancos-ecommerce-herokuapp-user-change-password-2022-10-05-21_08_06](https://user-images.githubusercontent.com/78254137/194230109-e8cdd757-fcc6-41d5-bd3f-35547cecfcfd.png)
 
 
