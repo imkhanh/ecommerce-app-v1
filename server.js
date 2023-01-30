@@ -18,14 +18,14 @@ app.use(express.urlencoded({ extended: false }));
 
 // Database connection
 mongoose
-	.connect(process.env.MONGO_URI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useCreateIndex: true,
-		useFindAndModify: false,
-	})
-	.then(() => console.log('Mongodb::::::::::: Connected'))
-	.catch((err) => console.log('Database Not Connected !!!'));
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log('Mongodb::::::::::: Connected'))
+  .catch((err) => console.log('Database Not Connected !!!'));
 
 // Routes
 app.use('/api', require('./routes/auth'));
@@ -37,14 +37,16 @@ app.use('/api/order', require('./routes/orders'));
 app.use('/api/braintree', require('./routes/braintree'));
 
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'));
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-	});
+  //*Set static folder up in production
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
 }
 
 // Run server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-	console.log(`Server running on port:::: ${PORT}`);
+  console.log(`Server running on port:::: ${PORT}`);
 });
