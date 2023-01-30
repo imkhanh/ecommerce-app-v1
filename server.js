@@ -34,7 +34,7 @@ app.use('/api/product', require('./routes/products'));
 app.use('/api/user', require('./routes/users'));
 app.use('/api/customize', require('./routes/customizes'));
 app.use('/api/order', require('./routes/orders'));
-app.use('/api/braintree', require('./routes/braintree'));
+// app.use('/api/braintree', require('./routes/braintree'));
 
 if (process.env.NODE_ENV === 'production') {
   //*Set static folder up in production
