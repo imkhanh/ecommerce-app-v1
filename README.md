@@ -17,7 +17,7 @@ Features of Blancos Ecommerce :
 -  User change password
 -  Order History
 
-#### Demo: https://blancos-ecommerce.herokuapp.com/
+#### Demo: [blancos-fashion-shop.onrender.com](https://blancos-fashion-shop.onrender.com/)
 
 <hr/>
 
