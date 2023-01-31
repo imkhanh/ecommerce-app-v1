@@ -17,15 +17,37 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 
 // Database connection
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
-  .then(() => console.log('Mongodb::::::::::: Connected'))
-  .catch((err) => console.log('Database Not Connected !!!'));
+// mongoose
+//   .connect(process.env.MONGO_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   })
+//   .then(() => console.log('Mongodb::::::::::: Connected'))
+//   .catch((err) => console.log('Database Not Connected !!!'));
+const start = async () => {
+  if (!process.env.MONGO_URI) {
+    console.log('auth DB_URI must be defined');
+  }
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+    console.log('Server connected to MongoDb!');
+  } catch (err) {
+    console.error(err);
+  }
+
+  const PORT = process.env.PORT;
+  app.listen(PORT, () => {
+    console.log(`Server is listening on ${PORT}!!!!!!!!!`);
+  });
+};
+
+start();
 
 // Routes
 app.use('/api', require('./routes/auth'));
@@ -44,9 +66,3 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   );
 }
-
-// Run server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port:::: ${PORT}`);
-});
